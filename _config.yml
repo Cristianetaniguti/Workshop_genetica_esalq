@@ -8,7 +8,7 @@ author:
   url: "http://cristianetaniguti.github.io/"
 
 # Build settings
-baseurl: /minicursos_workshop_2015/ # Change this to your relative path (ex: /blog/), or leave just a /
+baseurl: /Workshop_genetica_2015/ # Change this to your relative path (ex: /blog/), or leave just a /
 markdown: kramdown
 source: .
 destination: ./_site
