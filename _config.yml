@@ -1,11 +1,11 @@
 # Site settings
-title: Emerald | A simple Jekyll blog
-description: "A minimal blog template, build with Jekyll."
-url: "http://www.jacoporabolini.com/emerald"
+title: IX Workshop da Genética
+description: "Mini-cursos"
+url: "http://cristianetaniguti.github.io/Workshop_genetica_2015/"
 author:
   name: "Jacopo Rabolini"
   email: "hello@jacoporabolini.com"
-  url: "http://www.jacoporabolini.com"
+  url: "http://cristianetaniguti.github.io/"
 
 # Build settings
 baseurl: /minicursos_workshop_2015/ # Change this to your relative path (ex: /blog/), or leave just a /
