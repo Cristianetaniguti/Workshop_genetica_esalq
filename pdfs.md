@@ -3,11 +3,10 @@ layout: page
 title: Apresentações teóricas
 ---
 
-Através dos links abaixo você pode acessar aos pdfs das apresentações teóricas de cada mini-curso:
+Através dos links abaixo você pode acessar os slides das apresentações teóricas dos minicursos:
 
-## [Introdução ao R](https://github.com/Cristianetaniguti/minicursos_workshop_2015/blob/gh-pages/pdfs/R_intro.pdf)
-[Aqui](https://github.com/Cristianetaniguti/minicursos_workshop_2015/blob/gh-pages/pdfs/Tab_comandos.pdf) também tem uma tabela para facilitar lembrar das funções vistas
+## [Por que o R? (Workshop 2017)](https://Cristianetaniguti.github.io/Workshop_genetica_esalq/teoricas_2017/Why_R.html)
 
-## [Mapeamento Genético](https://github.com/Cristianetaniguti/minicursos_workshop_2015/blob/gh-pages/pdfs/Mapeamento.pdf)
+## [Introdução ao R (Workshop 2015)](https://Cristianetaniguti.github.io/Workshop_genetica_esalq/teoricas_2015/R_intro.pdf)
 
-## [Sequenciamento de RNA e Expressão Diferencial](https://github.com/Cristianetaniguti/minicursos_workshop_2015/blob/gh-pages/pdfs/Expre.pdf)
+[Aqui](https://Cristianetaniguti.gihub.io/Workshop_genetica_esalq/teoricas_2015/Tab_comandos.pdf) também tem uma tabela para facilitar lembrar das funções vistas nos minicursos
