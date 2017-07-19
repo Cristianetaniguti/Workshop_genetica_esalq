@@ -1,5 +1,0 @@
-* As configurações principais do site estão em _config.yml
-* Se quiser mudar cor e outras coisas, alterar as configurações em _layouts
-* Os posts da página são arquivos .html contidos na pasta _posts (regulado por data, datas futuras serão postadas no futuro)
-* Os posts na aba lateral são os arquivos como  o about.md que estão soltos no diretório principal, basta indicar "layout: page/ title: titulo qualquer"
-* Para testar a página sem precisar subir para o github seguir as recomendações desse site: https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/
