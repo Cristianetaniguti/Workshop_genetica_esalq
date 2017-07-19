@@ -1,14 +1,14 @@
 # Site settings
-title: IX Workshop da Genética
-description: "Mini-cursos"
-url: "http://cristianetaniguti.github.io/Workshop_genetica_2015/"
+title: Workshop da Genética
+description: "Minicursos"
+url: "http://cristianetaniguti.github.io/Workshop_genetica_esalq/"
 author:
-  name: "Jacopo Rabolini"
-  email: "hello@jacoporabolini.com"
+  name: "Cristiane Taniguti"
+  email: ""
   url: "http://cristianetaniguti.github.io/"
 
 # Build settings
-baseurl: /Workshop_genetica_2015/ # Change this to your relative path (ex: /blog/), or leave just a /
+baseurl: /Workshop_genetica_esalq/ # Change this to your relative path (ex: /blog/), or leave just a /
 markdown: kramdown
 source: .
 destination: ./_site

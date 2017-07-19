@@ -1,13 +1,11 @@
 ---
 layout: page
-title: Sobre mini-cursos
+title: Sobre minicursos
 ---
 ## Sobre
 
-Os mini-cursos foram realizados durante o IX Workshop de Férias de Genética e Melhoramento de Plantas pelos alunos de pós-graduação dos laboratórios de Genética Estatística e de Bioinformática Aplicada à Bioenergia. 
-Mais informações sobre o Workshop pode ser [encontradas aqui](http://www.genetica.esalq.usp.br/cursogmp/).
-
+Aqui estão os materiais dos minicursos de Introdução ao R realizados durante o IX e XI Workshop de Férias de Genética e Melhoramento de Plantas. Os cursos foram ministrados pelos alunos de pós-graduação dos laboratórios de Genética Estatística e de Bioinformática Aplicada à Bioenergia. 
 
 ### Equipe
 
-Todos material aqui contido foi elaborado pelos alunos: Cristiane Taniguti, Fernando Correr, Leticia Lara e Marianella Quezada
+Todos material aqui contido foi elaborado pelos alunos: Cristiane Taniguti, Fernando Correr e Matheus Krause
