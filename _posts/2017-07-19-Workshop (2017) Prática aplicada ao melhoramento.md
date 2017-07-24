@@ -7,7 +7,9 @@ O minicurso foi ministrado no terceiro dia do minicurso "Introdução ao R e Apl
 
 Neste dia o minicurso teve duração de 2 horas. A aula prática teve foco em aplicações do R no melhoramento de plantas e foi dividida em:
 
-* [Avaliações fenotípicas](Pratica_aplicadaI.html)
+* [Avaliações fenotípicas (tutorial)](praticas_2017/Pratica_aplicada_I.html)
+
+* [Avaliações fenotípicas (slides)](teoricas_2017/Aplicacoes_R_Melhoramento_2017.html)
 
 Arquivos necessários para realizá-la:
 
