@@ -251,7 +251,7 @@ $(document).ready(function () {
 <p>Agora, utilize as operações básicas para solucionar expressão:</p>
 <p><span class="math inline">\((\frac{13+2+1.5}{3})+ log_{4}96\)</span></p>
 <p>Resultado esperado:</p>
-<pre><code>## [1] 10.5</code></pre>
+<pre><code>## [1] 8.792481</code></pre>
 <p>Os comandos <code>log</code> e <code>sqrt</code> são duas de muitas outras funções básicas que o R possui. Para todas elas o R possui uma descrição para auxiliar no seu uso, para acessar essa ajuda use:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?log</code></pre></div>
 <p>E será aberta a descrição da função na janela <code>Help</code> do RStudio.</p>
@@ -272,8 +272,10 @@ $(document).ready(function () {
 <ul>
 <li>Crie uma sequencia utilizando a função <code>seq</code> que varie de 4 a 30, com intervalos de 3 em 3.</li>
 </ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">4</span>, <span class="dt">to=</span><span class="dv">30</span>, <span class="dt">by=</span><span class="dv">3</span>)</code></pre></div>
 <pre><code>## [1]  4  7 10 13 16 19 22 25 28</code></pre>
 <p>A função <code>rep</code> gera sequencias com números repetidos:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(<span class="dv">3</span>:<span class="dv">5</span>, <span class="dv">2</span>)</code></pre></div>
 <pre><code>## [1] 3 4 5 3 4 5</code></pre>
 <p>Podemos realizar operações utilizando esses vetores:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">8</span>)*<span class="dv">2</span>
@@ -319,7 +321,7 @@ z</code></pre></div>
 <p>Para obter informações do vetor criado utilize:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(z)</code></pre></div>
 <pre><code>##  num [1:6] 15.2 15.3 20.2 15.2 15.4 ...</code></pre>
-<p>A função <code>str</code> nos diz sobre a estrutura do vetor, que se trata de um vetor <strong>numérico</strong> com 5 elementos.</p>
+<p>A função <code>str</code> nos diz sobre a estrutura do vetor, que se trata de um vetor <strong>numérico</strong> com 6 elementos.</p>
 <p>Os vetores também podem receber outras categorias como <strong>caracteres</strong>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clone &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;GRA02&quot;</span>, <span class="st">&quot;URO01&quot;</span>, <span class="st">&quot;URO03&quot;</span>, <span class="st">&quot;GRA02&quot;</span>, <span class="st">&quot;GRA01&quot;</span>, <span class="st">&quot;URO01&quot;</span>)</code></pre></div>
 <p>Outra classe são os <strong>fatores</strong>, esses podem ser um pouco complexos de lidar. Agora no início, é bom evitá-los a não ser que esteja trabalhando com modelos estatísticos (como faremos em outra prática).</p>
@@ -334,10 +336,10 @@ z</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">logical &lt;-<span class="st"> </span>x &gt;<span class="st"> </span><span class="dv">40</span>
 logical   <span class="co"># Os elementos são maiores que 40?</span></code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE FALSE FALSE  TRUE</code></pre>
-<p>Com ele podemos, por exemplo, identificar quais são as posições dos elementos maiores que 4:</p>
+<p>Com ele podemos, por exemplo, identificar quais são as posições dos elementos maiores que 40:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which</span>(logical)  <span class="co"># Obtendo as posiçoes dos elementos TRUE</span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="kw">which</span>(logical)] <span class="co"># Obtendo os números maiores que 4 do vetor z pela posição</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="kw">which</span>(logical)] <span class="co"># Obtendo os números maiores que 40 do vetor z pela posição</span></code></pre></div>
 <pre><code>## [1] 40.1</code></pre>
 <p>Encontre mais sobre outros operadores lógicos, como o <code>&gt;</code> utilizado, neste <a href="http://www.statmethods.net/management/operators.html">link</a>.</p>
 <p>Não é possível misturar diferentes classes dentro de um mesmo vetor, ao tentar fazer isso repare que o R irá tentar igualar para uma única classe:</p>
@@ -419,7 +421,7 @@ W</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">campo1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="st">&quot;clone&quot;</span> =<span class="st"> </span>clone,     <span class="co"># Antes do sinal de &quot;=&quot;  </span>
                      <span class="st">&quot;altura&quot;</span> =<span class="st"> </span>x,        <span class="co"># estabelecemos os nomes  </span>
                      <span class="st">&quot;diametro&quot;</span> =<span class="st"> </span>y,      <span class="co"># das coluna</span>
-                     <span class="st">&quot;idade&quot;</span> =<span class="st"> </span>repet,
+                     <span class="st">&quot;idade&quot;</span> =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">3</span>:<span class="dv">5</span>, <span class="dv">2</span>),
                      <span class="st">&quot;corte&quot;</span>=<span class="st"> </span>logical) 
 campo1</code></pre></div>
 <pre><code>##   clone altura diametro idade corte
@@ -556,7 +558,7 @@ campo1_csv &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span 
   <span class="kw">print</span>(<span class="st">&quot;dois não é maior que três&quot;</span>)
 }</code></pre></div>
 <ul>
-<li>Teste se a 11ª resposta para a penultima pergunta (9ª coluna) foi “não”, se foi, deixe um recado motivacional, caso contrário, parabenize. (dica: o sinal <code>==</code> se refere a “exatamente igual a”)</li>
+<li>Teste se a 11ª resposta para a penultima pergunta (9ª coluna) foi “não”, se foi, deixe um recado motivacional, caso contrário, parabenize (dica: o sinal <code>==</code> se refere a “exatamente igual a”)</li>
 </ul>
 <pre><code>## [1] &quot;Muito bom!&quot;</code></pre>
 <p>Mas repare que só é possível utilizar a função para um elemento individual do vetor, se quisermos percorrer o vetor inteiro precisamos recorrer a outro recurso.</p>
