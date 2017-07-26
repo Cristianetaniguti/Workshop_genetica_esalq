@@ -13,6 +13,6 @@ Neste dia o minicurso terá duração de 2 horas. Será realizada um apresentaç
 
 Acesse o formulário [aqui](https://goo.gl/forms/i4z2alUTFgfppCIl2).
 
-Acesse ao primeiro [data.frame criado na prática](pratica_2017/campo1_data_frame.RData).
+Acesse ao primeiro [data.frame criado na prática](praticas_2017/campo1_data_frame.RData).
 
-Acesse o [.Rmd](pratica_2017/Pratica_basica.Rmd) utilizado para gerar o tutorial prático.
+Acesse o [.Rmd](praticas_2017/Pratica_basica.Rmd) utilizado para gerar o tutorial prático.
