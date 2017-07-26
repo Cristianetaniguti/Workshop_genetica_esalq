@@ -1,8 +1,6 @@
-Em construção...
-
 Primeiro dia do minicurso "Introdução ao R e Aplicações em Genética e Melhoramento de Plantas".
 
-Neste dia o minicurso terá duração de 2 horas. Será realizada um apresentação teórica ["Por que o R?"](teoricas_2017/Why_R.html) e será dado início à [prática básica](praticas_2017/Pratica_basica.html)(em breve) que abranje:
+Neste dia o minicurso terá duração de 2 horas. Será realizada um apresentação teórica ["Por que o R?"](teoricas_2017/Why_R.html) e será dado início à [prática básica](praticas_2017/Pratica_basica.html) que abranje:
 
 * Instalação do R e RStudio
 * Operações básicas
@@ -14,3 +12,7 @@ Neste dia o minicurso terá duração de 2 horas. Será realizada um apresentaç
 * Instalação e aplicações de pacotes
 
 Acesse o formulário [aqui](https://goo.gl/forms/i4z2alUTFgfppCIl2).
+
+Acesse ao primeiro [data.frame criado na prática](pratica_2017/campo1_data_frame.RData).
+
+Acesse o [.Rmd](pratica_2017/Pratica_basica.Rmd) utilizado para gerar o tutorial prático.
