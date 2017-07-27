@@ -497,12 +497,12 @@ A planilha com os dados será disponibilizada em uma pasta específica, adicione
 Aqui usaremos o argumento `stringAsFactors` que impede que o R transforme os vetores da tabela em fatores, os quais são mais difíceis de trabalhar. O argumento `na.strings` irá indicar como foram nomeados os dados perdidos. 
 
 ```{r, eval=FALSE}
-dados <- read.csv(file = "~/GLOBAL/Formulário no google drive.csv", stringsAsFactors = FALSE, na.strings = "-")
+dados <- read.csv(file = "http://cristianetaniguti.github.io/Workshop_genetica_esalq//praticas_2017/Formulario_resultados.csv", stringsAsFactors = FALSE, na.strings = "-")
 head(dados)
 ```
 
 ```{r, echo=FALSE}
-dados <- read.csv(file = "Formulário no google drive.csv", stringsAsFactors = FALSE, na.strings="-")
+dados <- read.csv(file = "Formulario_resultados.csv", stringsAsFactors = FALSE, na.strings="-")
 ```
 
 Vamos explorar a estrutura dos dados coletados:
