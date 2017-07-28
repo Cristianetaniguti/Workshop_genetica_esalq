@@ -1,6 +1,4 @@
-Primeiro dia do minicurso "Introdução ao R e Aplicações em Genética e Melhoramento de Plantas".
-
-Esta parte do minicurso teve duração de 4 horas, separada em dois dias. Foi realizada um apresentação teórica ["Por que o R?"](teoricas_2017/Why_R.html) e uma [prática básica](praticas_2017/Pratica_basica.html) que abranje:
+No primeiro e segundo dia do minicurso "Introdução ao R e Aplicações em Genética e Melhoramento de Plantas", com duração de 4 horas, foi realizada uma apresentação teórica ["Por que o R?"](teoricas_2017/Why_R.html) e uma [prática básica](praticas_2017/Pratica_basica.html), a qual abranje:
 
 * Instalação do R e RStudio
 * Operações básicas

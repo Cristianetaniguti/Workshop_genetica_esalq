@@ -4,8 +4,6 @@ Neste dia o minicurso teve duração de 2 horas. A aula prática teve foco em ap
 
 * [Avaliações fenotípicas (tutorial)](praticas_2017/Pratica_aplicada_I.html)
 * [Avaliações fenotípicas (slides)](teoricas_2017/Aplicacoes_R_Melhoramento_2017.html)
-* [Avaliações fenotípicas (códigos)](teoricas_2017/)
-
 
 
 Arquivos necessários para realizá-la:
