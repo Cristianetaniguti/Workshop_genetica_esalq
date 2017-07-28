@@ -4,7 +4,7 @@
  <title>Workshop da Genética</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <id>http://localhost:4000</id>
- <updated>2017-07-19T11:54:38-03:00</updated>
+ <updated>2017-07-20T09:34:41-03:00</updated>
  <author>
    <name>Cristiane Taniguti</name>
    <uri>http://cristianetaniguti.github.io/</uri>
@@ -28,12 +28,7 @@
    <link href="http://localhost:4000/Workshop-(2017)-Pr%C3%A1tica-aplicada-ao-melhoramento"/>
    <id>http://localhost:4000/Workshop (2017) Prática aplicada ao melhoramento</id>
    <updated>2017-07-19T00:00:00-03:00</updated>
-   <content type="html">&lt;h2 id=&quot;em-construção&quot;&gt;Em construção…&lt;/h2&gt;
-
-&lt;p&gt;Terceiro dia do minicurso “Introdução ao R e Aplicações em Genética e Melhoramento de Plantas”.&lt;/p&gt;
-
-&lt;p&gt;Neste dia o minicurso teve duração de 2 horas. Foi realizada uma &lt;a href=&quot;praticas_2017/pratica3_2017.html&quot;&gt;aula prática&lt;/a&gt; com foco em aplicações do R no melhoramento de plantas.&lt;/p&gt;
-</content>
+   <content type="html">&lt;h2 id=&quot;em-construção&quot;&gt;Em construção…&lt;/h2&gt; &lt;p&gt;Faça download dos arquivos utilizados na prática: &lt;a href=&quot;praticas_2017/Feijao_Magno.csv&quot;&gt;produtividade de feijão&lt;/a&gt; e &lt;a href=&quot;praticas_2017/Tempo_Londrina.csv&quot;&gt;precipitação em Londrina&lt;/a&gt;.&lt;/p&gt; &lt;p&gt;E acesse &lt;a href=&quot;praticas_2017/pratica3_2017.html&quot;&gt;aqui&lt;/a&gt; o minicurso prático!&lt;/p&gt; &lt;p&gt;O minicurso foi ministrado no terceiro dia do minicurso “Introdução ao R e Aplicações em Genética e Melhoramento de Plantas”.&lt;/p&gt; &lt;p&gt;Neste dia o minicurso...</content>
  </entry>
 
  
