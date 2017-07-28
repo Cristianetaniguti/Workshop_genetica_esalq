@@ -1,0 +1,795 @@
+---
+title: "Introdução ao R"
+author: "Cristiane Taniguti"
+date: "July 25, 2017"
+output:
+  html_document:
+    highlight: tango
+    number_sections: yes
+    theme: flatly
+    toc: yes
+    toc_depth: 3
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+header-includes: \usepackage{graphicx}
+---
+
+Esse material foi elaborado para o *Minicurso de Introdução ao R e Aplicações no Melhoramento de Plantas*. O minicurso foi ministrado pelos alunos de pós-graduação do Programa de Genética e Melhoramento de Plantas da ESALQ (USP).
+
+Você pode acessar os outros materiais elaborados para o minicurso [aqui](http://cristianetaniguti.github.io/Workshop_genetica_esalq/).
+
+# Instalação R e RStudio
+
+O R está diponível para os sistemas operacionais Linux, Mac e Windows. Aqui descreveremos os passos necessários para instalação no sistema Linux. Para instruções detalhadas de como instalar para qualquer um dos sistemas acesse o [site do CRAN](https://cran.r-project.org/):
+
+## Instalação do R no Ubuntu 16.04
+
+O primeiro passo para a instalação é procurar pelo arquivo `sources.list` e adicionar à ele o caminho para o "espelho" do R de sua preferência (veja as opções [aqui](https://cran.r-project.org/mirrors.html)) e a distribuição Linux referente ao seu sistema. Normalmente, o arquivo esta localizado em:
+
+```{bash, eval=FALSE}
+cd /etc/apt/
+```
+
+Pode ser que o arquivo esteja com permissão apenas para leitura para os usuários comuns, portanto acesse-o como super usuário utilizando um editor de texto de sua preferência e adicione o caminho. Exemplo:
+
+```{bash, eval=FALSE}
+sudo nano sources.list
+```
+
+Aqui consideraremos a distribuição Linux xenial (correspondente à Ubuntu 16.04) e  escolheremos o espelho localizado na ESALQ, portanto adicionamos a linha:
+
+```
+#deb https://brieger.esalq.usp.br/CRAN/bin/linux/ubuntu xenial/
+```
+
+A partir disso basta seguir os comandos:
+
+```{bash, eval=FALSE}
+sudo update
+sudo apt-get install r-base
+sudo apt-get install r-base-dev
+```
+
+Abrindo o R você verá algo como:
+
+<img src="images/rstart.png"  style="width:450px;height:400px;">
+
+
+## Instalação do RStudio
+
+O RStudio é uma interface mais amigável do R, com funcionalidades muito práticas. A interface do RStudio também esta disponível para os sistemas Windows, Mac e Linux. Para qualquer um deles, selecione o arquivo correspondente no [site](https://www.rstudio.com/products/rstudio/download/).
+
+No caso de um sistema linux, o arquivo baixado terá extenção `.deb`(para Ubuntu) ou `.rpm`(para Fedora) e basta clicar duas vezes no arquivo que o gerenciador de pacotes do Linux iniciará a instalação.
+
+## Familiarização com a interface do RStudio
+
+Abrindo o RStudio você verá:
+
+<img src="images/Rstudio.png"  style="width:700px;height:500px;">
+
+A interface é separada em quatro janelas com principais funções:
+
+* Edição de código
+* Ambiente de trabalho e histórico
+* Console
+* Arquivos, gráficos, pacotes e ajuda
+
+Explore cada uma das janelas. São inumeras funcionalidades para cada uma delas, exploraremos algumas delas a seguir.
+
+Utilize a janela de edição de código (provavelmente a localizada no canto superior esquerdo) para escrever o seu código e salve o arquivo com o nome que desejar com terminação `.R`. Aperte o botão `Run` para processar cada linha do código ou use `Ctrl + enter`.
+
+# Operações básicas
+
+Vamos então à linguagem! 
+
+O R pode funcionar como uma simples **calculadora**, que utiliza a mesma sintaxe que outros programas (como o excel):
+
+```{r, eval=FALSE}
+1+1 
+2*3
+2^3
+4/2
+
+sqrt(4)
+log(100, base = 10)
+log(100)
+
+```
+
+Para organizar o seu código é uma ótima prática fazer **comentários** nele, para que você possa se lembrar mais tarde do que estava pensando no momento ou para que outras pessoas possam entendê-lo. Para isso, use `#` para que o R entenda que trata-se de apenas um comentário, como no exemplo:
+
+```{r, eval=FALSE}
+#########################
+# Script da Prática Básica 
+# do minicurso "Introdução ao R"
+
+# Data: 25/07/2017
+# Cristiane Taniguti
+##########################
+
+# Operações básicas
+
+1+1.4               #Decimal definido com "."
+2*3
+2^3
+4/2
+
+sqrt(4)             #raíz quadrada
+log(100, base = 10) #logarítmo na base 10
+log(100)            #logarítmo com base neperiana
+
+```
+
+Agora, utilize as operações básicas para solucionar expressão:
+
+$(\frac{13+2+1.5}{3})+ log_{4}96$
+
+Resultado esperado:
+
+```{r, echo=FALSE}
+((13+2+1.5)/3) + log(96, base = 4)
+```
+
+Os comandos `log` e `sqrt` são duas de muitas outras funções básicas que o R possui. Para todas elas o R possui uma descrição para auxiliar no seu uso, para acessar essa ajuda use:
+
+```{r, eval=FALSE}
+?log
+```
+
+E será aberta a descrição da função na janela `Help` do RStudio.
+
+Se a descrição do próprio R não for suficiente para você entender como funciona a função, busque no google (de preferência em inglês). Existem diversos sites e fóruns com informações didáticas das funções do R.
+
+## Operações com vetores
+
+Os vetores são as estruturas mais simples trabalhadas no R. Construímos um vetor com uma sequencia numérica usando:
+
+```{r}
+c(1,3,2,5,2)
+```
+
+Podemos utilizar outras funções para gerar sequencias, como:
+
+```{r}
+seq(from=0, to=100, by=5)
+# ou
+seq(0,100,5) # Se você já souber a ordem dos argumentos da função
+
+```
+
+* Crie uma sequencia utilizando a função `seq` que varie de 4 a 30, com intervalos de 3 em 3.
+
+```{r}
+seq(from=4, to=30, by=3)
+```
+
+A função `rep` gera sequencias com números repetidos:
+
+```{r}
+rep(3:5, 2)
+```
+
+Podemos realizar operações utilizando esses vetores:
+
+```{r,eval=FALSE}
+c(1,4,3,2,5,8)*2
+c(4,2,1,5,3,2)+c(5,2,6,1,3,5)
+c(4,2,1,5,3,2)*c(5,2,6,1,3,5)
+```
+
+Repare que já esta ficando cansativo digitar os mesmos números repetidamente, vamos resolver isso criando **objetos** para armazenar nossos vetores e muito mais. 
+
+# Criando objetos
+
+O armazenamento de informações em objetos e a possível manipulação desses faz do R uma linguagem *orientada por objetos*. Para criar um objeto basta atribuir valores para variáveis como a seguir:
+
+```{r, results='hide'}
+x = c(30.1,30.4,40,30.2,30.6,40.1)
+# ou
+x <- c(30.1,30.4,40,30.2,30.6,40.1)
+
+y = c(0.26,0.3,0.36,0.24,0.27,0.35)
+```
+
+Os mais antigos costumam usar o sinal `<-`, mas tem a mesma função de `=`. Escolha usar o qual preferir.
+
+Para acessar os valores dentro o objeto basta:
+
+```{r}
+x
+```
+
+A linguagem é sensível à letras maiúsculas e minúsculas, portanto `x` é diferente de `X`:
+
+```{r, eval=FALSE}
+X
+```
+
+O objeto `X` não foi criado. 
+
+Podemos então realizar as operações com o objeto criado:
+
+```{r, results='hide'}
+x*2
+x + y
+x*y
+```
+
+E podemos armazenar a operação em outro objeto:
+
+```{r, results='hide'}
+z <- (x+y)/2
+z
+```
+
+Podemos também aplicar algumas funções, como exemplo:
+
+```{r}
+sum(z)  # soma dos valores de z
+mean(z) # média 
+var(z)  # variância
+```
+
+Acessamos somente o 3º valor do vetor criado com `[]`:
+
+```{r, results='hide'}
+z[3]
+```
+
+Também podemos acessar o número da posição 2 a 4 com:
+
+```{r}
+z[2:4]
+```
+
+Para obter informações do vetor criado utilize:
+
+```{r}
+str(z)
+```
+
+A função `str` nos diz sobre a estrutura do vetor, que se trata de um vetor **numérico** com 6 elementos. 
+
+Os vetores também podem receber outras categorias como **caracteres**:
+
+```{r}
+clone <- c("GRA02", "URO01", "URO03", "GRA02", "GRA01", "URO01")
+```
+
+Outra classe são os **fatores**, esses podem ser um pouco complexos de lidar. Agora no início, é bom evitá-los a não ser que esteja trabalhando com modelos estatísticos (como faremos em outra prática).
+
+De forma geral, fatores são valores categorizados por `levels`, como exemplo, se transformarmos nosso vetor de caracteres `clone` em fator, serão atribuidos níveis para cada uma das palavras:
+
+```{r}
+clone_fator <- as.factor(clone)
+str(clone_fator)
+```
+
+Dessa forma, teremos apenas 4 níveis para um vetor com 6 elementos, já que as palavras "GRA02" e "URO01" se repetem. Podemos obter o número de elementos do vetor ou o seu comprimento com:
+
+```{r}
+length(clone_fator)
+```
+
+Também vetores **lógicos**, que recebem valores de verdadeiro ou falso:
+
+```{r}
+logical <- x > 40
+logical   # Os elementos são maiores que 40?
+```
+
+Com ele podemos, por exemplo, identificar quais são as posições dos elementos maiores que 40:
+
+```{r}
+which(logical)  # Obtendo as posiçoes dos elementos TRUE
+
+x[which(logical)] # Obtendo os números maiores que 40 do vetor z pela posição
+```
+
+Encontre mais sobre outros operadores lógicos, como o `>` utilizado, neste [link](http://www.statmethods.net/management/operators.html).
+
+Não é possível misturar diferentes classes dentro de um mesmo vetor, ao tentar fazer isso repare que o R irá tentar igualar para uma única classe:
+
+```{r}
+errado <- c(TRUE, "vish", 1)
+errado
+```
+
+No caso, todos os elementos foram transformados em caracter.
+
+# Matrizes
+
+As matrizes são outra classe de objetos muito utilizadas no R, com elas podemos realizar operações de maior escala de forma automatizada, como veremos mais adiante com modelos estatísticos.
+
+Por serem usadas em operações, nelas somente armazenamos elementos numéricos. Para criar uma matriz, determinamos uma sequência de números e indicamos o número de linhas e colunas da matriz:
+
+```{r}
+X <- matrix(1:12, nrow = 6, ncol = 2)
+X
+```
+
+Podemos também utilizar sequencias já armazenadas em vetores para gerar uma matriz, desde que eles sejam numéricos:
+
+```{r}
+W <- matrix(c(x,y), nrow = 6, ncol =2)
+W
+```
+
+Com elas podemos realizar operações matriciais:
+
+```{r}
+X*2
+X*X        
+X%*%t(X)          # Multiplicação matricial
+```
+
+Utilizar essas operações exige conhecimento de álgebra de matrizes, se quiser se aprofundar a respeito, o livro *Linear Models in Statistics, Rencher (2008)* possui um boa revisão à respeito. Você também pode explorar a sintaxe do R para essas operações neste [link](http://www.statmethods.net/advstats/matrix.html).
+
+Acessamos os números internos à matriz dando as coordenadas [linha,coluna], como no exemplo:
+
+```{r}
+W[4,2] # Número posicionado na linha 1 e coluna 4
+```
+
+As vezes pode ser informativo dar nomes às colunas e às linhas da matriz, fazemos isso com:
+
+```{r}
+colnames(W) <- c("altura", "diametro")
+rownames(W) <- clone
+W
+```
+
+Essas funções `colnames` e `rownames` também funcionam nos data.frames.
+
+# Data.frames
+
+Diferente das matrizes, não realizamos operações com os data.frames, mas eles permitem a união de vetores com classes diferentes. Os data.frames são semelhantes à tabelas geradas em outros programas, como o excel.
+
+Os data.frames são combinação de vetores de mesmo comprimento. Todos os que criamos até agora tem tamanho 6, verifique. 
+
+Podemos assim combiná-los em colunas de um único data.frame:
+
+```{r}
+campo1 <- data.frame("clone" = clone,     # Antes do sinal de "="  
+                     "altura" = x,        # estabelecemos os nomes  
+                     "diametro" = y,      # das coluna
+                     "idade" = rep(3:5, 2),
+                     "corte"= logical) 
+campo1
+```
+
+Podemos acessar cada uma das colunas com:
+
+```{r}
+campo1$idade
+```
+
+Ou também com:
+
+```{r}
+campo1[,4] 
+```
+
+Aqui, o número dentro dos colchetes se refere à coluna, por ser o segundo elemento (separado por vírgula). O primeiro elemento se refere à linha. Como deixamos o primeiro elemento vazio, estaremos nos referindo a todas as linhas para aquela coluna.
+
+Dessa forma, se quisermos obter um conteúdo específico podemos dar as coordenadas com [linha,coluna]:
+
+```{r}
+campo1[1,2] 
+```
+
+* Obtenha o diâmetro do clone "URO03.
+
+```{r, echo=FALSE}
+campo1[3,3] 
+```
+
+Mesmo se tratando de um data.frame, podemos realizar operações com os vetores numéricos que a compõe.
+
+* Com o diâmetro e a altura das árvores, calcule o volume conforme a fórmula a seguir e armazene em um objeto `volume`:
+
+$3.14*(diametro/2)^2*altura$
+
+```{r, echo=FALSE}
+volume <- 3.14*((campo1$diametro/2)^2)*campo1$altura
+volume
+```
+
+Agora, vamos adicionar o vetor calculado com o volume ao nosso data.frame. Para isso use a função `cbind`.
+
+```{r}
+campo1 <- cbind(campo1, volume)
+str(campo1)
+```
+
+Também podemos utilizar uma função muito prática chamada `tapply` para obtermos operações específicas com os vetores. Aqui, obteremos a média da altura para cada idade:
+
+```{r}
+tapply(campo1$altura, campo1$idade, mean)
+```
+
+* Obtenha a média do volume para cada idade.
+
+```{r, echo=FALSE}
+tapply(campo1$volume, campo1$idade, mean)
+```
+
+A função `tapply` faz parte de uma família de funções denominadas `apply`, elas são muito eficientes e você pode obter mais informações sobre elas neste [link](https://www.r-bloggers.com/r-tutorial-on-the-apply-family-of-functions/).
+
+# Exportando e importando dados
+
+Os objetos criados dentro do R podem ser exportados em arquivos de diversos formatos. Mas, antes de exportá-los, vamos definir qual é o nosso diretório de trabalho.
+
+
+## Estabelecendo diretório de trabalho
+
+Utilize a aba `Files` para criar uma nova pasta (`New Folder`) chamada `MinicursoR` dentro da pasta `Documents`. Esta será nossa pasta de trabalho, todos os arquivos que exportaremos ou importaremos do R irá automaticamente para esta pasta, mas para isso é necessário informar para o R seu caminho:
+
+```{r, eval=FALSE}
+setwd("Documents/MinicursoR")
+```
+
+Verifique se funcionou:
+
+```{r, eval=FALSE}
+getwd()
+```
+
+## Exportação e importação de arquivos
+
+Para exportar o objeto no formato .RData, os quais podem ser lidos pelo R:
+
+```{r}
+save(campo1, file = "campo1.RData")
+```
+
+Essa é uma forma de salvar o objeto trabalhado, se removermos ele com:
+
+```{r, eval=FALSE}
+rm(campo1)  # Certifique-se que salvou o objeto antes de removê-lo
+```
+
+Podemos facilmente obtê-lo novamente com:
+
+```{r, eval=FALSE}
+load("campo1.RData")
+```
+
+Para salvar todos os objetos do seu *workspace* use:
+
+```{r, eval=FALSE}
+save.image()
+```
+
+O R irá criar um arquivo `.Rdata` contendo todos os seus objetos.
+
+Podemos exportar nossos objetos em outros formatos, como, por exemplo, `.txt` ou `.csv`. Para isso utilizamos:
+
+```{r}
+write.table(campo1, file = "campo1.txt", sep = ";", dec = ".", row.names = FALSE)
+write.csv(campo1, file = "campo1.csv", row.names = TRUE)
+```
+
+Ao exportar há diversas opções para a formatação do arquivo, é importante considerá-las se o arquivo for ser trabalhado em outro sofware posteriormente.
+
+Abra os arquivos gerados para visualizar sua formatação.
+
+Esses arquivos podem ser lidos novamente pelo R, utilizando as funções e suas especificações:
+
+```{r}
+campo1_txt <- read.table(file = "campo1.txt", sep=";", dec=".", header = TRUE)
+campo1_csv <- read.csv(file = "campo1.csv")
+head(campo1_txt)
+head(campo1_csv)
+```
+
+Agora que aprendemos a importar dados, vamos trabalhar com outro conjunto. Mas antes disso vamos criá-lo. 
+
+# Formulário para obtenção de dados
+
+Vamos preencher um formulário do google drive para coletar algumas informações. Caso não queira responder alguma das perguntas, complete com `-` o respectivo campo.
+
+* Acesse [aqui o formulário](https://goo.gl/forms/ZQPBKMjGc08PJ1u72).
+
+A planilha com os dados será disponibilizada em uma pasta específica, adicione-a ao seu diretório de trabalho ou indique o caminho da pasta ao importá-la para dentro do R, como a seguir.
+
+Aqui usaremos o argumento `stringAsFactors` que impede que o R transforme os vetores da tabela em fatores, os quais são mais difíceis de trabalhar. O argumento `na.strings` irá indicar como foram nomeados os dados perdidos. 
+
+```{r, eval=FALSE}
+dados <- read.csv(file = "http://cristianetaniguti.github.io/Workshop_genetica_esalq//praticas_2017/Formulario_resultados.csv", stringsAsFactors = FALSE, na.strings = "-")
+head(dados)
+```
+
+```{r, echo=FALSE}
+dados <- read.csv(file = "Formulario_resultados.csv", stringsAsFactors = FALSE, na.strings="-")
+```
+
+Vamos explorar a estrutura dos dados coletados:
+
+```{r, eval=FALSE}
+str(dados)
+```
+
+Repare que nos nomes das colunas ainda estão as perguntas completas feitas no formulário, vamos alterar para nomes mais fáceis de trabalhar:
+
+```{r}
+colnames(dados) <- c("Data_pesq", "Idade", "Niver", "Genero", "Cidade", 
+                     "Altura","Peso", "Area", "Programacao", "Nota")
+```
+
+# Paradoxo do aniversário
+
+Nossa primeira análise com esses dados envolverá um problema denominado ["Paradoxo do aniversário"](https://en.wikipedia.org/wiki/Birthday_problem), que afirma que em um grupo de 23 pessoas (ou mais), escolhidas aleatoriamente, há mais de 50% de chance de duas pessoas terem a mesma data de aniversário.
+
+Primeiro, vamos verificar em quantos somos, contando o número de linhas, para isso use a função `nrow`.
+
+```{r, eval=FALSE}
+nrow(dados)
+```
+
+Vamos então verificar se temos no nosso grupo pessoas que compartilham o mesmo dia de aniversário.
+
+Podemos verificar isso facilmente com a função `table`, que indica a frequência de cada observação:
+ 
+```{r}
+table(dados$Niver)
+```
+
+# Estruturas if, else e for
+
+Para nossa próxima atividade com os dados, vamos primeiro entender como funcionam as estruturas `if`, `else` e `for`.
+
+Nas funções condicionais `if` e `else`, estabelecemos uma condição para if, se ela for verdade a atividade será realizada, caso contrário (else) outra tarefa será. Como no exemplo:
+
+```{r, eval=FALSE}
+if(2 >3){
+  print("dois é maior que três")
+} else {
+  print("dois não é maior que três")
+}
+```
+
+* Teste se a 11ª resposta para a penultima pergunta (9ª coluna) foi "não", se foi, deixe um recado motivacional, caso contrário, parabenize (dica: o sinal `==` se refere a "exatamente igual a")
+
+```{r, echo=FALSE}
+if(dados[3,9] == "Sim"){
+  print("Muito bom!")
+} else {
+  print("Nunca é tarde para começar!")
+}
+```
+
+Mas repare que só é possível utilizar a função para um elemento individual do vetor, se quisermos percorrer o vetor inteiro precisamos recorrer a outro recurso.
+
+Esse recurso pode ser a função `for`, uma função muito utilizada e poderosa. Ela constitui uma estrutura de loop, pois irá aplicar a mesma atividade repetidamente até atingir à uma determinada condição. Veja exemplos:
+
+```{r, eval=FALSE}
+for(i in 1:10){
+  print(i)
+}
+
+test <- vector()
+for(i in 1:10){
+  test[i] <- i+4 
+}
+test
+```
+
+Nos casos acima, `i` funciona como um index que irá variar de 1 até 10 a operação determinada entre chaves.
+
+Com essa estrutura, podemos repetir a operação realizada com as estruturas `if` e `else` para todo o vetor:
+
+```{r, eval=FALSE}
+for(i in 1:nrow(dados))
+  if(dados[i,9] == "Sim"){
+    print("Muito bom!")
+  } else {
+    print("Nunca é tarde para começar!")
+}
+```
+
+
+# Elaboração de gráficos simples
+
+Para outros dados coletados, vamos gerar alguns gráficos simples utilizando as funções básicas do R. Existem pacotes como o `ggplot2`, `plotly` e `shiny` que possuem ferramentas muito poderosas para construção de gráficos, mas exigem um pouco mais de tempo para aprendizagem de sua sintaxe.
+
+Vamos iniciar com um simples gráfico de frequências (ou histograma) para os dados de `idade`.
+
+```{r}
+hist(dados$Idade)
+```
+
+Vamos adicionar alguns argumentos para dar uma personalizada:
+
+* `breaks` para definir os intervalos para cada barra; 
+* `col` para adicionar cor;
+* `xlab` alterar título do eixo x;
+* `ylab` alterar título do eixo y;
+* `main` alterar título geral;
+
+```{r}
+hist(dados$Idade, breaks=6, col="blue", xlab="Idades", 
+     ylab="Frequencia", main="Histograma das Idades (Lab StatGen 2017)")
+```
+
+Se preferir, podemos usar um gráfico de densidades de Kernel como:
+
+```{r}
+d <- density(dados$Idade, na.rm = TRUE)
+
+plot(d, col="blue", xlab="Idades",
+     ylab="Densidade", main="Densidade das Idades (Lab StatGen 2017)")
+```
+
+Alguns argumentos são específicos para cada função, busque mais informações sobre cada uma delas para entender sobre seus argumentos.
+
+Podemos também fazer um gráfico de barras para a resposta `Area` usando:
+
+```{r}
+contagens <- table(dados$Area)
+barplot(contagens, col= "red", main="Gráfico das Áreas")
+```
+
+Com esse tipo de gráfico é possível diferenciar colorações para diferentes categorias, como:
+
+```{r}
+contagens <- table(dados$Genero, dados$Area)
+barplot(contagens, col= c("yellow", "green", "red"), main="Gráfico de Áreas por gênero",
+        legend = rownames(contagens))
+```
+
+Ou podem ser gerados lado a lado:
+
+```{r}
+contagens <- table(dados$Genero, dados$Area)
+barplot(contagens, col= c("yellow", "green"), main="Gráfico de idades por gênero",
+        legend = rownames(contagens), beside = TRUE)
+```
+
+Na horizontal:
+
+```{r}
+contagens <- table(dados$Genero, dados$Area)
+barplot(contagens, col= c("yellow", "green"), main="Gráfico de idades por gênero",
+        legend = rownames(contagens), beside = TRUE, horiz = TRUE)
+```
+
+Vamos utilizar um boxplot para avaliar as `Nota`:
+
+```{r}
+boxplot(dados$Nota)
+```
+
+Sabe- se que existe uma correlação entre o peso e a altura das pessoas, e que, a distribuição dessas características configura uma bimodal se não considerarmos os gênero dos indivíduos avaliados. Vamos avaliar a correção entre essas caraterísticas com:
+
+```{r}
+plot(dados$Altura, dados$Peso, main = "Altura x Peso", xlab = "Altura", ylab = "Peso")
+```
+
+Verificando o valor da correlação:
+
+```{r}
+cor(dados$Altura, dados$Peso)
+```
+
+Agora vamos verificar a distribuição delas, primeiro com todos os gêneros e posteriormente separando masculino e feminino.
+
+```{r, results='hide'}
+
+Alt_total <- density(dados$Altura, na.rm = TRUE)  # Todos os dados de altura
+plot(Alt_total, main="Altura")
+
+pos_fem <- which(dados$Genero=="Feminino")   # Linhas referentes ao genero feminino
+pos_masc <- which(dados$Genero=="Masculino") # Linhas referentes ao genero masculino
+
+
+Alt_fem <- density(dados$Altura[pos_fem], na.rm = TRUE)   # Somente dados de altura de mulheres
+plot(Alt_fem, main="Altura de mulheres")
+
+Alt_masc <- density(dados$Altura[pos_masc], na.rm = TRUE) # Somente dados de altura de homens
+plot(Alt_masc, main="Altura de homens")
+
+plot(Alt_total, col="black",ylim=c(0,10),xlim=c(1,2.5), main="Alturas")
+lines(Alt_fem, col="red")
+lines(Alt_masc, col="green")
+
+### Fazendo o mesmo gráfico para peso
+
+Peso_total <- density(dados$Peso, na.rm = TRUE)   # Todos os dados de peso
+plot(Peso_total, main="Peso")
+
+Peso_fem <- density(dados$Peso[pos_fem], na.rm = TRUE)   # Peso das mulheres
+Peso_masc <- density(dados$Peso[pos_masc], na.rm = TRUE) # Peso dos homens
+
+plot(Peso_total, col="black",ylim=c(0,0.2),xlim=c(40,120), main="Peso")
+lines(Peso_fem, col="red")
+lines(Peso_masc, col="green")
+
+```
+
+Ajuste os eixos `xlim` e `ylim` da forma que achar conveniente. Obtidos todos esses gráficos, pode ser bom para visualização tê-los lado a lado.
+
+```{r}
+par(mfrow=c(1,2))
+
+plot(Alt_total, col="black",ylim=c(0,10),xlim=c(1,2.5), main="Alturas")
+lines(Alt_fem, col="red")
+lines(Alt_masc, col="green")
+
+plot(Peso_total, col="black",ylim=c(0,0.2),xlim=c(40,120), main="Peso")
+lines(Peso_fem, col="red")
+lines(Peso_masc, col="green")
+
+
+```
+
+
+# Instalação e aplicações de pacotes
+
+Existem diversos pacotes disponíveis para variadas aplicações. Aqui usaremos o pacote `ggmap`.
+
+Ele esta disponível no repositório oficial do R, o CRAN, portanto para instalá-lo basta:
+
+```{r, eval=FALSE}
+install.packages("ggmap")
+```
+
+Depois disso é necessário recrutá-lo com:
+
+```{r, warning=FALSE, message='hide'}
+library(ggmap) # Este comando será necessário toda vez que for utilizar o pacote
+```
+
+É um pacote que utiliza recursos online para gerar mapas conforme um conjunto de dados. Você pode obter mais informações sobre ele no [manual disponível no CRAN](https://cran.r-project.org/web/packages/ggmap/ggmap.pdf).
+
+Vamos utilizar a função `geocode` para obter dados de longitude e latitude das cidades dos participantes do curso:
+
+```{r,eval=FALSE}
+part1 <- geocode(dados$Cidade[1])
+```
+
+Podemos aplicar a mesma função para todos os participantes utilizando o `for`.
+
+```{r, warning=FALSE, message='hide', results='hide'}
+coord <- data.frame()
+for(i in 1:nrow(dados)){
+  coord <- rbind(coord,geocode(dados$Cidade[i]))
+}
+```
+
+Agora estabelecemos um mapa de fundo com a média das longitudes e latitudes:
+
+```{r, warning=FALSE, message='hide'}
+mapcurso <- get_map(location = 
+                    c(lon = mean(coord$lon), 
+                    lat = mean(coord$lat)), 
+                    zoom = 4,
+                    maptype = "roadmap", scale = 2)
+```
+
+Para mais informações sobre as funções do pacote utilize `?get_map`.
+
+Agora vamos adicionar as localizações no mapa:
+
+```{r}
+ggmap(mapcurso) +
+  geom_point(data = coord, 
+             aes(x = lon, y = lat, fill = "red"), 
+             size = 2, shape = 21)
+```
+
+Aqui os argumentos de `aes` definem características dos pontos no mapa, `fill` indica a coloração, `size` o tamanho e `shape` o formato. Acesse outras codificações de formato [aqui](http://www.cookbook-r.com/Graphs/Shapes_and_line_types/).
+ 
+ 
+# Pratique gerando relatórios no RStudio
+ 
+ Utilize o R no seu dia-a-dia para ir praticando a linguagem. Além das recomendações contidas na [primeira apresentação](http://cristianetaniguti.github.io/Workshop_genetica_esalq//teoricas_2017/Why_R.html), recomendamos também dar uma olhada em como gerar documentos em pdf e html usando a Markdown. Utilizamos essa metodologia para gerar este tutorial e outras apresentações do minicurso. Pode ser muito prático no dia-a-dia!
+ 
+ Recentemente foi publicado um tutorial sobre isso no R-bloggers, que acreditamos ser um bom começo! Acesse [aqui](https://www.r-bloggers.com/how-to-create-reports-with-r-markdown-in-rstudio/).
+ 
+ 
+ 
+ 
+ 
+ 
