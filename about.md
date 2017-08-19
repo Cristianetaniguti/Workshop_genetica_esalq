@@ -8,4 +8,4 @@ Aqui estão os materiais dos minicursos de Introdução ao R realizados durante 
 
 ### Equipe
 
-Todos material aqui contido foi elaborado pelos alunos: Cristiane Taniguti, Fernando Correr e Matheus Krause
+Todos material aqui contido foi elaborado pelos alunos: Cristiane Taniguti, Fernando Correr, Letícia Lara, Marianella Quezada, Matheus Krause e Rodrigo Amadeu.
