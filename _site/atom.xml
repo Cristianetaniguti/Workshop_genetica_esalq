@@ -4,7 +4,7 @@
  <title>Workshop da Genética</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <id>http://localhost:4000</id>
- <updated>2017-07-20T09:34:41-03:00</updated>
+ <updated>2018-07-20T16:45:21-03:00</updated>
  <author>
    <name>Cristiane Taniguti</name>
    <uri>http://cristianetaniguti.github.io/</uri>
@@ -14,11 +14,11 @@
  
 
  <entry>
-   <title>Workshop (2017) prática básica 2</title>
-   <link href="http://localhost:4000/Workshop-(2017)-Pr%C3%A1tica-b%C3%A1sica-2"/>
-   <id>http://localhost:4000/Workshop (2017) Prática básica 2</id>
-   <updated>2017-07-19T00:00:00-03:00</updated>
-   <content type="html">&lt;h2 id=&quot;em-construção&quot;&gt;Em construção…&lt;/h2&gt; &lt;p&gt;Segundo dia do minicurso “Introdução ao R e Aplicações em Genética e Melhoramento de Plantas”.&lt;/p&gt; &lt;p&gt;Neste dia o minicurso teve duração de 2 horas. Nesta &lt;a href=&quot;praticas_2017/pratica2_2017.html&quot;&gt;segunda aula prática&lt;/a&gt; foram abordados:&lt;/p&gt; &lt;ul&gt; &lt;li&gt;Conceitos de data frames e matrizes&lt;/li&gt; &lt;li&gt;Estruturas de loop&lt;/li&gt; &lt;li&gt;Instalação e aplicações de pacotes&lt;/li&gt; &lt;li&gt;Elaboração...</content>
+   <title>Workshop (2018) introdução ao r</title>
+   <link href="http://localhost:4000/Workshop-(2018)-Introdu%C3%A7%C3%A3o-ao-R"/>
+   <id>http://localhost:4000/Workshop (2018) Introdução ao R</id>
+   <updated>2018-07-20T00:00:00-03:00</updated>
+   <content type="html">&lt;p&gt;O minicurso será ministrado das 8-10h nos dias 24,25 e 26 de julho de 2018. Aqui ficarão disponíveis todo material necessário para realização do curso.&lt;/p&gt; &lt;p&gt;Antes que o curso comece, certifique-se que você tem instalado no seu computador o R e RStudio. Vamos precisar deles. Caso precise de ajuda para...</content>
  </entry>
 
  
@@ -27,8 +27,8 @@
    <title>Workshop (2017) prática aplicada ao melhoramento</title>
    <link href="http://localhost:4000/Workshop-(2017)-Pr%C3%A1tica-aplicada-ao-melhoramento"/>
    <id>http://localhost:4000/Workshop (2017) Prática aplicada ao melhoramento</id>
-   <updated>2017-07-19T00:00:00-03:00</updated>
-   <content type="html">&lt;h2 id=&quot;em-construção&quot;&gt;Em construção…&lt;/h2&gt; &lt;p&gt;Faça download dos arquivos utilizados na prática: &lt;a href=&quot;praticas_2017/Feijao_Magno.csv&quot;&gt;produtividade de feijão&lt;/a&gt; e &lt;a href=&quot;praticas_2017/Tempo_Londrina.csv&quot;&gt;precipitação em Londrina&lt;/a&gt;.&lt;/p&gt; &lt;p&gt;E acesse &lt;a href=&quot;praticas_2017/pratica3_2017.html&quot;&gt;aqui&lt;/a&gt; o minicurso prático!&lt;/p&gt; &lt;p&gt;O minicurso foi ministrado no terceiro dia do minicurso “Introdução ao R e Aplicações em Genética e Melhoramento de Plantas”.&lt;/p&gt; &lt;p&gt;Neste dia o minicurso...</content>
+   <updated>2017-07-20T00:00:00-03:00</updated>
+   <content type="html">&lt;p&gt;O minicurso foi ministrado no terceiro dia do minicurso “Introdução ao R e Aplicações em Genética e Melhoramento de Plantas”.&lt;/p&gt; &lt;p&gt;Neste dia o minicurso teve duração de 2 horas. A aula prática teve foco em aplicações do R no melhoramento de plantas:&lt;/p&gt; &lt;ul&gt; &lt;li&gt;&lt;a href=&quot;praticas_2017/Pratica_aplicada_I.html&quot;&gt;Avaliações fenotípicas (tutorial)&lt;/a&gt;&lt;/li&gt; &lt;li&gt;&lt;a href=&quot;teoricas_2017/Aplicacoes_R_Melhoramento_2017.html&quot;&gt;Avaliações fenotípicas...</content>
  </entry>
 
  
@@ -38,7 +38,20 @@
    <link href="http://localhost:4000/Workshop-(2017)-Por-que-o-R-+-pr%C3%A1tica-b%C3%A1sica"/>
    <id>http://localhost:4000/Workshop (2017) Por que o R? + prática básica</id>
    <updated>2017-07-18T00:00:00-03:00</updated>
-   <content type="html">&lt;p&gt;Em construção…&lt;/p&gt; &lt;p&gt;Primeiro dia do minicurso “Introdução ao R e Aplicações em Genética e Melhoramento de Plantas”.&lt;/p&gt; &lt;p&gt;Neste dia o minicurso teve duração de 2 horas. Foi realizada um apresentação teórica &lt;a href=&quot;teoricas_2017/Why_R.html&quot;&gt;“Por que o R?”&lt;/a&gt; e foi dado início à &lt;a href=&quot;praticas_2017/pratica1_2017.html&quot;&gt;prática básica&lt;/a&gt; que abranje:&lt;/p&gt; &lt;ul&gt; &lt;li&gt;Instalação do R...</content>
+   <content type="html">&lt;p&gt;No primeiro e segundo dia do minicurso “Introdução ao R e Aplicações em Genética e Melhoramento de Plantas”, com duração de 4 horas, foi realizada uma apresentação teórica &lt;a href=&quot;teoricas_2017/Why_R.html&quot;&gt;“Por que o R?”&lt;/a&gt; e uma &lt;a href=&quot;praticas_2017/Pratica_basica.html&quot;&gt;prática básica&lt;/a&gt;, a qual abranje:&lt;/p&gt; &lt;ul&gt; &lt;li&gt;Instalação do R e RStudio&lt;/li&gt; &lt;li&gt;Operações básicas&lt;/li&gt; &lt;li&gt;Criando...</content>
+ </entry>
+
+ 
+
+ <entry>
+   <title>Workshop (2016) introdução ao r</title>
+   <link href="http://localhost:4000/Workshop-(2016)-Introdu%C3%A7%C3%A3o-ao-R"/>
+   <id>http://localhost:4000/Workshop (2016) Introdução ao R</id>
+   <updated>2016-07-20T00:00:00-03:00</updated>
+   <content type="html">&lt;p&gt;No Workshop de 2016, o minicurso de Introdução ao R foi ministrado pelo mestrando Rodrigo Amadeu, também membro do laboratório de Genética Estatística de ESALQ.&lt;/p&gt;
+
+&lt;p&gt;Acesse &lt;a href=&quot;https://rramadeu.github.io/2016/08/08/Introduction-to-R/&quot;&gt;aqui&lt;/a&gt; o material feito por ele!&lt;/p&gt;
+</content>
  </entry>
 
  
