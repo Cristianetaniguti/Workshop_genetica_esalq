@@ -436,6 +436,8 @@ Agora que aprendemos a importar dados, vamos trabalhar com o conjunto gerado a p
 
 Nos disponibilizamos neste [link](dados.csv) dados simulados para esse experimento, mas é bem mais legal se cada um digitar o seu! Use qualquer programa para digitar os dados, faça isso no formato de tabela, você pode exportar em qualquer formato que o R da um jeito, mas se nao quiser ter muito trabalho, expore em .csv.
 
+Envie para nos seus dados no e-mail cursogmp@usp.br.
+
 Adicione o seu arquivo ao seu diretório de trabalho ou indique o caminho da pasta ao importá-lo para dentro do R, como a seguir.
 
 Aqui usaremos o argumento `stringAsFactors` que impede que o R transforme os vetores da tabela em fatores, os quais são mais difíceis de trabalhar. O argumento `na.strings` irá indicar como foram nomeados os dados perdidos. O argumento `header` indica que existe na planilha o nome das colunas.
@@ -456,7 +458,7 @@ dim(dados)
 Vamos alterar os nomes das colunas para nomes mais fáceis de trabalhar:
 
 ```{r}
-colnames(dados) = c("Bloco", "Parcela", "Hibrido", "AlturaPlantas", 
+colnames(dados) = c("Tempo","Bloco", "Parcela", "Hibrido", "AlturaPlantas", 
                                        "AlturaEspiga", "NumeroFolhas", "Estande")
 str(dados)
 ```
@@ -521,13 +523,39 @@ test
 
 Nos casos acima, `i` funciona como um index que irá variar de 1 até 10 a operação determinada entre chaves.
 
-Com essa estrutura, podemos repetir a operação realizada com as estruturas `if` e `else` para todo o vetor:
+Para exemplificar melhor a estrutura de um `for`:
+
+```{r}
+
+for(aguas in c("pau", "pedra", "o fim do caminho", "não sei cantar mais")){
+  cat("É", aguas, "\n")
+}
+
+```
+
+
+Com essa estrutura, podemos repetir a operação realizada com as estruturas `if` e `else` para um vetor:
+
+```{r}
+molejo = c("amor", "cilada")
+
+for(dilema in molejo){
+  if(dilema == "amor"){
+    cat("Não era", dilema)
+  }else{
+    cat(" era", dilema)
+  }
+}
+
+```
+
+Aplicando ao nosso conjunto de dados
 
 ```{r}
 for(i in 1:nrow(dados)){
-  if(dados[i,4] < 1.5){
+  if(dados[i,5] < 1.5){
     print("Híbrido pequeno demais")
-  } else if (dados[i,4] > 1.5 && dados[i,4] < 2.0){
+  } else if (dados[i,5] > 1.5 && dados[i,5] < 2.0){
     print("Tamanho OK")
   } else {
       print("Cresceu demais")
@@ -665,6 +693,9 @@ barplot(estande)
 #Alterando o eixo
 barplot(estande, horiz = TRUE)
 
+#Mais informações podem ser combinadas
+nota_temp <- table(dados$Estande, dados$Tempo)
+barplot(nota_temp)
 ```
 
 ```{r eval=FALSE}
@@ -679,11 +710,11 @@ curve(2*x, add = TRUE, col="red")
 #### Boxplot ####
 #Necessita de um vetor de valores ou uma expressão
 boxplot(dados$AlturaPlantas)
-boxplot(dados$AlturaPlantas~dados$Hibrido)
+boxplot(dados$AlturaPlantas~dados$Tempo)
 
 #Explore o bloxplot de outros atributos, podendo combiná-los
 #Desafio: faça o boxplot da altura pela combinação de Hibridos e Blocos
-boxplot(AlturaPlantas~Hibrido*Bloco, data = dados)
+boxplot(AlturaPlantas~Tempo*Hibrido, data = dados)
 
 #### Scatter plot ####
 #Utilizaremos coordenadas de pontos.
@@ -788,10 +819,14 @@ summary(mod1)
 
 ```
 
+
+
+
+
 Podemos falar que a altura de plantas é significativamente diferente entre hibridos?
 
 ```{r}
-mod1 <- aov(AlturaPlantas ~ Hibrido + Bloco, data = dados)
+mod1 <- aov(AlturaPlantas ~ Hibrido + Tempo:Bloco + Tempo:Bloco:Parcela, data = dados)
 summary(mod1)
 
 ```
@@ -801,9 +836,46 @@ O p-valor nos indica se podemos considerar diferenças de altura conforme o híb
 Podemos também fazer um teste de médias para diferenciar a altura de plantas de cada híbrido. Aqui utilizaremos o método de Tukey:
 
 ```{r}
-modaov <- aov(AlturaPlantas ~ Hibrido + Bloco, data = dados)
+modaov <- aov(AlturaPlantas ~ Hibrido + Tempo:Bloco + Tempo:Bloco:Parcela, data = dados)
 tukey.test <- TukeyHSD(x=modaov, 'Hibrido', conf.level=0.95)
 tukey.test
+```
+
+# Instalação e aplicações de pacotes
+
+O que deixa o R ainda mais poderoso é a capacidade de incorporármos à ele novas funções chamando pacotes. Existem milhares de pacotes disponíveis no CRAN (repositorio oficial), e outros repositórios. Para cada área de estudo existem diversos pacotes disponíveis. Aqui usaremos o pacote `desplot`.
+
+Como ele esta disponível no CRAN, para instalá-lo basta:
+  
+```{r, eval=FALSE}
+install.packages("desplot")
+```
+
+Depois disso é necessário recrutá-lo com:
+  
+```{r, warning=FALSE, message='hide'}
+library(desplot) # Este comando será necessário toda vez que for utilizar o pacote
+```
+
+Este pacote é um conjunto de funções elaboradas para gerar gráficos de campo. Você pode obter mais informações sobre ele no [manual disponível no CRAN](https://cran.r-project.org/web/packages/desplot/index.html).
+
+Com esse pacote podemos desenhar o experimento de campo (assim como esta no papel que recebeu, mas um pouco mais bonito).
+
+Para isso vamos adicionar duas outras colunas no nossa data.frame, com informações da posição de cada indivíduo no campo.
+
+```{r}
+row <- rep(rep(1:10, each=5),4)
+col <- c(rep(1:5,10),rep(6:10,10), rep(11:15,10), rep(16:20,10))
+
+dados.up <- cbind(col, row, dados)
+```
+
+Para usar a função do pacote, buscamos no google por tutoriais, [aqui](https://cran.r-project.org/web/packages/desplot/vignettes/desplot_examples.html) esta aquele no qual nos baseamos para elaborarmos o código abaixo.
+
+```{r}
+desplot(Bloco ~ col+row, dados.up,
+        text=Hibrido, cex=1, out1=Bloco,
+        out2=Hibrido, out2.gpar=list(col = "gray50", lwd = 1, lty = 1))
 ```
 
 # Pratique gerando relatórios no RStudio

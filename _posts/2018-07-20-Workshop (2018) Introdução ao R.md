@@ -4,3 +4,4 @@ Antes que o curso comece, certifique-se que você tem instalado no seu computado
 
 * [Tutorial de instalação do R e RStudio](unico_2018/Tutorial_instalacao.html)
 * [Tutorial principal](unico_2018/cursoR.html)
+* [Conjunto de dados simulados](unico_2018/dados.csv)
