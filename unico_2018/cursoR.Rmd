@@ -816,6 +816,43 @@ tukey.test <- TukeyHSD(x=modaov, 'Hibrido', conf.level=0.95)
 tukey.test
 ```
 
+# Instalação e aplicações de pacotes
+
+O que deixa o R ainda mais poderoso é a capacidade de incorporármos à ele novas funções chamando pacotes. Existem milhares de pacotes disponíveis no CRAN (repositorio oficial), e outros repositórios. Para cada área de estudo existem diversos pacotes disponíveis. Aqui usaremos o pacote `desplot`.
+
+Como ele esta disponível no CRAN, para instalá-lo basta:
+  
+```{r, eval=FALSE}
+install.packages("desplot")
+```
+
+Depois disso é necessário recrutá-lo com:
+  
+```{r, warning=FALSE, message='hide'}
+library(desplot) # Este comando será necessário toda vez que for utilizar o pacote
+```
+
+Este pacote é um conjunto de funções elaboradas para gerar gráficos de campo. Você pode obter mais informações sobre ele no [manual disponível no CRAN](https://cran.r-project.org/web/packages/desplot/index.html).
+
+Com esse pacote podemos desenhar o experimento de campo (assim como esta no papel que recebeu, mas um pouco mais bonito).
+
+Para isso vamos adicionar duas outras colunas no nossa data.frame, com informações da posição de cada indivíduo no campo.
+
+```{r}
+row <- rep(rep(1:10, each=5),2)
+col <- c(rep(1:5,10),rep(6:10,10))
+
+dados.up <- cbind(col, row, dados)
+```
+
+Para usar a função do pacote, buscamos no google por tutoriais, [aqui](https://cran.r-project.org/web/packages/desplot/vignettes/desplot_examples.html) esta aquele no qual nos baseamos para elaborarmos o código abaixo.
+
+```{r}
+desplot(Bloco ~ row+col, dados.up,
+        text=Hibrido, cex=1, out1=Bloco,
+        out2=Hibrido, out2.gpar=list(col = "gray50", lwd = 1, lty = 1))
+```
+
 # Pratique gerando relatórios no RStudio
  
  Utilize o R no seu dia-a-dia para ir praticando a linguagem. Além das recomendações contidas na [primeira apresentação](), recomendamos também dar uma olhada em como gerar documentos em pdf e html usando a Markdown. Utilizamos essa metodologia para gerar este tutorial e outras apresentações do curso. Pode ser muito prático no dia-a-dia!
