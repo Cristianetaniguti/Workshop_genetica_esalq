@@ -442,7 +442,7 @@ head(campo1_csv)
 
 Agora que aprendemos a importar dados, vamos trabalhar com o conjunto gerado a partir do dados que vocês coletaram em campo.
 
-Nos disponibilizamos neste [link](unico_2018/dados.csv) dados simulados para esse experimento, mas é bem mais legal se cada um digitar o seu! Use qualquer programa para digitar os dados, faça isso no formato de tabela, você pode exportar em qualquer formato que o R da um jeito, mas se nao quiser ter muito trabalho, expore em .csv.
+Nos disponibilizamos neste [link](dados.csv) dados simulados para esse experimento, mas é bem mais legal se cada um digitar o seu! Use qualquer programa para digitar os dados, faça isso no formato de tabela, você pode exportar em qualquer formato que o R da um jeito, mas se nao quiser ter muito trabalho, expore em .csv.
 
 Adicione o seu arquivo ao seu diretório de trabalho ou indique o caminho da pasta ao importá-lo para dentro do R, como a seguir.
 
