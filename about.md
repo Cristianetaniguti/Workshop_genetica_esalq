@@ -4,8 +4,19 @@ title: Sobre minicursos
 ---
 ## Sobre
 
-Aqui estão os materiais dos minicursos de Introdução ao R realizados durante o IX e XI Workshop de Férias de Genética e Melhoramento de Plantas. Os cursos foram ministrados pelos alunos de pós-graduação dos laboratórios de Genética Estatística e de Bioinformática Aplicada à Bioenergia. 
+Aqui estão os materiais dos minicursos de Introdução ao R realizados durante o IX,  XI e XII Workshop de Férias de Genética e Melhoramento de Plantas, e de outros cursos de R ministrados pelo mesmo grupo. Os cursos foram ministrados pelos alunos de pós-graduação dos laboratórios de Genética Estatística e de Bioinformática Aplicada à Bioenergia. 
 
 ### Equipe
 
-Todos material aqui contido foi elaborado pelos alunos: Cristiane Taniguti, Fernando Correr, Letícia Lara, Marianella Quezada, Matheus Krause e Rodrigo Amadeu.
+Para elaboração dos materiais aqui contidos, houve colaboração dos seguintes alunos de pós-graduação:
+* Cristiane Taniguti
+* Fernando Correr
+* Rodrigo Amadeu
+* Matheus Krause
+* Letícia Lara
+* Marianella Quezada
+* Ana Letycia Basso
+* Lorena Batista
+* Amanda Avelar
+* Guilherme Hosaka
+* Gabriel Gesteira

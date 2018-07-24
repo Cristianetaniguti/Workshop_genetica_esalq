@@ -4,7 +4,7 @@
  <title>Workshop da Genética</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <id>http://localhost:4000</id>
- <updated>2018-07-20T16:45:21-03:00</updated>
+ <updated>2018-07-23T21:15:57-03:00</updated>
  <author>
    <name>Cristiane Taniguti</name>
    <uri>http://cristianetaniguti.github.io/</uri>
@@ -19,6 +19,16 @@
    <id>http://localhost:4000/Workshop (2018) Introdução ao R</id>
    <updated>2018-07-20T00:00:00-03:00</updated>
    <content type="html">&lt;p&gt;O minicurso será ministrado das 8-10h nos dias 24,25 e 26 de julho de 2018. Aqui ficarão disponíveis todo material necessário para realização do curso.&lt;/p&gt; &lt;p&gt;Antes que o curso comece, certifique-se que você tem instalado no seu computador o R e RStudio. Vamos precisar deles. Caso precise de ajuda para...</content>
+ </entry>
+
+ 
+
+ <entry>
+   <title>Introdução à análise de dados em r (organização gvenck)</title>
+   <link href="http://localhost:4000/Introdu%C3%A7%C3%A3o-%C3%A0-an%C3%A1lise-de-dados-em-R-(Organiza%C3%A7%C3%A3o-Gvenck)"/>
+   <id>http://localhost:4000/Introdução à análise de dados em R (Organização Gvenck)</id>
+   <updated>2018-06-06T00:00:00-03:00</updated>
+   <content type="html">&lt;ul&gt; &lt;li&gt;&lt;a href=&quot;https://gvenck.github.io/cursoR/Intro.html&quot;&gt;Material do Curso “Introdução e análise de dados em R”&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;Acesse aqui o material elaborado para o treinamento INTRODUÇÃO E ANÁLISE DE DADOS EM R pelos alunos de pós-graduação Cristiane Taniguti, Fernando Correr, Gabriel Gesteira, Ana Letycia, Amanda Avelar e Guilherme Hosaka dos laboratórios de Genética Estatística...</content>
  </entry>
 
  

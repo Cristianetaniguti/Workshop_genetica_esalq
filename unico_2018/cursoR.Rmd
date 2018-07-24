@@ -1,0 +1,887 @@
+---
+date: "`r Sys.Date()`"
+author: "Universidade de São Paulo - ESALQ"
+output:
+    rmdformats::readthedown:
+      css: readthedowngvenk.css
+---
+
+# Minicurso de Introdução ao R
+
+Este material foi elaborado para o minicurso do XII Workshop de Férias em Genética e Melhoramento de Plantas pelos alunos de pós-graduação Cristiane Taniguti, Fernando Correr, Lorena Batista e Ana Letycia dos laboratórios de Genética Estatística e Laboratório de Bioinformática aplicada à Bioenergia da ESALQ-USP
+
+Você pode encontrar os materiais de cursos de R já realizados pela mesma equipe [neste site](http://cristianetaniguti.github.io/Workshop_genetica_esalq/). O curso realizado junto com o grupo gvenck teve maior duração que os apresentados nos Workshops, por isso contém um material mais completo, caso queira maiores aprofundamentos no que será aqui tratado, recomendamos que dê uma olhada [no material](https://gvenck.github.io/cursoR/Intro.html). 
+
+Recomendamos também outros materiais disponíveis online, encontre uma lista [aqui](https://gvenck.github.io/cursoR/english_tutorials.html).
+
+Sugerimos que, antes de iniciar a prática aqui descrita, siga [este tutorial](https://gvenck.github.io/cursoR/Tutorial_instalacao.html) para instalação do R e do RStudio.
+
+# Familiarização com a interface do RStudio
+
+Abrindo o RStudio você verá:
+
+<img src="imagens/Rstudio.png"  style="width:700px;height:500px;">
+
+A interface é separada em quatro janelas com principais funções:
+
+* Edição de código
+* Ambiente de trabalho e histórico
+* Console
+* Arquivos, gráficos, pacotes e ajuda
+
+Explore cada uma das janelas. São inúmeras funcionalidades para cada uma delas, veremos algumas delas ao decorrer do curso.
+
+## Um primeiro script
+
+A janela de edição de código (provavelmente a localizada no canto superior esquerdo) você irá utilizar para escrever o seu código. Abra um novo script clicando no `+` no canto superior esquerdo e selecionando `R script`.
+
+Vamos então iniciar os trabalhos com o tradicional `Hello World`. Digite no seu script:
+
+```{r}
+cat("Hello world")
+```
+
+Agora selecione a linha e aperte o botão `Run` ou utilize `Ctrl + enter`.
+
+Ao fazer isso o seu código será processado na janela `Console`, onde aparecerá em azul (se você estiver com as cores padrão do R) o código escrito e logo em seguida o resultado desejado. A linha somente não será processada no console se houver o símbolo `#` na frente. Agora, experimente colocar `#` na frente do código escrito. E, novamente, selecione a linha e aperte `Run`. 
+
+```{r}
+# cat("Hello world")
+```
+
+O símbolo `#` é muito utilizado para realizar **comentários** ao decorrer do código. Esta é uma ótima prática para deixar o código organizado e para que você possa lembrar mais tarde o que você mesmo/a estava pensando quando o escreveu ou para que outras pessoas possam entendê-lo. Como no exemplo:
+
+```{r}
+# Iniciando os trabalhos no R
+cat("Hello world")
+```
+
+**Importante**: sempre que quiser realizar alguma alteração, edite o seu script e não diretamente no console, pois tudo o que neste é escrito, não terá como ser salvo!
+
+Para salvar seu script, você pode utilizar a aba `Files` localizada (no padrão) no canto esquerdo inferior procurar uma localização de sua preferência, criar uma nova pasta com o nome `CursoR`. Depois, basta clicar no disquete localizado no cabeçalho do RStudio ou com `Ctrl + s` e selecionar o diretório `CursoR` criado. Scripts em R são salvos com a extensão `.R`. 
+
+
+## Estabelecendo diretório de trabalho
+
+Outra boa prática no R é deixar o script no mesmo diretório onde estão seus dados brutos (arquivos de entrada no script) e os dados processados (gráficos, tabelas, etc). Para isso, vamos fazer com que o R identifique o mesmo diretório em que você salvou o script como **diretório de trabalho**, assim ele entenderá que é dali que precisa obter os dados e para la que também irá soltar resultados.
+
+Você pode fazer isso utilizando as facilidades do RStudio, basta localizar o diretório `CursoR` pela aba `Files`, clique em `More` e depois "Set as Working Directory". Repare que irá aparecer no console algo como:
+
+```{r, eval=FALSE}
+setwd("~/Documents/CursoR")
+```
+
+Ou seja, você pode utilizar este mesmo comando para realizar esta ação. Esta então será nossa pasta de trabalho. Quando estiver perdido/a ou se tiver certeza que o diretório de trabalho foi alterado utilize:
+
+```{r, eval=FALSE}
+getwd()
+```
+
+## Facilitando a vida com `Tab`
+
+Agora, imagine que você tem um diretório como `~/Documentos/mestrado/semestre1/disciplina_tal/aula_tal/dados_28174/analise_276182/resultados_161/`. Não é fácil lembrar todo este caminho para escrever num comando `setwd()`.
+
+Além da facilidade da janela do RStudio, você pode utilizar a tecla `Tab` para completar o caminho para você. Experimente buscando alguma pasta no seu computador. Basta começar a digitar o caminho e apertar `Tab`, ele irá completar o nome para você! Se você tiver mais do que um arquivo com aquele início de nome, aperte duas vezes o `Tab`, ele mostrará todas as opções.
+
+O `Tab` funciona não só para indicar caminhos, mas também para comandos e nomes de objetos. É muito comum errarmos no código por erros de digitação, utilizar o `Tab` fará com que reduza significativamente esses erros.
+
+# Operações básicas
+
+Vamos então à linguagem! 
+
+O R pode funcionar como uma simples **calculadora**, que utiliza a mesma sintaxe que outros programas (como o excel):
+
+```{r, eval=FALSE}
+#########################
+# Script Curso R
+
+# Data: 24/07/2018
+##########################
+
+1+1.3                 #Decimal definido com "."
+2*3
+2^3
+4/2
+
+sqrt(4)              #raíz quadrada
+log(100, base = 10)  #logarítmo na base 10
+log(100)             #logarítmo com base neperiana
+
+```
+
+Agora, utilize as operações básicas para solucionar expressão abaixo. Lembre-se de utilizar parênteses `()` para estabelecer prioridades nas operações.
+
+$(\frac{13+2+1.5}{3})+ log_{4}96$
+
+Resultado esperado:
+
+```{r, echo=FALSE}
+((13+2+1.5)/3) + log(96, base = 4)
+```
+
+Os comandos `log` e `sqrt` são duas de muitas outras funções básicas que o R possui. Para todas elas o R possui uma descrição para auxiliar no seu uso, para acessar essa ajuda use:
+
+```{r, eval=FALSE}
+?log
+```
+
+E será aberta a descrição da função na janela `Help` do RStudio.
+
+Se a descrição do próprio R não for suficiente para você entender como funciona a função, busque no google (de preferência em inglês). Existem diversos sites e fóruns com informações didáticas das funções do R.
+
+## Operações com vetores
+
+Os vetores são as estruturas mais simples trabalhadas no R. Construímos um vetor com uma sequencia numérica usando:
+
+```{r}
+c(1,3,2,5,2)
+```
+
+Utilizamos o simbolo `:` para criar sequencias de números inteiros, como:
+
+```{r}
+1:10
+```
+
+Podemos utilizar outras funções para gerar sequencias, como:
+
+```{r}
+seq(from=0, to=100, by=5)
+# ou
+seq(0,100,5) # Se você já souber a ordem dos argumentos da função
+
+```
+
+* Crie uma sequencia utilizando a função `seq` que varie de 4 a 30, com intervalos de 3 em 3.
+
+```{r, echo=FALSE}
+seq(from=4, to=30, by=3)
+```
+
+A função `rep` gera sequencias com números repetidos:
+
+```{r}
+rep(3:5, 2)
+rep(3:5, each = 2)
+```
+
+Podemos realizar operações utilizando esses vetores:
+
+```{r,eval=FALSE}
+c(1,4,3,2,5,8)*2
+c(4,2,1,5,3,2)+c(5,2,6,1,3,5)
+c(4,2,1,5,3,2)*c(5,2,6,1,3,5)
+```
+
+Repare que já esta ficando cansativo digitar os mesmos números repetidamente, vamos resolver isso criando **objetos** para armazenar nossos vetores e muito mais. 
+
+# Criando objetos
+
+O armazenamento de informações em objetos e a possível manipulação desses faz do R uma linguagem *orientada por objetos*. Para criar um objeto basta atribuir valores para variáveis como a seguir:
+
+```{r, results='hide'}
+x = c(30.1,30.4,40,30.2,30.6,40.1)
+# ou
+x <- c(30.1,30.4,40,30.2,30.6,40.1)
+
+y = c(0.26,0.3,0.36,0.24,0.27,0.35)
+```
+
+Os mais antigos costumam usar o sinal `<-`, mas tem a mesma função de `=`. Escolha usar o qual preferir.
+
+Para acessar os valores dentro do objeto basta:
+
+```{r}
+x
+```
+
+A linguagem é sensível à letras maiúsculas e minúsculas, portanto `x` é diferente de `X`:
+
+```{r, eval=FALSE}
+X
+```
+
+O objeto `X` não foi criado. 
+
+Podemos então realizar as operações com o objeto criado:
+
+```{r, results='hide'}
+x*2
+x + y
+x*y
+```
+
+E podemos armazenar a operação em outro objeto:
+
+```{r, results='hide'}
+z <- (x+y)/2
+z
+```
+
+Podemos também aplicar algumas funções, como exemplo:
+
+```{r}
+sum(z)  # soma dos valores de z
+mean(z) # média 
+var(z)  # variância
+```
+
+Acessamos somente o 3º valor do vetor criado com `[]`:
+
+```{r, results='hide'}
+z[3]
+```
+
+Também podemos acessar o número da posição 2 a 4 com:
+
+```{r}
+z[2:4]
+```
+
+Para obter informações do vetor criado utilize:
+
+```{r}
+str(z)
+```
+
+A função `str` nos diz sobre a estrutura do vetor, que se trata de um vetor **numérico** com 6 elementos. 
+
+Os vetores também podem receber outras categorias como **caracteres**:
+
+```{r}
+clone <- c("GRA02", "URO01", "URO03", "GRA02", "GRA01", "URO01")
+```
+
+Outra classe são os **fatores**, esses podem ser um pouco complexos de lidar.
+
+De forma geral, fatores são valores categorizados por `levels`, como exemplo, se transformarmos nosso vetor de caracteres `clone` em fator, serão atribuidos níveis para cada uma das palavras:
+
+```{r}
+clone_fator <- as.factor(clone)
+str(clone_fator)
+levels(clone_fator)
+```
+
+Dessa forma, teremos apenas 4 níveis para um vetor com 6 elementos, já que as palavras "GRA02" e "URO01" se repetem. Podemos obter o número de elementos do vetor ou o seu comprimento com:
+
+```{r}
+length(clone_fator)
+```
+
+Também vetores **lógicos**, que recebem valores de verdadeiro ou falso:
+
+```{r}
+logico <- x > 40
+logico   # Os elementos são maiores que 40?
+```
+
+Com ele podemos, por exemplo, identificar quais são as posições dos elementos maiores que 40:
+
+```{r}
+which(logico)  # Obtendo as posiçoes dos elementos TRUE
+
+x[which(logico)] # Obtendo os números maiores que 40 do vetor x pela posição
+```
+
+Encontre mais sobre outros operadores lógicos, como o `>` utilizado, neste [link](http://www.statmethods.net/management/operators.html).
+
+**Warning**
+
+Não é possível misturar diferentes classes dentro de um mesmo vetor, ao tentar fazer isso repare que o R irá tentar igualar para uma única classe:
+
+```{r}
+errado <- c(TRUE, "vish", 1)
+errado
+```
+
+No caso, todos os elementos foram transformados em caracter.
+
+
+## Matrizes
+
+As matrizes são outra classe de objetos muito utilizadas no R, com elas podemos realizar operações de maior escala de forma automatizada.
+
+Por serem usadas em operações, nelas somente armazenamos elementos numéricos. Para criar uma matriz, determinamos uma sequência de números e indicamos o número de linhas e colunas da matriz:
+
+```{r}
+X <- matrix(1:12, nrow = 6, ncol = 2)
+X
+```
+
+Podemos também utilizar sequencias já armazenadas em vetores para gerar uma matriz, desde que eles sejam numéricos:
+
+```{r}
+W <- matrix(c(x,y), nrow = 6, ncol =2)
+W
+W2 <- matrix(c(x,y), nrow = 6, ncol =2, byrow = T)
+W2
+```
+
+Com elas podemos realizar operações matriciais:
+
+```{r}
+X*2
+X*X        
+X%*%t(X)          # Multiplicação matricial
+```
+
+Utilizar essas operações exige conhecimento de álgebra de matrizes, se quiser se aprofundar a respeito, o livro *Linear Models in Statistics, Rencher (2008)* possui um boa revisão à respeito. Você também pode explorar a sintaxe do R para essas operações neste [link](http://www.statmethods.net/advstats/matrix.html).
+
+Acessamos os números internos à matriz dando as coordenadas [linha,coluna], como no exemplo:
+
+```{r}
+W[4,2] # Número posicionado na linha 4 e coluna 2
+```
+
+As vezes pode ser informativo dar nomes às colunas e às linhas da matriz, fazemos isso com:
+
+```{r}
+colnames(W) <- c("altura", "diametro")
+rownames(W) <- clone
+W
+```
+
+Essas funções `colnames` e `rownames` também funcionam nos data.frames.
+
+## Data.frames
+
+Diferente das matrizes, não realizamos operações com os data.frames, mas eles permitem a união de vetores com classes diferentes. Os data.frames são semelhantes à tabelas geradas em outros programas, como o excel.
+
+Os data.frames são combinação de vetores de mesmo comprimento. Todos os que criamos até agora tem tamanho 6, verifique. 
+
+Podemos assim combiná-los em colunas de um único data.frame:
+
+```{r}
+campo1 <- data.frame("hibrido" = c("DKB390", "SHS7990", "SYN", "BM3063", "SHS7930"),     # Antes do sinal de "="  
+                     "AlturaPlantas" = c(1.5,2.0,1.6,1.8,1.3),        # estabelecemos os nomes  
+                     "AlturaEspiga" = c(0.3,0.4,0.2,0.1,0.25),      # das coluna
+                     "NumeroFolhas" = c(rep(51:52, 2),53),
+                     "NotaEstande"= c(1.5,2.0,1.6,1.8,1.3) > 1.5) 
+campo1
+```
+
+Podemos acessar cada uma das colunas com:
+
+```{r}
+campo1$NumeroFolhas
+```
+
+Ou também com:
+
+```{r}
+campo1[,4] 
+```
+
+Aqui, o número dentro dos colchetes se refere à coluna, por ser o segundo elemento (separado por vírgula). O primeiro elemento se refere à linha. Como deixamos o primeiro elemento vazio, estaremos nos referindo a todas as linhas para aquela coluna.
+
+Dessa forma, se quisermos obter um conteúdo específico podemos dar as coordenadas com [linha,coluna]:
+
+```{r}
+campo1[1,2] 
+```
+
+* Obtenha altura da primeira espiga do hibrido "SYN".
+
+```{r, echo=FALSE}
+campo1[3,3] 
+```
+
+Mesmo se tratando de um data.frame, podemos realizar operações com os vetores numéricos que a compõe.
+
+# Exportando e importando dados
+
+Os objetos criados dentro do R podem ser exportados em arquivos de diversos formatos. Lembre-se que, se não definir todo o caminho que deseja depositar o arquivo, ele irá ser salvo no seu diretório de trabalho.
+
+Para exportar o objeto no formato .RData:
+
+```{r, eval=FALSE}
+save(campo1, file = "campo1.RData")
+```
+
+Essa é uma forma de salvar o objeto trabalhado, se removermos ele com:
+
+```{r, eval=FALSE}
+rm(campo1)  # Certifique-se que salvou o objeto antes de removê-lo
+```
+
+Podemos facilmente obtê-lo novamente com:
+
+```{r, eval=FALSE}
+load("campo1.RData")
+```
+
+Para salvar todos os objetos do seu *workspace* use:
+
+```{r, eval=FALSE}
+save.image()
+```
+
+O R irá criar um arquivo `.Rdata` contendo todos os seus objetos.
+
+Podemos exportar nossos objetos em outros formatos, como, por exemplo, `.txt` ou `.csv`. Para isso utilizamos:
+
+```{r, eval=FALSE}
+write.table(campo1, file = "campo1.txt", sep = ";", dec = ".", row.names = FALSE)
+write.csv(campo1, file = "campo1.csv", row.names = TRUE)
+```
+
+Obs: Você pode adquirir pacotes para exportar e importar dados com outros fomatos, como exemplo o pacote `xlsx` exporta e importa dados com formato do excel.
+
+Ao exportar há diversas opções para a formatação do arquivo, é importante considerá-las se o arquivo for ser trabalhado em outro sofware posteriormente.
+
+Abra os arquivos gerados para visualizar sua formatação.
+
+Esses arquivos podem ser lidos novamente pelo R, utilizando as funções e suas especificações:
+
+```{r, eval=FALSE}
+campo1_txt <- read.table(file = "campo1.txt", sep=";", dec=".", header = TRUE)
+campo1_csv <- read.csv(file = "campo1.csv")
+head(campo1_txt)
+head(campo1_csv)
+```
+
+Agora que aprendemos a importar dados, vamos trabalhar com o conjunto gerado a partir do dados que vocês coletaram em campo.
+
+Nos disponibilizamos neste [link](unico_2018/dados.csv) dados simulados para esse experimento, mas é bem mais legal se cada um digitar o seu! Use qualquer programa para digitar os dados, faça isso no formato de tabela, você pode exportar em qualquer formato que o R da um jeito, mas se nao quiser ter muito trabalho, expore em .csv.
+
+Adicione o seu arquivo ao seu diretório de trabalho ou indique o caminho da pasta ao importá-lo para dentro do R, como a seguir.
+
+Aqui usaremos o argumento `stringAsFactors` que impede que o R transforme os vetores da tabela em fatores, os quais são mais difíceis de trabalhar. O argumento `na.strings` irá indicar como foram nomeados os dados perdidos. O argumento `header` indica que existe na planilha o nome das colunas.
+
+
+```{r}
+dados <- read.csv(file = "dados.csv", stringsAsFactors = FALSE, na.strings="-", header = T)
+```
+
+Vamos explorar a estrutura dos dados coletados:
+
+```{r}
+str(dados)
+# também
+dim(dados)
+```
+
+Vamos alterar os nomes das colunas para nomes mais fáceis de trabalhar:
+
+```{r}
+colnames(dados) = c("Bloco", "Parcela", "Hibrido", "AlturaPlantas", 
+                                       "AlturaEspiga", "NumeroFolhas", "Estande")
+str(dados)
+```
+
+# Estruturas condicionais
+
+## if e else
+
+Para nossa próxima atividade com os dados, vamos primeiro entender como funcionam as estruturas `if` e `else`.
+
+Nas funções condicionais `if` e `else`, estabelecemos uma condição para if, se ela for verdade a atividade será realizada, caso contrário (else) outra tarefa será. Como no exemplo:
+
+```{r}
+if(2 >3){
+  print("dois é maior que três")
+} else {
+  print("dois não é maior que três")
+}
+```
+
+* Teste o nível de conhecimento em R obtidos no formulaŕio (9ª coluna) pela terceira pessoa que o respondeu (linha 3). Envie uma mensagem motivacional se ela não possuir  qualquer conhecimento (nota 0), outra se possuir algum conhecimento (restante das notas). (dica: o sinal `==` se refere a "exatamente igual a")
+
+```{r}
+if(dados[3,4] < 1.5){
+  print("Híbrido pequeno demais")
+} else {
+  print("Tamanho provavelmente adequado")
+}
+```
+
+Podemos espeficiar mais do que uma condição repetindo a estrutura `if` `else`:
+
+```{r}
+if(dados[7,4] < 1.5){
+  print("Híbrido pequeno demais")
+} else if (dados[7,3] > 1.5 && dados[7,1] < 2.0){
+  print("Tamanho OK")
+} else {
+    print("Cresceu demais")
+  }
+```
+
+Mas repare que só é possível utilizar essas estruturas para um elemento individual do vetor, se quisermos percorrer o vetor inteiro precisamos recorrer a outro recurso.
+
+# Estruturas de repetição
+
+## For
+
+Esse recurso pode ser a função `for`, uma função muito utilizada e poderosa. Ela constitui uma estrutura de loop, pois irá aplicar a mesma atividade repetidamente até atingir uma determinada condição. Veja exemplos:
+
+```{r}
+for(i in 1:10){
+  print(i)
+}
+
+test <- vector()
+for(i in 1:10){
+  test[i] <- i+4 
+}
+test
+```
+
+Nos casos acima, `i` funciona como um index que irá variar de 1 até 10 a operação determinada entre chaves.
+
+Com essa estrutura, podemos repetir a operação realizada com as estruturas `if` e `else` para todo o vetor:
+
+```{r}
+for(i in 1:nrow(dados)){
+  if(dados[i,4] < 1.5){
+    print("Híbrido pequeno demais")
+  } else if (dados[i,4] > 1.5 && dados[i,4] < 2.0){
+    print("Tamanho OK")
+  } else {
+      print("Cresceu demais")
+    }
+}
+```
+
+## While
+
+Nesse tipo de estrutura de repetição a tarefa será realizada até que seja atingida determinada condição.
+
+```{r}
+x <- 1
+
+while(x < 5){
+  x <- x + 1
+  print(x)
+}
+```
+
+É muito importante que nessa estrutura a condição seja possível de ser atingida, caso contrário o loop irá funcionar infinitamente e você terá que interrompê-lo por meios externos, como, se este utilizando RStudio, clicar no simbolo em vermelho no canto direito superior da janela do console, ou apertar Ctrl+C no console.
+
+Não é muito difícil disso acontecer, basta um pequeno erro como:
+
+```{r, eval=FALSE}
+x <- 1
+
+while(x < 5){
+  x + 1
+  print(x)
+}
+```
+
+Aqui podemos utilizar os comandos `break` e `next` para atender a outras condições, como:
+
+```{r}
+x <- 1
+
+while(x < 5){
+  x <- x + 1
+  if(x==4) break
+  print(x)
+}
+
+x <- 1
+
+while(x < 5){
+  x <- x + 1
+  if(x==4) next
+  print(x)
+}
+
+```
+
+## Repeat
+
+Esta estrutura também exige uma condição de parada, mas esta condição é necessariamente colocada dentro do bloco de código com o uso do `break`. Ela então repete o bloco de código até a condição o interrompa.
+
+```{r}
+x <- 1
+repeat{
+  x <- x+1
+  print(x)
+  if(x==4) break
+}
+
+```
+
+## Loops dentro de loops
+
+É possível também utilizarmos estruturas de repetição dentro de estruturas de repetição. Por exemplo, se quisermos trabalhar tanto nas colunas como nas linhas de uma matrix.
+
+```{r}
+# Criando uma matrix vazia
+ex_mat <- matrix(nrow=10, ncol=10)
+
+# cada número dentro da matrix será o produto no índice da coluna pelo índice da linha
+for(i in 1:dim(ex_mat)[1]) {
+  for(j in 1:dim(ex_mat)[2]) {
+    ex_mat[i,j] = i*j
+  }
+}
+
+```
+
+Fizemos um vídeo com mais detalhes sobre loops no R, aumentem nossa quantidade de views e likes por [la](https://www.youtube.com/watch?v=VYOo7I5htOw).
+
+
+```{r}
+# Criando uma matrix vazia
+ex_mat <- matrix(nrow=10, ncol=10)
+
+# cada número dentro da matrix será o produto no índice da coluna pelo índice da linha
+for(i in 1:dim(ex_mat)[1]) {   # Primeiro nível, não tem espaço
+  for(j in 1:dim(ex_mat)[2]) { # Segundo nível tem um espaço (tab)
+    ex_mat[i,j] = i*j          # Terceiro nível tem dois espaços
+  }                            # Fechei o segundo nível
+}                              # Fechei o primeiro nível
+
+```
+
+# Elaboração de gráficos simples
+
+Para outros dados coletados, vamos gerar alguns gráficos simples utilizando as funções básicas do R. Existem pacotes como o `ggplot2`, `plotly` e `shiny` que possuem ferramentas muito poderosas para construção de gráficos, mas exigem um pouco mais de tempo para aprendizagem de sua sintaxe.
+
+Os tipos mais comuns já possuem funções próprias, mas outros gráficos podem ser customizados de acordo com a necessidade do usuário. Vamos iniciar com um simples gráfico de frequências (ou histograma) para os dados de `Altura de Plantas`.
+
+```{r, eval=FALSE}
+hist(dados$AlturaPlantas)
+```
+
+Vamos adicionar alguns argumentos para dar uma personalizada:
+
+* `breaks` para definir os intervalos para cada barra; 
+
+```{r, eval=FALSE}
+#### Histograma ####
+#Utiliza um vetor de valores para obter as frequências
+hist(dados$AlturaPlantas)
+hist(dados$AlturaPlantas, breaks = 2)
+hist(dados$AlturaPlantas, breaks = 15) 
+
+```
+
+Agora tente fazer o histograma para o número de folhas, aproveite para tentar alterar alguns parâmetros. Em seguida, serão apresentados outros gráficos que poderão ser utilizados.
+
+```{r}
+#### Bar plot ####
+#É um gráfico interessante quando possuímos resultados da função table
+estande <- table(dados$Estande)
+barplot(estande)
+
+```
+```{r eval=FALSE}
+#Alterando o eixo
+barplot(estande, horiz = TRUE)
+
+```
+
+```{r eval=FALSE}
+#Crie um objeto que corresponda ao data.frame 'dados' ordenado de acordo com a Altura (ou peso, como desejar!)
+#Em seguida, tente criar o dot plot.
+
+#### Curve ####
+#Utiliza uma expressão/função 
+curve(x^2 + 3*x)
+curve(2*x, add = TRUE, col="red")
+
+#### Boxplot ####
+#Necessita de um vetor de valores ou uma expressão
+boxplot(dados$AlturaPlantas)
+boxplot(dados$AlturaPlantas~dados$Hibrido)
+
+#Explore o bloxplot de outros atributos, podendo combiná-los
+#Desafio: faça o boxplot da altura pela combinação de Hibridos e Blocos
+boxplot(AlturaPlantas~Hibrido*Bloco, data = dados)
+
+#### Scatter plot ####
+#Utilizaremos coordenadas de pontos.
+plot(x = dados$AlturaPlantas, y= dados$AlturaEspiga)
+
+```
+
+##Parâmetros gráficos
+
+É possível customizar os gráficos alterando seus eixos, cores, fontes, etc. Começaremos através do gráfico de pontos.
+
+* `col` para adicionar cor;
+* `xlab` alterar título do eixo x;
+* `ylab` alterar título do eixo y;
+* `main` alterar título geral;
+
+```{r, eval=FALSE}
+hist(dados$NumeroFolhas, breaks=6, col="blue", xlab="Número de folhas", 
+     ylab="Frequencia", main="Histograma do número de Folhas (Curso 2018)")
+```
+
+Se preferir, podemos usar um gráfico de densidades de Kernel como:
+
+```{r, eval=FALSE}
+d <- density(dados$NumeroFolhas, na.rm = TRUE)
+
+plot(d, col="blue", xlab="Número de Folhas",
+     ylab="Densidade", main="Densidade do número de Folhas (Curso 2018)")
+```
+
+Vamos explorar um pouco mais o gráfico de pontos. Vamos verificar se existe uma correlação entre o a altura de plantas e a altura da primeira espiga:
+
+```{r}
+#Busque explorar mais parâmetros no gráfico a seguir:
+##Dica: tente alterar o nome dos eixos
+plot(x = dados$AlturaPlantas, y= dados$AlturaEspiga)
+
+#Linha de ajuste
+abline(lm(AlturaEspiga ~ AlturaPlantas, data = dados), col="red")
+
+#Verificar a correlação:
+cor(dados$AlturaPlantas, dados$AlturaEspiga)
+```
+
+Alguns argumentos são específicos para cada função, busque mais informações sobre cada uma delas para entender sobre seus argumentos. Outros parâmetros gráficos mais recorrentes são os relacionados com:
+
+* O tamanho de texto e símbolos, chamados de `cex`; 
+* Os símbolos de plotagem (25 ao todo), através do parâmetro `pch`;
+* Há os relacionados com a fonte (`font` e `family`);
+* Cores (`col`, `bg`, `fg`);
+
+```{r eval=FALSE}
+#Tamanho, pontos e cores
+plot(x = dados$AlturaPlantas, y= dados$AlturaEspiga, 
+     main = "Altura da prim. espiga  x Altura da planta", #Título principal 
+     xlab = "Altura de plantas", #Eixo x
+     ylab = "Alturada prim. espiga", #Eixo y
+     cex=2,
+     cex.axis=1.5)
+
+#Agora, busque alterar o nome dos rótulos (lab) e do título (main)
+#Utilize o parâmetro 'pch=' e coloque um número de 0 a 25
+#De maneira similar ao tamanho, trabalhe com as cores (utilize o color() para ver todas as cores disponíveis) 
+
+# Fontes e linhas #
+plot(x = dados$AlturaPlantas, y= dados$AlturaEspiga,
+     main = "Altura da prim. espiga  x Altura da planta", #Título principal 
+     xlab = "Altura de plantas", #Eixo x
+     ylab = "Alturada prim. espiga", #Eixo y
+     font=3,
+     family="serif", #Fonte do seu computador (Windows: "TT Courier New")
+     col="blue")
+abline(lm(AlturaEspiga ~ AlturaPlantas, data = dados), col="red", lty=3)
+
+
+```
+
+
+# Algumas ferramentas básicas de análise de dados
+
+Claramente a análise de dados é algo muito específico de cada conjunto de dados e interesses. Vamos aqui mostrar alguns recursos básicos como análise de variância, regressão e teste de médias.
+
+Algumas avaliações descritivas podem ser feitas pelo uso do `tapply` e de gráficos, como já mostrado anteriormente. A função `summary` também da informações gerais do conjunto. É possível usá-la em conjunto com o `tapply`.
+
+
+```{r}
+str(dados)
+# Certifique-se que esta lidando com variável categórica (fator)
+dados$Hibrido <- as.factor(dados$Hibrido)
+dados$Parcela <- as.factor(dados$Parcela)
+dados$Bloco <- as.factor(dados$Bloco)
+
+tapply(dados$AlturaPlantas, dados$Hibrido, summary)
+tapply(dados$AlturaEspiga, dados$Hibrido, summary)
+
+```
+
+Qual a relaçao linear entre altura de plantas e altura da primeira espiga?
+```{r}
+mod1 <- lm(AlturaPlantas ~ AlturaEspiga, data = dados)
+summary(mod1)
+
+```
+
+Podemos falar que a altura de plantas é significativamente diferente entre hibridos?
+
+```{r}
+mod1 <- aov(AlturaPlantas ~ Hibrido + Bloco, data = dados)
+summary(mod1)
+
+```
+
+O p-valor nos indica se podemos considerar diferenças de altura conforme o híbrido.
+
+Podemos também fazer um teste de médias para diferenciar a altura de plantas de cada híbrido. Aqui utilizaremos o método de Tukey:
+
+```{r}
+modaov <- aov(AlturaPlantas ~ Hibrido + Bloco, data = dados)
+tukey.test <- TukeyHSD(x=modaov, 'Hibrido', conf.level=0.95)
+tukey.test
+```
+
+# Pratique gerando relatórios no RStudio
+ 
+ Utilize o R no seu dia-a-dia para ir praticando a linguagem. Além das recomendações contidas na [primeira apresentação](), recomendamos também dar uma olhada em como gerar documentos em pdf e html usando a Markdown. Utilizamos essa metodologia para gerar este tutorial e outras apresentações do curso. Pode ser muito prático no dia-a-dia!
+ 
+Para utilizar, será necessário a instalação de outros pacotes. Um deles é o próprio `rmarkdown`:
+
+```{r, eval=FALSE}
+install.packages("rmarkdown")
+```
+
+```{r}
+library(rmarkdown)
+```
+ 
+Agora crie um arquivo .Rmd utilizando as facilidades do RStudio, clique no ícone com símbolo `+` no canto superior esquerdo. Escolha o opção `R Markdown`. Dê um título ao seu arquivo e escolha a opção `html`. Ao fazer isso, o RStudio já coloca um template inicial, ja com um cabeçalho:
+
+```
+---
+title: "Teste"
+author: "Eu"
+date: "June 5, 2018"
+output: html_document
+---
+
+```
+
+Este é o mais simples possível, você pode otimizá-lo de diversas maneiras. Saiba mais [aqui](https://rmarkdown.rstudio.com/html_document_format.html).
+
+O template inicial também traz alguns exemplos de sintaxe do markdown. Observe que utilizando `#` para títulos de sessões, `##` para um nível inferior (subtitulos) e assim por diante. Palavras em negrito são escritas em meia a dois `*` e existem diversas outras especificações para essa sintaxe. Veja mais sobre ela [aqui](https://www.markdownguide.org/basic-syntax).
+
+Para compilar o código, basta clicar em `Knit`. Ele irá pedir para que o arquivo .Rmd seja salvo com algum nome em algum lugar.
+
+O markdown também é capaz de entender diretamente a linguagem html, também a css e latex. Para essa última, o latex precisa estar instalado e todas suas dependências.
+
+Existem alguns pacotes que fornecem templates mais robustos para produção de htmls. Para esse tutorial utilizando o pacote `rmdformats` e personalizamos suas cores. Experimente:
+
+```{r, eval=FALSE}
+install.packages("rmdformats")
+```
+
+Agora faça o mesmo procedimento, clique no `+`, escolha `R Markdown` e, antes de escolher um título, mude para `From Template`, escolha o `HTML readthedown template`. Copie e cole o seguinte texto e aperte `Knit`.
+
+```
+# Teste1
+
+Isso aqui é um teste só para dar uma olhada no template
+
+## Testinho
+
+Subsessão
+
+* Item
+
+**negrito**
+
+*itálico*
+
+fiz um [link](https://gvenck.github.io/)!
+
+```
+
+
+Saiba mais no tutorial sobre isso no R-bloggers, que acreditamos ser um bom começo! Acesse [aqui](https://www.r-bloggers.com/how-to-create-reports-with-r-markdown-in-rstudio/).
+ 
+
+Acesse também outros materiais em português produzidos por Cristiane Taniguti, Fernando Correr e Rodrigo Amadeu [aqui](http://cristianetaniguti.github.io/Workshop_genetica_esalq/).
+
+Também recomendamos diversos materiais em inglês [aqui](https://gvenck.github.io/cursoR/english_tutorials.html).
+
+
+ 
