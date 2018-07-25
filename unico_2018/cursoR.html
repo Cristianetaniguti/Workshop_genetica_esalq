@@ -435,7 +435,7 @@ campo1_csv &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span 
 <span class="kw">head</span>(campo1_csv)</code></pre></div>
 <p>Agora que aprendemos a importar dados, vamos trabalhar com o conjunto gerado a partir do dados que vocês coletaram em campo.</p>
 <p>Nos disponibilizamos neste <a href="dados.csv">link</a> dados simulados para esse experimento, mas é bem mais legal se cada um digitar o seu! Use qualquer programa para digitar os dados, faça isso no formato de tabela, você pode exportar em qualquer formato que o R da um jeito, mas se nao quiser ter muito trabalho, expore em .csv.</p>
-<p>Envie para nos seus dados no e-mail <a href="mailto:cursogmp@usp.br">cursogmp@usp.br</a>.</p>
+<p>Envie para nos seus dados no e-mail <a href="mailto:cursogmp@gmail.com">cursogmp@gmail.com</a></p>
 <p>Adicione o seu arquivo ao seu diretório de trabalho ou indique o caminho da pasta ao importá-lo para dentro do R, como a seguir.</p>
 <p>Aqui usaremos o argumento <code>stringAsFactors</code> que impede que o R transforme os vetores da tabela em fatores, os quais são mais difíceis de trabalhar. O argumento <code>na.strings</code> irá indicar como foram nomeados os dados perdidos. O argumento <code>header</code> indica que existe na planilha o nome das colunas.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dados &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;dados.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>, <span class="dt">na.strings=</span><span class="st">&quot;-&quot;</span>, <span class="dt">header =</span> T)</code></pre></div>
