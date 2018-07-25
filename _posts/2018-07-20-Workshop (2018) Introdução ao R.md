@@ -5,3 +5,5 @@ Antes que o curso comece, certifique-se que você tem instalado no seu computado
 * [Tutorial de instalação do R e RStudio](unico_2018/Tutorial_instalacao.html)
 * [Tutorial principal](unico_2018/cursoR.html)
 * [Conjunto de dados simulados](unico_2018/dados.csv)
+* [Conjunto de dados reais](unico_2018/dados_completos.csv)
+* [Script com loops](unico_2018/scriptWorkshop.R)

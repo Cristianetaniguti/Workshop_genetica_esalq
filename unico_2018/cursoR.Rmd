@@ -800,6 +800,128 @@ abline(lm(AlturaEspiga ~ AlturaPlantas, data = dados), col="red", lty=3)
 
 ```
 
+# Planilha com dados reais
+
+* [Acesse aqui](dados_completos.csv) a planilha completa com dados reais coletados no campo dia 23/07/2018.
+
+Leia a planilha para o seu ambiente R com:
+
+```{r}
+dados_compl <- read.csv("dados_completos.csv", stringsAsFactors = FALSE)
+
+str(dados_compl) # Verifique se deu certo, são 200 obs e 8 variáveis
+```
+
+
+# Elaboração de funções
+
+Normalmente é uma boa prática criar um bloco de código se vai realizar aquela ação poucas vezes. Se for realizar várias vezes a ação e de uma vez só, vale a pena fazer um loop. Mas, se for realizar diversas vezes e o objeto de entrada for modificado vale a pena fazer uma função. E, na hierarquia, quando tiver acumulado muitas funções para realizar uma tarefa mais complexa, vale a pena construir um pacote.
+
+Aqui não vamos nos aprofundar muito nesse assunto, talvez ele renda um outro módulo inteiro, vamos apenas passar noções básicas.
+
+A função também é considerada um objeto no R, portanto você a atribui à uma variável, nesse caso à `quadra`. Então estabelecemos os argumentos da função, nesse caso `x`. Entre as chaves fica todo o corpo da função. Se você quer que a função retorne algum valor, é necessário utilizar o `return`.
+
+```{r}
+quadra <- function(x){
+  z <- x*x
+  return(z)
+}
+
+quadra(3)
+quadra(4)
+
+qualquer_nome <- 4
+quadra(qualquer_nome)
+```
+
+Vamos complicar um pouco e também dar mais sentido para construir uma função. Vamos definir no seu corpo várias ações antes de retornar o valor, algo que não poderia ser feito usando uma única função já pronta do R. Vamos aproveitar para explorar os dados coletados.
+
+```{r}
+# Número total de dados coletados
+tot <- dim(dados_compl)[1]
+
+# Média do número de folhas
+mfolhas <- mean(dados_compl[,7])
+
+# Máxima altura
+max.alt <- max(dados_compl[,5])
+
+# Outras características da árvore mais alta
+ca.alt.max <- dados_compl[which(dados_compl[,5] == max(dados_compl[,5])),]
+
+# Características da árvore mais baixa
+ca.alt.min <- dados_compl[which(dados_compl[,5] == min(dados_compl[,5])),]
+
+# Gráfico com correlação entre Altura da Planta com a Altura da Espiga
+png(filename = "corr.alt.png")
+plot(dados_compl[,5], dados_compl[,6], xlab = "Altura da Planta", ylab = "Altura da primeira espiga")
+dev.off()
+```
+
+Em forma de função:
+
+```{r}
+extrair_info <- function(dados_compl){
+  tot <- dim(dados_compl)[1]
+  
+  # Média do número de folhas
+  mfolhas <- mean(dados_compl[,7])
+  
+  # Máxima altura
+  max.alt <- max(dados_compl[,5])
+  
+  # Outras características da árvore mais alta
+  ca.alt.max <- dados_compl[which(dados_compl[,5] == max(dados_compl[,5])),]
+  
+  # Características da árvore mais baixa
+  ca.alt.min <- dados_compl[which(dados_compl[,5] == min(dados_compl[,5])),]
+  
+  # Gráfico com correlação entre Altura da Planta com a Altura da Espiga
+  png(filename = "corr.alt.png")
+  plot(dados_compl[,5], dados_compl[,6], xlab = "Altura da Planta", ylab = "Altura da primeira espiga")
+  dev.off()
+  
+  return(list(tot, mfolhas, max.alt, ca.alt.max, ca.alt.min))
+}
+
+lista_info <- extrair_info(dados_compl)
+
+# Indexação de lista
+lista_info[[2]]
+
+# Posso fazer com outro conjunto de dados
+lista_info2 <- extrair_info(dados)
+
+```
+
+Posso adicionar outros argumentos na função:
+
+```{r}
+extrair_info <- function(dados_compl, file.name){
+  tot <- dim(dados_compl)[1]
+  
+  # Média do número de folhas
+  mfolhas <- mean(dados_compl[,7])
+  
+  # Máxima altura
+  max.alt <- max(dados_compl[,5])
+  
+  # Outras características da árvore mais alta
+  ca.alt.max <- dados_compl[which(dados_compl[,5] == max(dados_compl[,5])),]
+  
+  # Características da árvore mais baixa
+  ca.alt.min <- dados_compl[which(dados_compl[,5] == min(dados_compl[,5])),]
+  
+  # Gráfico com correlação entre Altura da Planta com a Altura da Espiga
+  png(filename = file.name)
+  plot(dados_compl[,5], dados_compl[,6], xlab = "Altura da Planta", ylab = "Altura da primeira espiga")
+  dev.off()
+  
+  return(list(tot, mfolhas, max.alt, ca.alt.max, ca.alt.min))
+}
+
+lista_info <- extrair_info(dados_compl, "outronome.png")
+```
 
 # Algumas ferramentas básicas de análise de dados
 
@@ -826,9 +948,6 @@ mod1 <- lm(AlturaPlantas ~ AlturaEspiga, data = dados)
 summary(mod1)
 
 ```
-
-
-
 
 
 Podemos falar que a altura de plantas é significativamente diferente entre hibridos?
@@ -875,7 +994,7 @@ Para isso vamos adicionar duas outras colunas no nossa data.frame, com informaç
 row <- rep(rep(1:10, each=5),4)
 col <- c(rep(1:5,10),rep(6:10,10), rep(11:15,10), rep(16:20,10))
 
-dados.up <- cbind(col, row, dados)
+dados.up <- cbind(col, row, dados_compl)
 ```
 
 Para usar a função do pacote, buscamos no google por tutoriais, [aqui](https://cran.r-project.org/web/packages/desplot/vignettes/desplot_examples.html) esta aquele no qual nos baseamos para elaborarmos o código abaixo.
@@ -885,6 +1004,73 @@ desplot(Bloco ~ col+row, dados.up,
         text=Hibrido, cex=1, out1=Bloco,
         out2=Hibrido, out2.gpar=list(col = "gray50", lwd = 1, lty = 1))
 ```
+
+Saindo um pouco do nosso conjunto de dados. Vamos agora utilizar um outro pacote chamado "ggmap". 
+
+
+Ele esta disponível no repositório oficial do R, o CRAN, portanto para instalá-lo basta:
+
+```{r, eval=FALSE}
+install.packages("ggmap")
+```
+
+Depois disso é necessário recrutá-lo com:
+
+```{r, warning=FALSE, message='hide'}
+library(ggmap) # Este comando será necessário toda vez que for utilizar o pacote
+```
+
+É um pacote que utiliza recursos online para gerar mapas conforme um conjunto de dados. Você pode obter mais informações sobre ele no [manual disponível no CRAN](https://cran.r-project.org/web/packages/ggmap/ggmap.pdf).
+
+Vamos então montar um vetor com o nome da cidade dos participantes do curso. Segue um exemplo:
+
+```{r}
+cidades <- c("Piracicaba - SP", "São Paulo - SP", "Pindamonhangaba - SP")
+```
+
+Vamos utilizar a função `geocode` para obter dados de longitude e latitude das cidades dos participantes do curso:
+
+```{r}
+part1 <- geocode(cidades[1])
+```
+
+Podemos aplicar a mesma função para todos os participantes utilizando o `for`.
+
+```{r, warning=FALSE, message='hide', results='hide'}
+
+coord <- data.frame()
+for(i in 1:length(cidades)){
+  coord <- rbind(coord,geocode(cidades[i]))
+}
+
+coord
+```
+
+Pode ser que algumas coordenadas não puderam ser encontradas, é um problema de conexão com o google, mas não tem problema, vamos em frente.
+
+Agora estabelecemos um mapa de fundo com a média das longitudes e latitudes:
+
+```{r, warning=FALSE, message='hide'}
+mapcurso <- get_map(location = 
+                    c(lon = mean(coord$lon, na.rm = TRUE), 
+                    lat = mean(coord$lat, na.rm = TRUE)), 
+                    zoom = 5,
+                    maptype = "roadmap", scale = 2)
+```
+
+Para mais informações sobre as funções do pacote utilize `?get_map`.
+
+Agora vamos adicionar as localizações no mapa:
+
+```{r}
+ggmap(mapcurso) +
+  geom_point(data = coord, 
+             aes(x = lon, y = lat, fill = "red"), 
+             size = 2, shape = 21)
+```
+
+Aqui os argumentos de `aes` definem características dos pontos no mapa, `fill` indica a coloração, `size` o tamanho e `shape` o formato. Acesse outras codificações de formato [aqui](http://www.cookbook-r.com/Graphs/Shapes_and_line_types/).
+
 
 # Pratique gerando relatórios no RStudio
  
