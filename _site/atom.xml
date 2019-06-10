@@ -4,12 +4,22 @@
  <title>Workshop da Genética</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <id>http://localhost:4000</id>
- <updated>2018-07-25T11:45:28-03:00</updated>
+ <updated>2019-06-10T09:05:16-03:00</updated>
  <author>
    <name>Cristiane Taniguti</name>
    <uri>http://cristianetaniguti.github.io/</uri>
    <email></email>
  </author>
+
+ 
+
+ <entry>
+   <title>Treinamento Em Programação No Ambiente R</title>
+   <link href="http://localhost:4000/Treinamento-em-Programa%C3%A7%C3%A3o-no-Ambiente-R"/>
+   <id>http://localhost:4000/Treinamento-em-Programação-no-Ambiente-R</id>
+   <updated>2019-05-06T00:00:00-03:00</updated>
+   <content type="html">&lt;ul&gt; &lt;li&gt;&lt;a href=&quot;https://gent-esalq.github.io/cursoR/index.html&quot;&gt;Material do “Treinamento em Programação no Ambiente R”&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;O treinamento aconteceu nos dias 16, 17 e 18 de maio de 2019. Foi ministrado por Cristiane Taniguti, Fernando Henrique Correr e Kaio Olimpio Dias.&lt;/p&gt; &lt;p&gt;O material foi elaborado por alunos de pós-graduação dos laboratórios de Genética Estatística e...</content>
+ </entry>
 
  
 
