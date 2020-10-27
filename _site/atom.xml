@@ -4,12 +4,32 @@
  <title>Workshop da Genética</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <id>http://localhost:4000</id>
- <updated>2019-06-10T09:05:16-03:00</updated>
+ <updated>2020-10-27T19:27:17-03:00</updated>
  <author>
    <name>Cristiane Taniguti</name>
    <uri>http://cristianetaniguti.github.io/</uri>
    <email></email>
  </author>
+
+ 
+
+ <entry>
+   <title>Minicurso De Introdução Ao R E Aplicações Em Genética</title>
+   <link href="http://localhost:4000/Minicurso-de-Introdu%C3%A7%C3%A3o-ao-R-e-Aplica%C3%A7%C3%B5es-em-Gen%C3%A9tica"/>
+   <id>http://localhost:4000/Minicurso-de-Introdução-ao-R-e-Aplicações-em-Genética</id>
+   <updated>2020-10-25T00:00:00-03:00</updated>
+   <content type="html">&lt;p&gt;O minicurso de “Introdução ao R e Aplicações em Genética” será realizado no X 4biotec em 01 e 02 de outubro de 2020.&lt;/p&gt; &lt;p&gt;Aqui estão alguns materiais que podem ser úteis:&lt;/p&gt; &lt;ul&gt; &lt;li&gt;&lt;a href=&quot;https://groups.google.com/g/curso-r-4biotec2020&quot;&gt;Link para o fórum de discussões&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;Ao abrir a página, será necessário pedir autorização de acesso....</content>
+ </entry>
+
+ 
+
+ <entry>
+   <title>Treinamento Em Programação No Ambiente R</title>
+   <link href="http://localhost:4000/Treinamento-em-Programa%C3%A7%C3%A3o-no-Ambiente-R"/>
+   <id>http://localhost:4000/Treinamento-em-Programação-no-Ambiente-R</id>
+   <updated>2020-03-16T00:00:00-03:00</updated>
+   <content type="html">&lt;ul&gt; &lt;li&gt;&lt;a href=&quot;https://gent-esalq.github.io/cursoR2/index.html&quot;&gt;Material do “Treinamento em Programação no Ambiente R”&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;O treinamento aconteceu nos dias 16, 18 e 20 de março de 2020. Foi ministrado por Cristiane Taniguti, Ana Letycia Basso Garcia e Vitor Hugo de Mello Pessoa.&lt;/p&gt; &lt;p&gt;O material foi elaborado por alunos de pós-graduação dos laboratórios de...</content>
+ </entry>
 
  
 
@@ -114,16 +134,6 @@
   &lt;li&gt;Utilizar um conjunto de dados exemplo contido no R&lt;/li&gt;
 &lt;/ul&gt;
 </content>
- </entry>
-
- 
-
- <entry>
-   <title>Workshop (2015)   introdução ao r {prática 1}</title>
-   <link href="http://localhost:4000/Workshop-(2015)-Introdu%C3%A7%C3%A3o-ao-R-Pr%C3%A1tica-1"/>
-   <id>http://localhost:4000/Workshop (2015) - Introdução ao R {Prática 1}</id>
-   <updated>2015-07-27T00:00:00-03:00</updated>
-   <content type="html">&lt;p&gt;Acesse &lt;a href=&quot;praticas_2015/Pratica1.html&quot;&gt;aqui&lt;/a&gt;!&lt;/p&gt; &lt;p&gt;Ministrada no minicurso “Introdução ao R”. Antes dela foi feita uma apresentação teórica de &lt;a href=&quot;teoricas_2015/R_intro.pdf&quot;&gt;Introdução ao R&lt;/a&gt;.&lt;/p&gt; &lt;p&gt;Esta primeira prática tem como objetivo:&lt;/p&gt; &lt;ul&gt; &lt;li&gt;Apresentar as principais classes de objetos;&lt;/li&gt; &lt;li&gt;Fazer operações matemáticas simples com vetores;&lt;/li&gt; &lt;li&gt;Criar e manipular uma data frame;&lt;/li&gt; &lt;li&gt;Lidar com diretório de...</content>
  </entry>
 
  
