@@ -52,6 +52,9 @@ fenotipos <- read.csv("https://raw.githubusercontent.com/Cristianetaniguti/Works
 str(fenotipos)
 head(fenotipos)
 
+rownames(fenotipos) <- fenotipos$cultivar
+fenotipos <- fenotipos[,-c(1,2)]
+
 genotipos <- read.csv("https://raw.githubusercontent.com/Cristianetaniguti/Workshop_genetica_esalq/gh-pages/4biotec/genotipos.csv", 
                       stringsAsFactors = F)
 
@@ -77,17 +80,18 @@ head(genotipos)
 geno.cores <- rev(geno.cores)
 
 heatmap(genotipos, Colv = NA, Rowv = NA,  col=geno.cores)
+heatmap(genotipos, Colv = NA, Rowv = NA,  col=geno.cores, scale = "column")
 
-fen_ordenado <- sort(fen)
+fenotipos_ordenado <- sort(fenotipos)
 
-desordem <- match(fen, fen_ordenado)
+desordem <- match(fenotipos, fenotipos_ordenado)
 
 colfunc <- colorRampPalette(c("royalblue", "red"))
 cores <- colfunc(20)[desordem]
 
 heatmap(genotipos, Colv = NA, Rowv = NA, col=rev(heat.colors(3)), RowSideColors = cores, scale = "column")
 
-ordem <- match(fen_ordenado, fen)
+ordem <- match(fenotipos_ordenado, fenotipos)
 
 heatmap(genotipos[ordem,], Rowv = NA, Colv = NA, col=geno.cores, RowSideColors = cores[ordem], scale = "column")
 
@@ -96,18 +100,18 @@ heatmap(genotipos[ordem,-c(6:10,17:20)], Rowv = NA, Colv = NA, col=geno.cores, R
 
 # não ligados
 par(mfrow=c(2,2))
-boxplot(fen ~ genotipos[,11])
-boxplot(fen ~ genotipos[,12])
-boxplot(fen ~ genotipos[,13])
-boxplot(fen ~ genotipos[,14])
+boxplot(fenotipos ~ genotipos[,11])
+boxplot(fenotipos ~ genotipos[,12])
+boxplot(fenotipos ~ genotipos[,13])
+boxplot(fenotipos ~ genotipos[,14])
 
 
 # ligados
 par(mfrow=c(2,2))
-boxplot(media_cultivar ~ genotipos[,7])
-boxplot(media_cultivar ~ genotipos[,8])
-boxplot(media_cultivar ~ genotipos[,9])
-boxplot(media_cultivar ~ genotipos[,10])
+boxplot(fenotipos ~ genotipos[,7])
+boxplot(fenotipos ~ genotipos[,8])
+boxplot(fenotipos ~ genotipos[,9])
+boxplot(fenotipos ~ genotipos[,10])
 
 
 mk <- genotipos[,11]
@@ -117,7 +121,7 @@ mk <- gsub(pattern = 2, replacement = "AA", x = mk)
 
 mk <- as.factor(mk)
 
-modelo <- lm(media_cultivar ~ mk)
+modelo <- lm(fenotipos ~ mk)
 summary(modelo)
 
 
@@ -128,7 +132,7 @@ mk <- gsub(pattern = 2, replacement = "AA", x = mk)
 
 mk <- as.factor(mk)
 
-modelo <- lm(media_cultivar ~ mk)
+modelo <- lm(fenotipos ~ mk)
 summary(modelo)
 
 # Loop para identificar p-valor de todos os marcadores
@@ -142,7 +146,7 @@ for(i in 1:dim(genotipos)[2]){
   
   mk <- as.factor(mk)
   
-  modelo <- lm(fen ~ mk)
+  modelo <- lm(fenotipos ~ mk)
   f <- summary(modelo)$fstatistic
   p[i] <- pf(f[1],f[2],f[3],lower.tail=F)
 }
