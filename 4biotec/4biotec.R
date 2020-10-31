@@ -89,7 +89,7 @@ head(genotipos)
 
 ordem <- match(fenotipos_ordenado, fenotipos)
 
-heatmap(genotipos[ordem,], Rowv = NA, Colv = NA, col=geno.cores, RowSideColors = cores[ordem], scale = "column")
+heatmap(genotipos[ordem,], Rowv = NA, Colv = NA, col=geno.cores, RowSideColors = cores[ordem])
 
 heatmap(genotipos[ordem,c(6:10,17:20)], Rowv = NA, Colv = NA, col=geno.cores, RowSideColors = cores[ordem], scale = "column")
 heatmap(genotipos[ordem,-c(6:10,17:20)], Rowv = NA, Colv = NA, col=geno.cores, RowSideColors = cores[ordem], scale = "column")
