@@ -9,7 +9,7 @@ Aqui estão alguns materiais que podem ser úteis:
 
 Ao abrir a página, será necessário pedir autorização de acesso. Aguarde uns instantes que já liberaremos.
 
-* [Link para acesso ao caderno Colab com suporte para R](https://colab.research.google.com/drive/1IizoRWT5P_0eHzco_5xQ6oV5q1858In1?usp=sharing)
+* [Link para acesso ao caderno Colab com suporte para R](https://colab.research.google.com/drive/1kG0UgThpfx5g56JDyO--ZRINZznpMbuW?usp=sharing)
 
 Ao Acessar o link, você deve abrir o caderno no seu google drive. Neste você não conseguirá salvar edições, pois demos apenas permissão de visualização, mas você pode clicar em "Copiar para o drive". Depois, na cópia gerada, você deve conectar o Colab aos recursos do seu computador clicando em "conect" no canto direito superior. Pronto! Agora você pode usar o R sem precisar instalá-lo no seu computador. Mas sugerimos que, para atividades no R após este curso, você utilize o RStudio. Siga o tutorial abaixo para sua instalação.
 
