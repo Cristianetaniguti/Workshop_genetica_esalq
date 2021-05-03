@@ -20,3 +20,6 @@ Para elaboração dos materiais aqui contidos, houve colaboração dos seguintes
 * Amanda Avelar
 * Guilherme Hosaka
 * Gabriel Gesteira
+* Lucas Taniguti
+* Guilherme Hosaka
+* Victor Mello
