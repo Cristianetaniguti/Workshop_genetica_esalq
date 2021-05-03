@@ -1,0 +1,321 @@
+Por que o R?
+========================================================
+author: Treinamento em Programação no Ambiente R 
+date: 16/03/2020
+autosize: true
+
+<div align="right">
+<img src="Rlogo.svg" width=500 height=300>
+</div>
+
+========================================================
+<h2 style="color:blue;">Perguntamos em 2018 e 2019! (e perguntaremos novamente este ano)</h2>
+
+```{r, echo=FALSE,fig.width10, fig.height=8, fig.show='hold', fig.align='center'}
+library(tm)
+library(SnowballC)
+library(wordcloud)
+
+data <- read.csv("Formulario2018.csv", stringsAsFactors = F)
+data2 <- read.csv("Formulario2019.csv", stringsAsFactors = F)
+
+txt <- data$Para.que.você.utiliza.ou.utilizará.o.R.
+text <- c(txt, data2$Para.que.você.utiliza.ou.utilizará.o.R.)
+
+docs <- Corpus(VectorSource(text))
+#inspect(docs)
+toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
+# Convert the text to lower case
+docs <- tm_map(docs, content_transformer(tolower))
+# Remove numbers
+docs <- tm_map(docs, removeNumbers)
+# Remove english common stopwords
+docs <- tm_map(docs, removeWords, stopwords("portuguese"))
+# Remove punctuations
+docs <- tm_map(docs, removePunctuation)
+# Eliminate extra white spaces
+docs <- tm_map(docs, stripWhitespace)
+# Text stemming
+#docs <- tm_map(docs, stemDocument)
+dtm <- TermDocumentMatrix(docs)
+m <- as.matrix(dtm)
+v <- sort(rowSums(m),decreasing=TRUE)
+d <- data.frame(word = names(v),freq=v)
+#head(d, 10)
+wordcloud(words = d$word, freq = d$freq, min.freq = 1,
+          max.words=200, random.order=FALSE, 
+          colors=brewer.pal(8, "Dark2"),scale = c(8,2))
+
+```
+
+========================================================
+<h2 style="color:blue;">O que é o R?</h2>
+
+- Uma linguagem e ambiente para análises estatísticas e gráficos
+- Um projeto GNU
+- Provinda da linguagem S 
+- Desenvolvida no Bell Laboratories pelo John Chambers e colegas
+- Oficialmente: "Preferimos pensar que é um ambiente dentro do qual técnicas estatísticas são implementadas."
+
+========================================================
+left:70%
+<h2 style="color:blue;">Algumas capacidades</h2>
+
+<small><ul style="list-style-type:disc">
+  <li> Compatibilidade com qualquer plataforma</li>
+  <li> Várias possibilidades de manipulação de dados</li>
+  <li> Processamento rápido (pode ser vinculado com C, C++ e Fortran)</li>
+  <li> Lida bem com Big Data</li>
+  <li> Automação e reprodutibilidade</li>
+  <li> Relatórios e Apresentações (inclusive esta e as próximas)</li>
+  <li> Estado da arte em gráficos (<a align="right" href="http://www.r-graph-gallery.com/"> belos exemplos</a>
+) </li>
+  <li> ... </li>
+</ul>
+</small>
+
+***  
+<img src="images/emoticon_surprise.png" alt="R Icon" width="100" height="100" align="center">
+
+
+========================================================
+<h2 style="color:blue;">Um projeto <em>GNU</em> 
+<img style="float:right;" src="images/gnu.png" alt="R Icon" width="150" height="150" >
+</h2>
+Free Software Foundation’s GNU general license:
+
+- Rodar o programa para qualquer propósito
+- Estudar como o programa funciona e adaptar isso aos seus interesses
+- Distribuir cópias
+- Aprimorar o programa e liberar para a comunidade acesso ao código fonte
+
+<footer align="right" ><small> https://www.r-project.org/about.html</small></footer>
+
+========================================================
+<h2 style="color:blue;">Não é só pelo dinheiro!</h2>
+
+["Software livre é referente à liberdade, não ao preço. Para entender o conceito, você deve pensar em "livre" como "liberdade de expressão", não como "open bar".](http://www.gnu.org/)
+
+["Tira o poder dos desenvolvedores sob os usuários"](http://www.gnu.org/philosophy/free-software-even-more-important.html)
+
+- No R são possíveis infinitas combinações
+
+Extensível (pacotes):
+- <a href="https://cran.r-project.org/index.html">CRAN</a> (15381 pacotes em 15.03.2020)
+- <a href="https://bioconductor.org/">Bioconductor</a> (1823 pacotes em 15.03.2020)
+- <a href="https://r-forge.r-project.org/">R-forge</a> (2123 pacotes em 15.03.2020)
+- <a href="https://github.com/">Github</a>
+
+========================================================
+<h2 style="color:blue;">Uma <em>Linguagem</em> de Programação </h2>
+
+Nível de abstração das linguagens
+
+- Mais baixo o nível, mais liberdades e mais difícil a aprendizagem
+
+```{r, echo=FALSE,fig.width=6, fig.height=4, fig.show='hold', fig.align='center'}
+# generate pairs of x-y values
+nx = 100
+ny = 80
+x = sample(x = 1:nx, size = 90, replace = TRUE)
+y = seq(-1, -ny, length = 90)
+ 
+# set graphical parameters
+op = par(bg = "black", mar = c(0, 0.2, 0, 0.2))
+ 
+# plot
+plot(1:nx, seq(-1, -nx), type = "n", xlim = c(1, nx), ylim = c(-ny, 1))
+for (i in seq_along(x))
+{
+  aux = sample(1:ny, 1)
+  points(rep(x[i], aux), y[1:aux], pch = sample(c("0","1"), aux, replace = TRUE), 
+         col = hsv(0.35, 1, 1, runif(aux, 0.3)), cex = runif(aux, 0.3))
+}
+```
+
+<font size="5">  
+```{r}
+cat("Feito em R!")
+```
+</font> 
+
+=======================================================
+<h2 style="color:blue;"> Por que aprender a programar? </h2>
+
+<font size="5.5">
+
+- Divergência entre capacidade tecnológicas e aplicação
+
+<a href="https://www.youtube.com/watch?v=xfBWk4nw440">You Should Learn to Program: Christian Genco at TEDxSMU</a> 
+
+Apollo Guidance Computer (1961) x 1 milhão = Smartphone (hoje)
+
+<img style="float:center;" src="images/apolo.png" alt="Apolo" width="700" height="250" >
+
+- Ainda há excesso de trabalho repetitivo
+- 65% das crianças hoje terão empregos no futuro que ainda não existem (World Economic Forum)
+
+</font>
+
+========================================================
+<h2 style="color:blue;">Reprodutibilidade </h2>
+
+Crise na reprodutibilidade de ciência
+
+* [Por que a maioria dos descobrimentos cientificos publicados são falsos? (2015)](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0020124)
+
+* [Manifesto pela ciência reprodutível](https://www.nature.com/articles/s41562-016-0021)
+
+* [Desafio para pesquisadores rodarem seu código novamente depois de 10 anos](https://www.nature.com/articles/d41586-019-03296-8)
+
+Outra sugestão de ferramenta para reprodutibilidade: [Docker](https://www.docker.com)
+
+
+=========================================
+<h2 style="color:blue;">O poder da mentalidade colaborativa
+<img style="float:right;" src="images/Octocat.png" alt="Github" width="120" height="120" >
+</h2>
+
+<font size="5">
+
+<a href="http://augusto-garcia.github.io/statgen-esalq/Short-tutorial-about-Git/">Tutorial sobre o git</a>
+
+
+<a href="http://www.geo.uzh.ch/microsite/reproducible_research/post/rr-rstudio-git/">Tutorial de como integrar git e RStudio</a>
+
+<ul small style="list-style-type:disc">
+
+<li><a>Compartilhamento de dados sobre COVID-19</a></li>
+
+<p style="margin-bottom:1cm;"> <a  href="https://github.com/CSSEGISandData/COVID-19">CSSEGISandData/COVID-19</a> - 3 contribuidores e mais 3,5 mil forks.</p>
+
+<p style="margin-top:0.3cm;"><a href="https://github.com/FoldingAtHome/coronavirus">FoldingAtHome/coronavirus</a> - 3 contribuidores e 15 forks </p>
+
+
+<li><a href="https://github.com/collections/open-journalism">Jornalismo aberto</a></li>
+
+<p style="margin-bottom:1cm;"> <a  href="https://github.com/fivethirtyeight/data">fivethirtyeight/data</a> - 37 contribuidores </p>
+
+<li><a href="https://github.com/showcases/science">Ciência</a></li>
+<a href="https://github.com/cms-sw/cmssw">Cmssw</a> - 
+Partículas elementares Higgs Boson (2012), 3800 pessoas de 42 países diferentes, 645 contribuidores no github
+
+<p style="margin-bottom:1cm;"><a href="https://github.com/Cristianetaniguti/onemap">OneMap</a> - 9 contribuidores
+</p>
+
+<p style="margin-bottom:1cm;"><li><a href="https://github.com/trending/r">Muitos outros pacotes do R</a></li></p>
+
+<li> <a href="https://github.com/GENt-esalq/GENt-esalq.github.io">O site do GENt </a>-8 contribuidores</li> 
+
+</ul>
+
+</font>
+
+========================================================
+<h2 style="color:blue;">Incentivo à lógica de programação
+<img style="float:right;" src="images/emoticon_excited.png" alt="R Icon" width="100" height="100" >
+</h2>
+
+<a href="https://hourofcode.com/pt">Hour of Code</a> 
+
+<img style="float:right;" src="images/giphy.gif" alt="R Icon" width="500" height="430" >
+
+<a href="https://scratch.mit.edu/">Scratch</a> 
+
+<a href="https://pt.coursera.org/">Coursera</a> 
+
+<a href="https://pt.khanacademy.org/">Khan academy</a> 
+
+<a href="https://www.codecademy.com/pt">Code academy</a> 
+
+[Code school](https://www.codeschool.com/)
+
+[edX](https://www.edx.org/)
+
+[Github](https://github.com/collections/learn-to-code)
+
+
+========================================================
+<h2 style="color:blue;">Materiais disponíveis para aprendizagem de R
+</h2>
+
+Algumas sugestões:
+
+- Manuais do [CRAN](https://cran.r-project.org/)
+
+- Pacote interativo [Swirl](http://swirlstats.com/students.html)
+
+- Canal do Youtube [The New Boston](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGCzVMGCPi1kwvABu7eWv08P)
+
+- Cursos do [Datacamp](https://www.datacamp.com/community/open-courses)
+
+- Série de tarefas em [TryR](http://tryr.codeschool.com/)
+
+
+=======================================================
+<h2 style="color:blue;">Como aprender a programar?
+<img style="float:right;" src="images/emoticon_sad.jpg" alt="R Icon" width="100" height="100" >
+</h2>
+
+Curva de aprendizagem
+
+<img style="center" src="curve.jpg" alt="curva" width="800" height="400">
+
+[referência](http://sascha-kasper.com/the-bumpy-learning-curve/)
+
+=======================================================
+<h2 style="color:blue;">Lidar com frustrações
+</h2>
+
+- Diferença de outros tipos de aprendizado
+- Bravura x perfeição
+[Teach girls bravery, not perfection | Reshma Saujani](https://www.youtube.com/watch?v=fC9da6eqaqg)
+
+```{r, eval=F, echo=F}
+
+#"(...) e eu descobri que as ensinando a programar, estava educando-as para serem corajosas. Programação é um processo sem fim de tentativa e erro, de tentar colocar o comando certo  no lugar certo. Às vezes, apenas um ponto e vírgula é a diferença entre o sucesso e o fracasso.O código falha e é destruído em seguida. Geralmente precisa haver muitas tentativas até aquele momento mágico em que aquilo que tentamos construir ganhar vida. Isso exige perseverança. Isso exige imperfeição.(...) "
+
+```
+
+<img align="center" src="images/desconf.png" alt="Frust" width="750" height="450" >
+
+=======================================================
+<h2 style="color:blue;">Dicas para o controle de pragas
+</h2>
+
+Termo "bug" por [Grace Hopper](https://en.wikipedia.org/wiki/Grace_Hopper) em 1947
+
+- Vá aos poucos
+- Identifique a linha do código onde esta o erro
+- Google!
+- Use o método científico: levante hipóteses e teste
+- Deixe o erro facilmente reproduzível
+
+***
+
+<img align="right" src="images/bug.png" alt="Frust" width="300" height="300" >
+
+=========================================
+<h2 style="color:blue;">Para mais motivação:
+</h2>
+
+TED talks:
+- [Mitch Resnick: Let's teach kids to code](https://www.youtube.com/watch?v=Ok6LbV6bqaE)
+- [My Experience of Using the Statistical Language R | Nathan Hadjiyski](https://www.youtube.com/watch?v=HtO40PR0fjM)
+
+Vídeos motivadores:
+- [Hour of code 1](https://www.youtube.com/watch?v=ip051U7Rvds) 
+- [Hour of code 2](https://www.youtube.com/watch?v=FC5FbmsH4fw)
+- [Incentivo do Obama](https://www.youtube.com/watch?v=6XvmhE1J9PY)
+
+=========================================
+<h2 style="color:blue;">Informes!
+</h2>
+
+- Ta rolando uma epidemia! O que faremos?
+- Uso do fórum
+- Sinais no zoom para seguirmos
+- Tutorial disponível online
+
+
+
