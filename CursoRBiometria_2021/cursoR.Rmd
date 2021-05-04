@@ -1831,6 +1831,53 @@ H_2
 
 > Crie uma função para estimar a herdabilidade 
 
+## Criando mapas com ggplot
+
+Não vamos entrar em detalhe sobre os códigos que usamos aqui porque ele faz uso do `tidyverse`, um pacote que permite manipular os dados com muita flexibilidade, mas ele iria requerer outro curso focado apenas nele! Esta é uma aplicação para mostrar que conseguimos fazer quase tudo com R e ggplot em mãos. O mais difícil é saber manipular os dados...
+
+```{r}
+### Instalar pacote ###
+#devtools::install_github("rpradosiqueira/brazilmaps")
+# Sometimes need to install 'sf' (install.packages("sf")
+#  and also the dependencies:
+# - 'units' (libudunits2-dev - Linux)
+# - 'gdal' (libgdal-dev - Linux)
+#######################
+
+# Carregar pacote
+library(tidyverse)
+
+# Caso não tenha mais conjunto dados disponível no seu ambiente de trabalho
+dados = read.csv("dados_alunos2020.csv", stringsAsFactors = FALSE)
+colnames(dados) = c("horario", "genero", "participacao", "cidade", "instituicao", "escolaridade", "graduacao", 
+                   "area", "idade", "altura", "peso", "aniversario", "conhecimentoR", "linguagens", "usoR", "motivacaoR")
+
+# Coletando os dados da base por estado
+estados = brazilmaps::get_brmap("State")
+
+# Adicionando uma coluna com as siglas dos estados, será importane para a próxima etapa
+estados$sigla = c("RO", "AC", "AM", "RR", "PA", "AP", "TO", "MA", "PI", "CE", "RN", "PB", "PE", "AL", "SE", "BA", "MG", "ES", "RJ", "SP", "PR", "SC", "MS", "MT", "GO", "DF", "RS")
+
+# Aqui, estamos pegando as duas últimas letras da cidade de origem da pessoa,
+# se ela tiver preenchido corretamente, estas últimas serão o estado, como em
+# "Piracicaba - SP". Após isto, fazemos a contagem de pessoas por estado e 
+# unimos com os dados do brazilmaps
+estados = dados %>%
+  mutate(sigla = str_sub(cidade, nchar(cidade)-1, nchar(cidade))) %>%
+  group_by(sigla) %>%
+  summarise(n = n()) %>%
+  ungroup() %>% 
+  right_join(estados, by = "sigla")
+
+# Aqui usamos um outro tipo de plot, o geom_sf(), que precisa de dados de
+# coordenadas geométricas para construir os mapas. O resto envolve apenas
+# funções e argumentos que nós conhecemos!!!
+ggplot(estados) +
+  geom_sf(aes(geometry = geometry, fill = n)) + 
+  theme_minimal() + scale_fill_continuous(low = "gray40", high = "red") +
+  labs(fill = "Número \nde pessoas")
+```
+
 # Extra
 
 ## Família de funções `apply`
@@ -1921,38 +1968,6 @@ Observe que nas funções `apply` podemos trocar as funções prontas do *r base
 
 > Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão extra**](exercicios.html), se não, faça-os no conforto do seu lar e nos envie dúvidas pelo fórum.
 
-
-## Criando mapas com ggplot
-
-Não vamos entrar em detalhe sobre os códigos que usamos aqui porque ele faz uso do `tidyverse`, um pacote que permite manipular os dados com muita flexibilidade, mas ele iria requerer outro curso focado apenas nele! Esta é uma aplicação para mostrar que conseguimos fazer quase tudo com R e ggplot em mãos. O mais difícil é saber manipular os dados...
-
-```{r}
-library(tidyverse)
-
-# Coletando os dados da base por estado
-estados = brazilmaps::get_brmap("State")
-
-# Adicionando uma coluna com as siglas dos estados, será importane para a próxima etapa
-estados$sigla = c("RO", "AC", "AM", "RR", "PA", "AP", "TO", "MA", "PI", "CE", "RN", "PB", "PE", "AL", "SE", "BA", "MG", "ES", "RJ", "SP", "PR", "SC", "MS", "MT", "GO", "DF", "RS")
-
-# Aqui, estamos pegando as duas últimas letras da cidade de origem da pessoa,
-# se ela tiver preenchido corretamente, estas últimas serão o estado, como em
-# "Piracicaba - SP". Após isto, fazemos a contagem de pessoas por estado e 
-# unimos com os dados do brazilmaps
-estados = dados %>%
-  mutate(sigla = str_sub(cidade, nchar(cidade)-1, nchar(cidade))) %>%
-  group_by(sigla) %>%
-  summarise(n = n()) %>%
-  right_join(estados, by = "sigla")
-
-# Aqui usamos um outro tipo de plot, o geom_sf(), que precisa de dados de
-# coordenadas geométricas para construir os mapas. O resto envolve apenas
-# funções e argumentos que nós conhecemos!!!
-ggplot(estados) +
-  geom_sf(aes(geometry = geometry, fill = n)) + 
-  theme_minimal() + scale_fill_continuous(low = "gray40", high = "red") +
-  labs(fill = "Número \nde pessoas")
-```
 
 ## Gerando sorteio para delineamento experimental
 
