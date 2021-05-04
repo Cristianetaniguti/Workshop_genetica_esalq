@@ -1600,7 +1600,7 @@ tapply(clima_lond$prec.mm, clima_lond$Mes, summary)
 
 ```
 
-Podemos também avaliar fazendo alguns gráficos:
+Podemos também avaliar visualmente através de gráficos:
 
 ```{r}
 ggplot(clima_lond) + 
@@ -1630,14 +1630,14 @@ ggplot(stat_lond_edit) +
 
 ```
 
-Vamos então realizar um análise de variância para medir diferenças entre os meses.
+Vamos então realizar uma análise de variância a fim de verificar se há diferenças significativas entre os meses.
 
 ```{r}
 mod <- lm(prec.mm ~ Mes, data = clima_lond)
 summary(mod)
 ```
 
-Podemos também fazer um teste de médias para diferenciar a precipitação ao decorrer dos meses. Aqui utilizaremos o método de Tukey:
+Podemos também fazer um teste de médias para diferenciar a precipitação no decorrer dos meses. Aqui utilizaremos o método de Tukey:
 
 ```{r}
 modaov <- aov(prec.mm ~ Mes, data = clima_lond)
@@ -1674,7 +1674,7 @@ data <- transform(data, rep = factor(rep), prog = factor(prog), colheita = facto
 str(data)
 ```
 
-Vamos primeiro analisar somente os dados referentes à primeira colheita. Podemos fazer um subconjunto:
+Vamos analisar somente os dados referentes à primeira colheita. Para isso, podemos obter o subconjunto referente a ela:
 
 ```{r}
 # Indexar primeita colheita
@@ -1682,7 +1682,7 @@ Colheita_1 <- subset(data, colheita == 1)
 str(Colheita_1)
 ```
 
-Repare que, ao fazer o subconjunto, o conjunto de dados ainda mantém os três níveis do fator colheita, embora agora só tenhamos um. Isso pode ser um problema para a nossa análise. Portanto, devemos remover os níveis excedentes:
+Repare que, ao fazer o subconjunto, os três níveis do fator colheita ainda são mantidos, embora agora tenhamos apenas um. Isso pode ser um problema para a nossa análise. Portanto, devemos remover os níveis excedentes:
 
 ```{r}
 # Droplevels
@@ -1690,7 +1690,7 @@ Colheita_1 <- droplevels(subset(data, colheita == 1))
 str(Colheita_1)
 ```
 
-Agora podemos rodar nosso modelo de análise de variância.
+Em seguida, podemos rodar nosso modelo de análise de variância.
 
 ```{r}
 # Modelo
