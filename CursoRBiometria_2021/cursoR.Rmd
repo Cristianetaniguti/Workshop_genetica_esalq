@@ -1194,56 +1194,6 @@ calc_IMC(peso, altura)
 
 Para saber mais sobre desenvolvimento de funções acesse [aqui](https://www.r-bloggers.com/how-to-write-and-debug-an-r-function/) e, um pouco mais avançado, [aqui](http://adv-r.had.co.nz/Functions.html).
 
-# Diferenças entre `cat`, `print` e `paste`
-
-```{r}
-exemplo <- "Este é um exemplo"
-
-# Diferença 1 - salva em novos objetos?
-
-obj <- cat(exemplo)
-obj
-
-obj <- print(exemplo)
-obj
-
-obj <- paste(exemplo)
-obj
-
-# Diferença 2 - Concatena?
-
-cat(exemplo, "oi")
-# print(exemplo, "oi") não concatena
-paste(exemplo, "oi")
-paste0(exemplo, "oi")
-
-# Diferença 4 - Aparece quando dentro de funções ou loops?
-
-for(i in 1:5){
-  cat(exemplo)
-}
-
-for(i in 1:5){
-  paste(exemplo)
-}
-
-for(i in 1:5){
-  print(exemplo)
-}
-
-# Diferença 3 - Pode mudar conforme classes S3?
-
-cat(exemplo)
-print(exemplo)
-
-class(exemplo) <- "inventei_uma_classe" # Aqui estou fazendo um objeto de classe S3
-print.inventei_uma_classe <- function(x) print("Agora vai printar isso aqui, pq eu quero")
-
-cat(exemplo)
-print(exemplo)
-paste(exemplo)
-```
-
 
 # Rodando outros scripts .R 
 
@@ -1714,7 +1664,7 @@ tapply(clima_lond$prec.mm, clima_lond$Mes, summary)
 
 ```
 
-Podemos também avaliar fazendo alguns gráficos:
+Podemos também avaliar visualmente através de gráficos:
 
 ```{r}
 ggplot(clima_lond) + 
@@ -1744,14 +1694,14 @@ ggplot(stat_lond_edit) +
 
 ```
 
-Vamos então realizar um análise de variância para medir diferenças entre os meses.
+Vamos então realizar uma análise de variância a fim de verificar se há diferenças significativas entre os meses.
 
 ```{r}
 mod <- lm(prec.mm ~ Mes, data = clima_lond)
 summary(mod)
 ```
 
-Podemos também fazer um teste de médias para diferenciar a precipitação ao decorrer dos meses. Aqui utilizaremos o método de Tukey:
+Podemos também fazer um teste de médias para diferenciar a precipitação no decorrer dos meses. Aqui utilizaremos o método de Tukey:
 
 ```{r}
 modaov <- aov(prec.mm ~ Mes, data = clima_lond)
@@ -1788,7 +1738,7 @@ data <- transform(data, rep = factor(rep), prog = factor(prog), colheita = facto
 str(data)
 ```
 
-Vamos primeiro analisar somente os dados referentes à primeira colheita. Podemos fazer um subconjunto:
+Vamos analisar somente os dados referentes à primeira colheita. Para isso, podemos obter o subconjunto referente a ela:
 
 ```{r}
 # Indexar primeita colheita
@@ -1796,7 +1746,7 @@ Colheita_1 <- subset(data, colheita == 1)
 str(Colheita_1)
 ```
 
-Repare que, ao fazer o subconjunto, o conjunto de dados ainda mantém os três níveis do fator colheita, embora agora só tenhamos um. Isso pode ser um problema para a nossa análise. Portanto, devemos remover os níveis excedentes:
+Repare que, ao fazer o subconjunto, os três níveis do fator colheita ainda são mantidos, embora agora tenhamos apenas um. Isso pode ser um problema para a nossa análise. Portanto, devemos remover os níveis excedentes:
 
 ```{r}
 # Droplevels
@@ -1804,7 +1754,7 @@ Colheita_1 <- droplevels(subset(data, colheita == 1))
 str(Colheita_1)
 ```
 
-Agora podemos rodar nosso modelo de análise de variância.
+Em seguida, podemos rodar nosso modelo de análise de variância.
 
 ```{r}
 # Modelo
