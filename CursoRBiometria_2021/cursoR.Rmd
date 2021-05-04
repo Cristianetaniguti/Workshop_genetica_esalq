@@ -1194,56 +1194,6 @@ calc_IMC(peso, altura)
 
 Para saber mais sobre desenvolvimento de funções acesse [aqui](https://www.r-bloggers.com/how-to-write-and-debug-an-r-function/) e, um pouco mais avançado, [aqui](http://adv-r.had.co.nz/Functions.html).
 
-# Diferenças entre `cat`, `print` e `paste`
-
-```{r}
-exemplo <- "Este é um exemplo"
-
-# Diferença 1 - salva em novos objetos?
-
-obj <- cat(exemplo)
-obj
-
-obj <- print(exemplo)
-obj
-
-obj <- paste(exemplo)
-obj
-
-# Diferença 2 - Concatena?
-
-cat(exemplo, "oi")
-# print(exemplo, "oi") não concatena
-paste(exemplo, "oi")
-paste0(exemplo, "oi")
-
-# Diferença 4 - Aparece quando dentro de funções ou loops?
-
-for(i in 1:5){
-  cat(exemplo)
-}
-
-for(i in 1:5){
-  paste(exemplo)
-}
-
-for(i in 1:5){
-  print(exemplo)
-}
-
-# Diferença 3 - Pode mudar conforme classes S3?
-
-cat(exemplo)
-print(exemplo)
-
-class(exemplo) <- "inventei_uma_classe" # Aqui estou fazendo um objeto de classe S3
-print.inventei_uma_classe <- function(x) print("Agora vai printar isso aqui, pq eu quero")
-
-cat(exemplo)
-print(exemplo)
-paste(exemplo)
-```
-
 
 # Rodando outros scripts .R 
 
@@ -1606,6 +1556,70 @@ Podemos verificar se modelo ajustado atende às pressuposições da análise de 
 plot(mod1)
 ```
 
+## Pratique gerando relatórios no RStudio
+ 
+ Utilize o R no seu dia-a-dia para ir praticando a linguagem. Além das recomendações contidas na [primeira apresentação](), recomendamos também dar uma olhada em como gerar documentos em pdf e html usando a Markdown. Utilizamos essa metodologia para gerar este tutorial e outras apresentações do curso. Pode ser muito prático no dia-a-dia!
+ 
+Para utilizar, será necessário a instalação de outros pacotes. Um deles é o próprio `rmarkdown`:
+
+```{r, eval=FALSE}
+install.packages("rmarkdown")
+```
+
+```{r}
+library(rmarkdown)
+```
+ 
+Agora crie um arquivo .Rmd utilizando as facilidades do RStudio, clique no ícone com símbolo `+` no canto superior esquerdo. Escolha o opção `R Markdown`. Dê um título ao seu arquivo e escolha a opção `html`. Ao fazer isso, o RStudio já coloca um template inicial, ja com um cabeçalho:
+
+```
+---
+title: "Teste"
+author: "Eu"
+date: "June 5, 2018"
+output: html_document
+---
+
+```
+
+Este é o mais simples possível, você pode otimizá-lo de diversas maneiras. Saiba mais [aqui](https://rmarkdown.rstudio.com/html_document_format.html).
+
+O template inicial também traz alguns exemplos de sintaxe do markdown. Observe que utilizando `#` para títulos de sessões, `##` para um nível inferior (subtitulos) e assim por diante. Palavras em negrito são escritas em meia a dois `*` e existem diversas outras especificações para essa sintaxe. Veja mais sobre ela [aqui](https://www.markdownguide.org/basic-syntax).
+
+Para compilar o código, basta clicar em `Knit`. Ele irá pedir para que o arquivo .Rmd seja salvo com algum nome em algum lugar.
+
+O markdown também é capaz de entender diretamente a linguagem html, também a css e latex. Para essa última, o latex precisa estar instalado e todas suas dependências.
+
+Existem alguns pacotes que fornecem templates mais robustos para produção de htmls. Para esse tutorial utilizando o pacote `rmdformats` e personalizamos suas cores. Experimente:
+
+```{r, eval=FALSE}
+install.packages("rmdformats")
+```
+
+Agora faça o mesmo procedimento, clique no `+`, escolha `R Markdown` e, antes de escolher um título, mude para `From Template`, escolha o `HTML readthedown template`. Copie e cole o seguinte texto e aperte `Knit`.
+
+```
+# Teste1
+
+Isso aqui é um teste só para dar uma olhada no template
+
+## Testinho
+
+Subsessão
+
+* Item
+
+**negrito**
+
+*itálico*
+
+fiz um [link](https://GENt-esalq.github.io/)!
+
+```
+
+
+Saiba mais no tutorial do R-bloggers, que acreditamos ser um bom começo! Acesse [aqui](https://www.r-bloggers.com/how-to-create-reports-with-r-markdown-in-rstudio/).
+
 ## Avaliando o clima de Londrina
 
 Vamos utilizar outro conjunto de dados para realizarmos mais avaliações utilizando a função `lm`. Acesse o conjunto [clima_lond](clima_lond.RData):
@@ -1650,7 +1664,7 @@ tapply(clima_lond$prec.mm, clima_lond$Mes, summary)
 
 ```
 
-Podemos também avaliar fazendo alguns gráficos:
+Podemos também avaliar visualmente através de gráficos:
 
 ```{r}
 ggplot(clima_lond) + 
@@ -1680,14 +1694,14 @@ ggplot(stat_lond_edit) +
 
 ```
 
-Vamos então realizar um análise de variância para medir diferenças entre os meses.
+Vamos então realizar uma análise de variância a fim de verificar se há diferenças significativas entre os meses.
 
 ```{r}
 mod <- lm(prec.mm ~ Mes, data = clima_lond)
 summary(mod)
 ```
 
-Podemos também fazer um teste de médias para diferenciar a precipitação ao decorrer dos meses. Aqui utilizaremos o método de Tukey:
+Podemos também fazer um teste de médias para diferenciar a precipitação no decorrer dos meses. Aqui utilizaremos o método de Tukey:
 
 ```{r}
 modaov <- aov(prec.mm ~ Mes, data = clima_lond)
@@ -1724,7 +1738,7 @@ data <- transform(data, rep = factor(rep), prog = factor(prog), colheita = facto
 str(data)
 ```
 
-Vamos primeiro analisar somente os dados referentes à primeira colheita. Podemos fazer um subconjunto:
+Vamos analisar somente os dados referentes à primeira colheita. Para isso, podemos obter o subconjunto referente a ela:
 
 ```{r}
 # Indexar primeita colheita
@@ -1732,7 +1746,7 @@ Colheita_1 <- subset(data, colheita == 1)
 str(Colheita_1)
 ```
 
-Repare que, ao fazer o subconjunto, o conjunto de dados ainda mantém os três níveis do fator colheita, embora agora só tenhamos um. Isso pode ser um problema para a nossa análise. Portanto, devemos remover os níveis excedentes:
+Repare que, ao fazer o subconjunto, os três níveis do fator colheita ainda são mantidos, embora agora tenhamos apenas um. Isso pode ser um problema para a nossa análise. Portanto, devemos remover os níveis excedentes:
 
 ```{r}
 # Droplevels
@@ -1740,7 +1754,7 @@ Colheita_1 <- droplevels(subset(data, colheita == 1))
 str(Colheita_1)
 ```
 
-Agora podemos rodar nosso modelo de análise de variância.
+Em seguida, podemos rodar nosso modelo de análise de variância.
 
 ```{r}
 # Modelo
@@ -1817,116 +1831,54 @@ H_2
 
 > Crie uma função para estimar a herdabilidade 
 
-## Gerando sorteio para delineamento experimental
+## Criando mapas com ggplot
 
-Que tal pensarmos em um delineamento experimental e sortearmos as unidades experimentais? Com o pacote `agricolae` elaboraremos o sorteio de um experimento de blocos completos casualizados.
-
-```{r,  message=FALSE, warning=FALSE}
-############################
-#SORTEIO DE EXPERIMENTOS####
-############################
-
-#install.packages("agricolae")
-library(agricolae)
-trt <- c("0","1","2","5","10","20","50","100","Dina")
-rcbd <- design.rcbd(trt, 6, serie = 1, seed = 1, "default") # seed = 1
-rcbd # Planilha de campo
-```
-
-Podemos exportar e salvar nosso sorteio com:
+Não vamos entrar em detalhe sobre os códigos que usamos aqui porque ele faz uso do `tidyverse`, um pacote que permite manipular os dados com muita flexibilidade, mas ele iria requerer outro curso focado apenas nele! Esta é uma aplicação para mostrar que conseguimos fazer quase tudo com R e ggplot em mãos. O mais difícil é saber manipular os dados...
 
 ```{r}
-write.table(rcbd,"SORTEIO.txt", row.names=FALSE, sep="\t")
-file.show("SORTEIO.txt")
-write.csv(rcbd,"SORTEIO.csv",row.names=F)
+### Instalar pacote ###
+#devtools::install_github("rpradosiqueira/brazilmaps")
+# Sometimes need to install 'sf' (install.packages("sf")
+#  and also the dependencies:
+# - 'units' (libudunits2-dev - Linux)
+# - 'gdal' (libgdal-dev - Linux)
+#######################
+
+# Carregar pacote
+library(tidyverse)
+
+# Caso não tenha mais conjunto dados disponível no seu ambiente de trabalho
+dados = read.csv("dados_alunos2020.csv", stringsAsFactors = FALSE)
+colnames(dados) = c("horario", "genero", "participacao", "cidade", "instituicao", "escolaridade", "graduacao", 
+                   "area", "idade", "altura", "peso", "aniversario", "conhecimentoR", "linguagens", "usoR", "motivacaoR")
+
+# Coletando os dados da base por estado
+estados = brazilmaps::get_brmap("State")
+
+# Adicionando uma coluna com as siglas dos estados, será importane para a próxima etapa
+estados$sigla = c("RO", "AC", "AM", "RR", "PA", "AP", "TO", "MA", "PI", "CE", "RN", "PB", "PE", "AL", "SE", "BA", "MG", "ES", "RJ", "SP", "PR", "SC", "MS", "MT", "GO", "DF", "RS")
+
+# Aqui, estamos pegando as duas últimas letras da cidade de origem da pessoa,
+# se ela tiver preenchido corretamente, estas últimas serão o estado, como em
+# "Piracicaba - SP". Após isto, fazemos a contagem de pessoas por estado e 
+# unimos com os dados do brazilmaps
+estados = dados %>%
+  mutate(sigla = str_sub(cidade, nchar(cidade)-1, nchar(cidade))) %>%
+  group_by(sigla) %>%
+  summarise(n = n()) %>%
+  ungroup() %>% 
+  right_join(estados, by = "sigla")
+
+# Aqui usamos um outro tipo de plot, o geom_sf(), que precisa de dados de
+# coordenadas geométricas para construir os mapas. O resto envolve apenas
+# funções e argumentos que nós conhecemos!!!
+ggplot(estados) +
+  geom_sf(aes(geometry = geometry, fill = n)) + 
+  theme_minimal() + scale_fill_continuous(low = "gray40", high = "red") +
+  labs(fill = "Número \nde pessoas")
 ```
-
-## PCA - Análise de componentes principais
-
-O PCA é uma análise exploratória muito frequente quando utilizada por usuários que possuem muitos dados. Nela, torna-se possível visualizar dados que deveriam ter diversas dimensões em apenas duas componentes mais informativas. Para isto, usamos a função `autoplot()`.
-
-```{r, eval=FALSE}
-# para instalar, use install.packages("ggfortify")
-library(ggfortify)
-
-autoplot(prcomp(~ conhecimentoR + altura + peso + idade, data = dados),
-         data = dados, shape = 'area', colour = 'graduacao', loadings = TRUE, loadings.colour = 'red', 
-         loadings.label = TRUE, loadings.label.colour = 'black',
-         loadings.label.size = 4) +
-  labs(shape = "Área de \ninteresse", color = "Formação", title = "PCA")
-
-# Os parâmetros relacionados com "LOADINGS" são na verdade a direção onde a váriável mais cresce em duas dimensões
-# Ela serve apenas como uma aproximação, já que os dados reais precisariam de mais dimensões, que nosso olho não pode ver
-```
-
-Agora que você fez um plot de PCA, você pode perceber que ele é apenas uma variação do `geom_point()`, isto permite que você adicione todas as camadas de ggplot que você quiser sobre este gráfico. Já fizemos isto com as legendas!
 
 # Extra
-
-## Pratique gerando relatórios no RStudio
- 
- Utilize o R no seu dia-a-dia para ir praticando a linguagem. Além das recomendações contidas na [primeira apresentação](), recomendamos também dar uma olhada em como gerar documentos em pdf e html usando a Markdown. Utilizamos essa metodologia para gerar este tutorial e outras apresentações do curso. Pode ser muito prático no dia-a-dia!
- 
-Para utilizar, será necessário a instalação de outros pacotes. Um deles é o próprio `rmarkdown`:
-
-```{r, eval=FALSE}
-install.packages("rmarkdown")
-```
-
-```{r}
-library(rmarkdown)
-```
- 
-Agora crie um arquivo .Rmd utilizando as facilidades do RStudio, clique no ícone com símbolo `+` no canto superior esquerdo. Escolha o opção `R Markdown`. Dê um título ao seu arquivo e escolha a opção `html`. Ao fazer isso, o RStudio já coloca um template inicial, ja com um cabeçalho:
-
-```
----
-title: "Teste"
-author: "Eu"
-date: "June 5, 2018"
-output: html_document
----
-
-```
-
-Este é o mais simples possível, você pode otimizá-lo de diversas maneiras. Saiba mais [aqui](https://rmarkdown.rstudio.com/html_document_format.html).
-
-O template inicial também traz alguns exemplos de sintaxe do markdown. Observe que utilizando `#` para títulos de sessões, `##` para um nível inferior (subtitulos) e assim por diante. Palavras em negrito são escritas em meia a dois `*` e existem diversas outras especificações para essa sintaxe. Veja mais sobre ela [aqui](https://www.markdownguide.org/basic-syntax).
-
-Para compilar o código, basta clicar em `Knit`. Ele irá pedir para que o arquivo .Rmd seja salvo com algum nome em algum lugar.
-
-O markdown também é capaz de entender diretamente a linguagem html, também a css e latex. Para essa última, o latex precisa estar instalado e todas suas dependências.
-
-Existem alguns pacotes que fornecem templates mais robustos para produção de htmls. Para esse tutorial utilizando o pacote `rmdformats` e personalizamos suas cores. Experimente:
-
-```{r, eval=FALSE}
-install.packages("rmdformats")
-```
-
-Agora faça o mesmo procedimento, clique no `+`, escolha `R Markdown` e, antes de escolher um título, mude para `From Template`, escolha o `HTML readthedown template`. Copie e cole o seguinte texto e aperte `Knit`.
-
-```
-# Teste1
-
-Isso aqui é um teste só para dar uma olhada no template
-
-## Testinho
-
-Subsessão
-
-* Item
-
-**negrito**
-
-*itálico*
-
-fiz um [link](https://GENt-esalq.github.io/)!
-
-```
-
-
-Saiba mais no tutorial sobre isso no R-bloggers, que acreditamos ser um bom começo! Acesse [aqui](https://www.r-bloggers.com/how-to-create-reports-with-r-markdown-in-rstudio/).
-
 
 ## Família de funções `apply`
 
@@ -2017,37 +1969,50 @@ Observe que nas funções `apply` podemos trocar as funções prontas do *r base
 > Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão extra**](exercicios.html), se não, faça-os no conforto do seu lar e nos envie dúvidas pelo fórum.
 
 
-## Criando mapas com ggplot
+## Gerando sorteio para delineamento experimental
 
-Não vamos entrar em detalhe sobre os códigos que usamos aqui porque ele faz uso do `tidyverse`, um pacote que permite manipular os dados com muita flexibilidade, mas ele iria requerer outro curso focado apenas nele! Esta é uma aplicação para mostrar que conseguimos fazer quase tudo com R e ggplot em mãos. O mais difícil é saber manipular os dados...
+Que tal pensarmos em um delineamento experimental e sortearmos as unidades experimentais? Com o pacote `agricolae` elaboraremos o sorteio de um experimento de blocos completos casualizados.
+
+```{r,  message=FALSE, warning=FALSE}
+############################
+#SORTEIO DE EXPERIMENTOS####
+############################
+
+#install.packages("agricolae")
+library(agricolae)
+trt <- c("0","1","2","5","10","20","50","100","Dina")
+rcbd <- design.rcbd(trt, 6, serie = 1, seed = 1, "default") # seed = 1
+rcbd # Planilha de campo
+```
+
+Podemos exportar e salvar nosso sorteio com:
 
 ```{r}
-library(tidyverse)
-
-# Coletando os dados da base por estado
-estados = brazilmaps::get_brmap("State")
-
-# Adicionando uma coluna com as siglas dos estados, será importane para a próxima etapa
-estados$sigla = c("RO", "AC", "AM", "RR", "PA", "AP", "TO", "MA", "PI", "CE", "RN", "PB", "PE", "AL", "SE", "BA", "MG", "ES", "RJ", "SP", "PR", "SC", "MS", "MT", "GO", "DF", "RS")
-
-# Aqui, estamos pegando as duas últimas letras da cidade de origem da pessoa,
-# se ela tiver preenchido corretamente, estas últimas serão o estado, como em
-# "Piracicaba - SP". Após isto, fazemos a contagem de pessoas por estado e 
-# unimos com os dados do brazilmaps
-estados = dados %>%
-  mutate(sigla = str_sub(cidade, nchar(cidade)-1, nchar(cidade))) %>%
-  group_by(sigla) %>%
-  summarise(n = n()) %>%
-  right_join(estados, by = "sigla")
-
-# Aqui usamos um outro tipo de plot, o geom_sf(), que precisa de dados de
-# coordenadas geométricas para construir os mapas. O resto envolve apenas
-# funções e argumentos que nós conhecemos!!!
-ggplot(estados) +
-  geom_sf(aes(geometry = geometry, fill = n)) + 
-  theme_minimal() + scale_fill_continuous(low = "gray40", high = "red") +
-  labs(fill = "Número \nde pessoas")
+write.table(rcbd,"SORTEIO.txt", row.names=FALSE, sep="\t")
+file.show("SORTEIO.txt")
+write.csv(rcbd,"SORTEIO.csv",row.names=F)
 ```
+
+## PCA - Análise de componentes principais
+
+O PCA é uma análise exploratória muito frequente quando utilizada por usuários que possuem muitos dados. Nela, torna-se possível visualizar dados que deveriam ter diversas dimensões em apenas duas componentes mais informativas. Para isto, usamos a função `autoplot()`.
+
+```{r, eval=FALSE}
+# para instalar, use install.packages("ggfortify")
+library(ggfortify)
+
+autoplot(prcomp(~ conhecimentoR + altura + peso + idade, data = dados),
+         data = dados, shape = 'area', colour = 'graduacao', loadings = TRUE, loadings.colour = 'red', 
+         loadings.label = TRUE, loadings.label.colour = 'black',
+         loadings.label.size = 4) +
+  labs(shape = "Área de \ninteresse", color = "Formação", title = "PCA")
+
+# Os parâmetros relacionados com "LOADINGS" são na verdade a direção onde a váriável mais cresce em duas dimensões
+# Ela serve apenas como uma aproximação, já que os dados reais precisariam de mais dimensões, que nosso olho não pode ver
+```
+
+Agora que você fez um plot de PCA, você pode perceber que ele é apenas uma variação do `geom_point()`, isto permite que você adicione todas as camadas de ggplot que você quiser sobre este gráfico. Já fizemos isto com as legendas!
+
 
 # Sugestões, críticas, elogios e convites para almoço
 
@@ -2055,6 +2020,6 @@ Caso tenha sugestões para aprimoramento desse material, enviar e-mail para `gen
 
 Acesse também outros materiais em português produzidos por Cristiane Taniguti, Fernando Correr e Rodrigo Amadeu [aqui](http://cristianetaniguti.github.io/Workshop_genetica_esalq/).
 
-Este material foi produzido por alunos do programa de pós-graduação em Genética e Melhoramento de Plantas. Cristiane Taniguti, Victor Hugo de Mello Pessoa e Ana Letycia Basso Garcia ministraram o Treinamento. Também contamos com os monitores: Getúlio Caixeta, Rafael Yassue, Wellingson, Vitória, Guilherme Hokasa, Fernando Correr, Humberto, Igor Araújo, Jenifer Camila Godoy.
+Este material foi produzido por alunos do programa de pós-graduação em Genética e Melhoramento de Plantas. Cristiane Taniguti, Fernando Correr, Guilherme Hokasa, Jenifer Camila Godoy e Wellingson Araújo ministraram o Treinamento.
 
 Também recomendamos materiais em inglês [aqui](https://GENt-esalq.github.io/cursoR/english_tutorials.html).
