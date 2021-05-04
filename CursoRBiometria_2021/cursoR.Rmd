@@ -1194,56 +1194,6 @@ calc_IMC(peso, altura)
 
 Para saber mais sobre desenvolvimento de funções acesse [aqui](https://www.r-bloggers.com/how-to-write-and-debug-an-r-function/) e, um pouco mais avançado, [aqui](http://adv-r.had.co.nz/Functions.html).
 
-# Diferenças entre `cat`, `print` e `paste`
-
-```{r}
-exemplo <- "Este é um exemplo"
-
-# Diferença 1 - salva em novos objetos?
-
-obj <- cat(exemplo)
-obj
-
-obj <- print(exemplo)
-obj
-
-obj <- paste(exemplo)
-obj
-
-# Diferença 2 - Concatena?
-
-cat(exemplo, "oi")
-# print(exemplo, "oi") não concatena
-paste(exemplo, "oi")
-paste0(exemplo, "oi")
-
-# Diferença 4 - Aparece quando dentro de funções ou loops?
-
-for(i in 1:5){
-  cat(exemplo)
-}
-
-for(i in 1:5){
-  paste(exemplo)
-}
-
-for(i in 1:5){
-  print(exemplo)
-}
-
-# Diferença 3 - Pode mudar conforme classes S3?
-
-cat(exemplo)
-print(exemplo)
-
-class(exemplo) <- "inventei_uma_classe" # Aqui estou fazendo um objeto de classe S3
-print.inventei_uma_classe <- function(x) print("Agora vai printar isso aqui, pq eu quero")
-
-cat(exemplo)
-print(exemplo)
-paste(exemplo)
-```
-
 
 # Rodando outros scripts .R 
 
