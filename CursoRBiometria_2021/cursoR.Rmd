@@ -1606,6 +1606,70 @@ Podemos verificar se modelo ajustado atende às pressuposições da análise de 
 plot(mod1)
 ```
 
+## Pratique gerando relatórios no RStudio
+ 
+ Utilize o R no seu dia-a-dia para ir praticando a linguagem. Além das recomendações contidas na [primeira apresentação](), recomendamos também dar uma olhada em como gerar documentos em pdf e html usando a Markdown. Utilizamos essa metodologia para gerar este tutorial e outras apresentações do curso. Pode ser muito prático no dia-a-dia!
+ 
+Para utilizar, será necessário a instalação de outros pacotes. Um deles é o próprio `rmarkdown`:
+
+```{r, eval=FALSE}
+install.packages("rmarkdown")
+```
+
+```{r}
+library(rmarkdown)
+```
+ 
+Agora crie um arquivo .Rmd utilizando as facilidades do RStudio, clique no ícone com símbolo `+` no canto superior esquerdo. Escolha o opção `R Markdown`. Dê um título ao seu arquivo e escolha a opção `html`. Ao fazer isso, o RStudio já coloca um template inicial, ja com um cabeçalho:
+
+```
+---
+title: "Teste"
+author: "Eu"
+date: "June 5, 2018"
+output: html_document
+---
+
+```
+
+Este é o mais simples possível, você pode otimizá-lo de diversas maneiras. Saiba mais [aqui](https://rmarkdown.rstudio.com/html_document_format.html).
+
+O template inicial também traz alguns exemplos de sintaxe do markdown. Observe que utilizando `#` para títulos de sessões, `##` para um nível inferior (subtitulos) e assim por diante. Palavras em negrito são escritas em meia a dois `*` e existem diversas outras especificações para essa sintaxe. Veja mais sobre ela [aqui](https://www.markdownguide.org/basic-syntax).
+
+Para compilar o código, basta clicar em `Knit`. Ele irá pedir para que o arquivo .Rmd seja salvo com algum nome em algum lugar.
+
+O markdown também é capaz de entender diretamente a linguagem html, também a css e latex. Para essa última, o latex precisa estar instalado e todas suas dependências.
+
+Existem alguns pacotes que fornecem templates mais robustos para produção de htmls. Para esse tutorial utilizando o pacote `rmdformats` e personalizamos suas cores. Experimente:
+
+```{r, eval=FALSE}
+install.packages("rmdformats")
+```
+
+Agora faça o mesmo procedimento, clique no `+`, escolha `R Markdown` e, antes de escolher um título, mude para `From Template`, escolha o `HTML readthedown template`. Copie e cole o seguinte texto e aperte `Knit`.
+
+```
+# Teste1
+
+Isso aqui é um teste só para dar uma olhada no template
+
+## Testinho
+
+Subsessão
+
+* Item
+
+**negrito**
+
+*itálico*
+
+fiz um [link](https://GENt-esalq.github.io/)!
+
+```
+
+
+Saiba mais no tutorial do R-bloggers, que acreditamos ser um bom começo! Acesse [aqui](https://www.r-bloggers.com/how-to-create-reports-with-r-markdown-in-rstudio/).
+
 ## Avaliando o clima de Londrina
 
 Vamos utilizar outro conjunto de dados para realizarmos mais avaliações utilizando a função `lm`. Acesse o conjunto [clima_lond](clima_lond.RData):
@@ -1817,116 +1881,7 @@ H_2
 
 > Crie uma função para estimar a herdabilidade 
 
-## Gerando sorteio para delineamento experimental
-
-Que tal pensarmos em um delineamento experimental e sortearmos as unidades experimentais? Com o pacote `agricolae` elaboraremos o sorteio de um experimento de blocos completos casualizados.
-
-```{r,  message=FALSE, warning=FALSE}
-############################
-#SORTEIO DE EXPERIMENTOS####
-############################
-
-#install.packages("agricolae")
-library(agricolae)
-trt <- c("0","1","2","5","10","20","50","100","Dina")
-rcbd <- design.rcbd(trt, 6, serie = 1, seed = 1, "default") # seed = 1
-rcbd # Planilha de campo
-```
-
-Podemos exportar e salvar nosso sorteio com:
-
-```{r}
-write.table(rcbd,"SORTEIO.txt", row.names=FALSE, sep="\t")
-file.show("SORTEIO.txt")
-write.csv(rcbd,"SORTEIO.csv",row.names=F)
-```
-
-## PCA - Análise de componentes principais
-
-O PCA é uma análise exploratória muito frequente quando utilizada por usuários que possuem muitos dados. Nela, torna-se possível visualizar dados que deveriam ter diversas dimensões em apenas duas componentes mais informativas. Para isto, usamos a função `autoplot()`.
-
-```{r, eval=FALSE}
-# para instalar, use install.packages("ggfortify")
-library(ggfortify)
-
-autoplot(prcomp(~ conhecimentoR + altura + peso + idade, data = dados),
-         data = dados, shape = 'area', colour = 'graduacao', loadings = TRUE, loadings.colour = 'red', 
-         loadings.label = TRUE, loadings.label.colour = 'black',
-         loadings.label.size = 4) +
-  labs(shape = "Área de \ninteresse", color = "Formação", title = "PCA")
-
-# Os parâmetros relacionados com "LOADINGS" são na verdade a direção onde a váriável mais cresce em duas dimensões
-# Ela serve apenas como uma aproximação, já que os dados reais precisariam de mais dimensões, que nosso olho não pode ver
-```
-
-Agora que você fez um plot de PCA, você pode perceber que ele é apenas uma variação do `geom_point()`, isto permite que você adicione todas as camadas de ggplot que você quiser sobre este gráfico. Já fizemos isto com as legendas!
-
 # Extra
-
-## Pratique gerando relatórios no RStudio
- 
- Utilize o R no seu dia-a-dia para ir praticando a linguagem. Além das recomendações contidas na [primeira apresentação](), recomendamos também dar uma olhada em como gerar documentos em pdf e html usando a Markdown. Utilizamos essa metodologia para gerar este tutorial e outras apresentações do curso. Pode ser muito prático no dia-a-dia!
- 
-Para utilizar, será necessário a instalação de outros pacotes. Um deles é o próprio `rmarkdown`:
-
-```{r, eval=FALSE}
-install.packages("rmarkdown")
-```
-
-```{r}
-library(rmarkdown)
-```
- 
-Agora crie um arquivo .Rmd utilizando as facilidades do RStudio, clique no ícone com símbolo `+` no canto superior esquerdo. Escolha o opção `R Markdown`. Dê um título ao seu arquivo e escolha a opção `html`. Ao fazer isso, o RStudio já coloca um template inicial, ja com um cabeçalho:
-
-```
----
-title: "Teste"
-author: "Eu"
-date: "June 5, 2018"
-output: html_document
----
-
-```
-
-Este é o mais simples possível, você pode otimizá-lo de diversas maneiras. Saiba mais [aqui](https://rmarkdown.rstudio.com/html_document_format.html).
-
-O template inicial também traz alguns exemplos de sintaxe do markdown. Observe que utilizando `#` para títulos de sessões, `##` para um nível inferior (subtitulos) e assim por diante. Palavras em negrito são escritas em meia a dois `*` e existem diversas outras especificações para essa sintaxe. Veja mais sobre ela [aqui](https://www.markdownguide.org/basic-syntax).
-
-Para compilar o código, basta clicar em `Knit`. Ele irá pedir para que o arquivo .Rmd seja salvo com algum nome em algum lugar.
-
-O markdown também é capaz de entender diretamente a linguagem html, também a css e latex. Para essa última, o latex precisa estar instalado e todas suas dependências.
-
-Existem alguns pacotes que fornecem templates mais robustos para produção de htmls. Para esse tutorial utilizando o pacote `rmdformats` e personalizamos suas cores. Experimente:
-
-```{r, eval=FALSE}
-install.packages("rmdformats")
-```
-
-Agora faça o mesmo procedimento, clique no `+`, escolha `R Markdown` e, antes de escolher um título, mude para `From Template`, escolha o `HTML readthedown template`. Copie e cole o seguinte texto e aperte `Knit`.
-
-```
-# Teste1
-
-Isso aqui é um teste só para dar uma olhada no template
-
-## Testinho
-
-Subsessão
-
-* Item
-
-**negrito**
-
-*itálico*
-
-fiz um [link](https://GENt-esalq.github.io/)!
-
-```
-
-
-Saiba mais no tutorial sobre isso no R-bloggers, que acreditamos ser um bom começo! Acesse [aqui](https://www.r-bloggers.com/how-to-create-reports-with-r-markdown-in-rstudio/).
-
 
 ## Família de funções `apply`
 
@@ -2049,12 +2004,57 @@ ggplot(estados) +
   labs(fill = "Número \nde pessoas")
 ```
 
+## Gerando sorteio para delineamento experimental
+
+Que tal pensarmos em um delineamento experimental e sortearmos as unidades experimentais? Com o pacote `agricolae` elaboraremos o sorteio de um experimento de blocos completos casualizados.
+
+```{r,  message=FALSE, warning=FALSE}
+############################
+#SORTEIO DE EXPERIMENTOS####
+############################
+
+#install.packages("agricolae")
+library(agricolae)
+trt <- c("0","1","2","5","10","20","50","100","Dina")
+rcbd <- design.rcbd(trt, 6, serie = 1, seed = 1, "default") # seed = 1
+rcbd # Planilha de campo
+```
+
+Podemos exportar e salvar nosso sorteio com:
+
+```{r}
+write.table(rcbd,"SORTEIO.txt", row.names=FALSE, sep="\t")
+file.show("SORTEIO.txt")
+write.csv(rcbd,"SORTEIO.csv",row.names=F)
+```
+
+## PCA - Análise de componentes principais
+
+O PCA é uma análise exploratória muito frequente quando utilizada por usuários que possuem muitos dados. Nela, torna-se possível visualizar dados que deveriam ter diversas dimensões em apenas duas componentes mais informativas. Para isto, usamos a função `autoplot()`.
+
+```{r, eval=FALSE}
+# para instalar, use install.packages("ggfortify")
+library(ggfortify)
+
+autoplot(prcomp(~ conhecimentoR + altura + peso + idade, data = dados),
+         data = dados, shape = 'area', colour = 'graduacao', loadings = TRUE, loadings.colour = 'red', 
+         loadings.label = TRUE, loadings.label.colour = 'black',
+         loadings.label.size = 4) +
+  labs(shape = "Área de \ninteresse", color = "Formação", title = "PCA")
+
+# Os parâmetros relacionados com "LOADINGS" são na verdade a direção onde a váriável mais cresce em duas dimensões
+# Ela serve apenas como uma aproximação, já que os dados reais precisariam de mais dimensões, que nosso olho não pode ver
+```
+
+Agora que você fez um plot de PCA, você pode perceber que ele é apenas uma variação do `geom_point()`, isto permite que você adicione todas as camadas de ggplot que você quiser sobre este gráfico. Já fizemos isto com as legendas!
+
+
 # Sugestões, críticas, elogios e convites para almoço
 
 Caso tenha sugestões para aprimoramento desse material, enviar e-mail para `gent.esalq@gmail.com`.
 
 Acesse também outros materiais em português produzidos por Cristiane Taniguti, Fernando Correr e Rodrigo Amadeu [aqui](http://cristianetaniguti.github.io/Workshop_genetica_esalq/).
 
-Este material foi produzido por alunos do programa de pós-graduação em Genética e Melhoramento de Plantas. Cristiane Taniguti, Victor Hugo de Mello Pessoa e Ana Letycia Basso Garcia ministraram o Treinamento. Também contamos com os monitores: Getúlio Caixeta, Rafael Yassue, Wellingson, Vitória, Guilherme Hokasa, Fernando Correr, Humberto, Igor Araújo, Jenifer Camila Godoy.
+Este material foi produzido por alunos do programa de pós-graduação em Genética e Melhoramento de Plantas. Cristiane Taniguti, Fernando Correr, Guilherme Hokasa, Jenifer Camila Godoy e Wellingson Araújo ministraram o Treinamento.
 
 Também recomendamos materiais em inglês [aqui](https://GENt-esalq.github.io/cursoR/english_tutorials.html).
