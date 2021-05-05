@@ -1504,12 +1504,11 @@ Não vamos entrar em detalhe sobre os códigos que usamos aqui porque ele faz us
 ```{r}
 ### Instalar pacotes ###
 #devtools::install_github("rpradosiqueira/brazilmaps")
-# Sometimes need to install 'sf' (install.packages("sf")
+# Need to install 'sf' (install.packages("sf")
 #  and also the dependencies:
 # - 'units' (libudunits2-dev - Linux)
 # - 'gdal' (libgdal-dev - Linux)
 #
-#install.packages("pracma")
 #######################
 
 # Carregar pacote
