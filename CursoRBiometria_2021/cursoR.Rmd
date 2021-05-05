@@ -1,12 +1,11 @@
 ---
+title: "Treinamento em Programação no Ambiente R"
 date: "`r Sys.Date()`"
 author: "[GENt](https://gent-esalq.github.io/) <br/>  Escola Superior de Agricultura Luiz de Queiroz <br/> Universidade de São Paulo"
 output:
     rmdformats::readthedown:
       css: readthedownstatgen.css
 ---
-
-# Treinamento em Programação no Ambiente R
 
 Esse material foi elaborado para o **Treinamento em Programação no Ambiente R**
 organizado pelo Laboratório de Genetica Estatistica do Departamento de Genética da ESALQ- USP
@@ -1061,7 +1060,7 @@ localizacao(latitude = dados[,6], longitude = dados[,7])
 
 Agora, aprimore a função acima adicionando também uma coluna que indique a média de conhecimento do participante sobre as três áreas perguntadas. Considere para isso: Básico = 1, Intermediário = 2, Avançado = 3, Sabe o teste F? Fui eu que desenvolvi, mas não publiquei porque sou modesto = 99 e 0 = 0.
 
-```{r, echo=F}
+```{r}
 # Dica
 dados[dados == "Avançado"] <- 3
 dados[dados == "Intermediário"] <- 2
@@ -1130,13 +1129,6 @@ localizacao <- function(latitude,
 
 localizacao(dados[,6], dados[,7], genetica = dados[,3], 
             estatistica = dados[,4], genetica_estatistica = dados[,5])
-```
-
-```{r, eval=FALSE}
-peso <- c(-1,56,79)
-altura <- c(1.6,1.73,1.58)
-
-calc_IMC(peso, altura)
 ```
 
 Para saber mais sobre desenvolvimento de funções acesse [aqui](https://www.r-bloggers.com/how-to-write-and-debug-an-r-function/) e, um pouco mais avançado, [aqui](http://adv-r.had.co.nz/Functions.html).
@@ -1278,11 +1270,13 @@ fiz um [link](https://GENt-esalq.github.io/)!
 
 Saiba mais no tutorial do R-bloggers, que acreditamos ser um bom começo! Acesse [aqui](https://www.r-bloggers.com/how-to-create-reports-with-r-markdown-in-rstudio/).
 
-# Algumas ferramentas básicas de análise de dados
+# Extra
 
-Claramente a análise de dados é algo muito específico de cada conjunto de dados e interesses. 
+## Algumas ferramentas básicas de análise de dados
 
-## Avaliando o clima de Londrina
+Claramente a análise de dados é algo muito específico de cada conjunto de dados e interesses, aqui apenas exemplificaremos o uso de algumas funções do R em duas situações específicas.
+
+### Avaliando o clima de Londrina
 
 Vamos utilizar outro conjunto de dados para realizarmos mais avaliações utilizando a função `lm`. Acesse o conjunto [clima_lond](clima_lond.RData):
 
@@ -1375,7 +1369,7 @@ tukey.test <- TukeyHSD(x=modaov, 'Mes', conf.level=0.95)
 tukey.test
 ```
 
-## Avaliando experimento de café
+### Avaliando experimento de café
 
 Agora, trabalharemos com dados de um experimento de café. Acesse aqui:
 
@@ -1503,8 +1497,9 @@ Não vamos entrar em detalhe sobre os códigos que usamos aqui porque ele faz us
 
 ```{r}
 ### Instalar pacotes ###
-#devtools::install_github("rpradosiqueira/brazilmaps")
-# Need to install 'sf' (install.packages("sf")
+# devtools::install_github("rpradosiqueira/brazilmaps")
+# Need to install 'sf' 
+# install.packages("sf")
 #  and also the dependencies:
 # - 'units' (libudunits2-dev - Linux)
 # - 'gdal' (libgdal-dev - Linux)
@@ -1517,9 +1512,12 @@ library(sf)
 
 # Caso não tenha mais conjunto dados disponível no seu ambiente de trabalho
 dados = read.csv("dados_alunos2021.csv", stringsAsFactors = FALSE, dec = ",")
-colnames(dados) = c("categoria", "graduacao",
-                    "genetica", "estatistica",
-                    "genetica_estatistica", "latitude", "longitude")
+
+# ou
+load("dados_alunos2021.RData")
+
+colnames(dados) = c("Ocupacao", "Graduacao", "Conhecimentos_Genetica", "Conhecimentos_Estatistica", "Conhecimento_Gen_Est", 
+                   "Latitude", "Longitude")
 
 # Coletando os dados da base por estado
 estados = brazilmaps::get_brmap("State")
@@ -1529,7 +1527,7 @@ estados$sigla = c("RO", "AC", "AM", "RR", "PA", "AP", "TO", "MA", "PI", "CE", "R
 
 ## Aqui buscaremos se as coordenadas das cidades estão contidas nas coordenadas 
 ## dos estados
-inter_sf = st_as_sf(dados, coords = c('longitude', 'latitude'), crs = st_crs(estados))
+inter_sf = st_as_sf(dados, coords = c('Longitude', 'Latitude'), crs = st_crs(estados))
 
 ## Mapear coordenadas das cidades nos estados
 map_data = st_join(inter_sf, estados %>% 
@@ -1558,6 +1556,11 @@ Que tal tentarmos fazer com o mapa mundi?
 
 ```{r}
 # Pacotes
+
+# install.packages("rnaturalearth")
+# install.packages("rnaturalearthdata")
+# install.packages("rgeos")
+
 library("rnaturalearth")
 library("rnaturalearthdata")
 library("rgeos")
@@ -1567,10 +1570,10 @@ world <- ne_countries(scale = "medium", returnclass = "sf")
 
 ## Buscaremos se as coordenadas das cidades estão contidas nas coordenadas 
 ## dos paises
-inter_sf = st_as_sf(dados, coords = c('longitude', 'latitude'), crs = st_crs(world))
+inter_sf = st_as_sf(dados, coords = c('Longitude', 'Latitude'), crs = st_crs(world))
 
 map_data = st_join(world, inter_sf) %>%
-  filter(!is.na(graduacao)) %>% 
+  filter(!is.na(Graduacao)) %>% 
   select(name, geometry) %>% 
   as.data.frame()
 
@@ -1590,9 +1593,6 @@ ggplot(to_plot) +
   theme_minimal() + scale_fill_continuous(low = "#C6FFDD", high = "#f64f59", na.value="white") +
   labs(fill = "Número \nde pessoas")
 ```
-
-
-# Extra
 
 ## Família de funções `apply`
 
@@ -1671,9 +1671,16 @@ Vamos utilizar nosso conjunto de dados:
 
 ```{r}
 str(dados)
-dados$area <- as.factor(dados$area)
-tapply(dados$conhecimentoR, dados$area, mean)
+dados$Graduacao  <- as.factor(dados$Graduacao)
 
+dados[dados == "Avançado"] <- 3
+dados[dados == "Intermediário"] <- 2
+dados[dados == "Básico"] <- 1
+dados[dados == "Sabe o teste F? Fui eu que desenvolvi, mas não publiquei porque sou modesto"] <- 99
+
+dados$Conhecimentos_Genetica <- as.numeric(dados$Conhecimentos_Genetica)
+
+tapply(dados$Conhecimentos_Genetica, dados$Graduacao, mean)
 ```
 
 Saiba mais sobre essa família de funções no [link](https://www.r-bloggers.com/r-tutorial-on-the-apply-family-of-functions/)
@@ -1716,7 +1723,7 @@ O PCA é uma análise exploratória muito frequente quando utilizada por usuári
 library(ggfortify)
 
 autoplot(prcomp(~ conhecimentoR + altura + peso + idade, data = dados),
-         data = dados, shape = 'area', colour = 'graduacao', loadings = TRUE, loadings.colour = 'red', 
+         data = dados, shape = 'area', colour = 'Graduacao', loadings = TRUE, loadings.colour = 'red', 
          loadings.label = TRUE, loadings.label.colour = 'black',
          loadings.label.size = 4) +
   labs(shape = "Área de \ninteresse", color = "Formação", title = "PCA")
@@ -1728,7 +1735,7 @@ autoplot(prcomp(~ conhecimentoR + altura + peso + idade, data = dados),
 Agora que você fez um plot de PCA, você pode perceber que ele é apenas uma variação do `geom_point()`, isto permite que você adicione todas as camadas de ggplot que você quiser sobre este gráfico. Já fizemos isto com as legendas!
 
 
-# Sugestões, críticas, elogios e convites para almoço
+# Sugestões, críticas e elogios
 
 Caso tenha sugestões para aprimoramento desse material, enviar e-mail para `biometriamarcadores@gmail.com`.
 

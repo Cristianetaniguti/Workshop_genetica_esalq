@@ -1,9 +1,9 @@
 ---
 date: "`r Sys.Date()`"
-author: "[GENt](https://gent-esalq.github.io/) <br/>  Escola Superior de Agricultura Luiz de Queiroz <br/> Universidade de São Paulo"
+author: "[Statistical Genetics Laboratory](https://statgen-esalq.github.io/) <br/>  Escola Superior de Agricultura Luiz de Queiroz <br/> Universidade de São Paulo"
 output:
     rmdformats::readthedown:
-      css: readthedowngent.css
+      css: readthedownstatgen.css
 ---
 
 # Exercícios
