@@ -1269,49 +1269,8 @@ O `ggplot2` é um pacote que permite a construção de gráficos estatísticos, 
 
 # Algumas ferramentas básicas de análise de dados
 
-Claramente a análise de dados é algo muito específico de cada conjunto de dados e interesses. Vamos aqui mostrar alguns recursos básicos como análise de variância, teste de médias e PCA.
+Claramente a análise de dados é algo muito específico de cada conjunto de dados e interesses. 
 
-## Estatísticas descritivas
-
-Algumas avaliações descritivas podem ser feitas pelo uso do `tapply` e de gráficos. A função `summary` também da informações gerais do conjunto. É possível usá-la em conjunto com o `tapply`.
-
-```{r}
-# Caso não tenha mais conjunto dados disponível no seu ambiente de trabalho
-dados = read.csv("dados_alunos2020.csv", stringsAsFactors = FALSE)
-colnames(dados) = c("horario", "genero", "participacao", "cidade", "instituicao", "escolaridade", "graduacao", 
-                   "area", "idade", "altura", "peso", "aniversario", "conhecimentoR", "linguagens", "usoR", "motivacaoR")
-
-str(dados)
-# Certifique-se que esta lidando com variável categórica (fator)
-dados$genero <- as.factor(dados$genero)
-
-tapply(dados$altura, dados$genero, summary)
-tapply(dados$peso, dados$genero, summary)
-
-```
-
-## Análise de variância
-
-Podemos falar que há diferenças significativas entre o peso de homens e mulheres?
-
-```{r, eval=FALSE}
-mod1 <- lm(peso ~ genero, data = dados)
-summary(mod1)
-
-# ou o equivalente
-
-mod1 <- aov(peso ~ genero, data = dados)
-summary(mod1)
-
-```
-
-As funções `lm` e `summary` diferem apenas na forma de apresentar os resultados. O p-valor nos indica se podemos considerar diferenças do peso conforme o gênero.
-
-Podemos verificar se modelo ajustado atende às pressuposições da análise de variância, através da observação de gráficos. Se você teve aulas de estatística experimental, talvez se lembre disso. Caso contrário, não precisa se preocupar, nosso foco é ensinar vocês sobre programar no R e dar independência para que comecem a analisar seus próprios conjuntos.
-
-```{r, eval=FALSE}
-plot(mod1)
-```
 
 ## Pratique gerando relatórios no RStudio
  
@@ -1388,6 +1347,8 @@ load("clima_lond.RData")
 Para obter os dados de precipitação da cidade de Londrina no primeiro semestre de 2017. Vamos utilizar as funções `tapply` e
 `lm` para avaliar os dados.
 
+Algumas avaliações descritivas podem ser feitas pelo uso do `tapply` e de gráficos. A função `summary` também fornece informações gerais do conjunto. É possível usá-la em conjunto com o `tapply`.
+
 ```{r}
 # Verificando se as variáveis categórias estão como fatores
 str(clima_lond)
@@ -1451,17 +1412,19 @@ ggplot(stat_lond_edit) +
 
 ```
 
-Vamos então realizar uma análise de variância a fim de verificar se há diferenças significativas entre os meses.
+Vamos então realizar uma análise de variância a fim de verificar se há diferenças significativas entre os meses. As funções `lm` e `summary` diferem apenas na forma de apresentar os resultados. O p-valor nos indica se podemos considerar diferenças do peso conforme o gênero.
 
 ```{r}
 mod <- lm(prec.mm ~ Mes, data = clima_lond)
 summary(mod)
+
+modaov <- aov(prec.mm ~ Mes, data = clima_lond)
+summary(modaov)
 ```
 
 Podemos também fazer um teste de médias para diferenciar a precipitação no decorrer dos meses. Aqui utilizaremos o método de Tukey:
 
 ```{r}
-modaov <- aov(prec.mm ~ Mes, data = clima_lond)
 tukey.test <- TukeyHSD(x=modaov, 'Mes', conf.level=0.95)
 tukey.test
 ```
