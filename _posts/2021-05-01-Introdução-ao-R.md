@@ -7,6 +7,10 @@ Aqui disponibilizaremos os materiais utilizados nos treinamento e alguns outros 
 
 * [Tutorial de instalação do R e RStudio](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/Tutorial_instalacao.html).
 
+* [Introdução](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/Introducao.pdf)
+
+* [Tutorial principal](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/cursoR.html)
+
 * [Link para o fórum de discussões](https://groups.google.com/u/1/g/biometria-de-marcadores-2021)
 
 
