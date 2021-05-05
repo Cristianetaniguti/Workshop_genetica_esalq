@@ -1067,3 +1067,24 @@ div.sourceCode .row div {
     border-bottom: 1px solid #fcfcfc;
 }
 
+/* Spoilers */
+
+.spoiler {
+  visibility: hidden;
+}
+
+.spoiler::before {
+  visibility: visible;
+  content: "Alerta de Spoiler!!";
+  color: #C76F23
+}
+
+.spoiler:hover {
+  visibility: visible;
+}
+
+.spoiler:hover::before {
+  display: none;
+}
+
+

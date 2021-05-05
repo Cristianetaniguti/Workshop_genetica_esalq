@@ -9,13 +9,10 @@ output:
 # Treinamento em Programação no Ambiente R
 
 Esse material foi elaborado para o **Treinamento em Programação no Ambiente R**
-organizado pelo GENt, grupo de Divulgação Científica do Programa de Pós-Graduação em Genética e Melhoramento de Plantas da ESALQ- USP, em parceria com o grupo Gfito-LQ, grupo de estudos do Departamento de Fitopatologia e Nematologia.
+organizado pelo Laboratório de Genetica Estatistica do Departamento de Genética da ESALQ- USP
 
-Você pode acessar mais informações sobre o grupo GENt neste [link](https://gent-esalq.github.io/). No site, você pode encontrar as atividades que temos desenvolvido. 
+Sugerimos que, antes de iniciar a prática aqui descrita, siga [este tutorial](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/Tutorial_instalacao.html) para instalação do R e do RStudio.
 
-Sugerimos que, antes de iniciar a prática aqui descrita, siga [este tutorial](https://GENt-esalq.github.io/cursoR2/Tutorial_instalacao.html) para instalação do R e do RStudio.
-
-Pedimos que, em algum momento deste primeiro dia, preencham este [formulário](https://forms.gle/nxCzX5uB9mARmfxm9). Utilizaremos essas informações no segundo dia de curso.
 
 # Familiarização com a interface do RStudio
 
@@ -384,7 +381,7 @@ No caso, todos os elementos foram transformados em caracter.
 * Cuidado para não sobrepor objetos já criados criando outros com o mesmo nome. Use, por exemplo: altura1, altura2.
 * Mantenha no seu script .R somente os comandos que funcionaram e, de preferência, adicione comentários. Você pode, por exemplo, comentar dificuldades encontradas, para que você não cometa os mesmos erros mais tarde.
 
-> Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão 1**](exercicios.html#sessao1), se não, faça-os no conforto do seu lar e nos envie dúvidas pelo fórum.
+> Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão 1**](exercicios.html#sessao1), se não, faça-os em outro momento e nos envie dúvidas pelo fórum.
 
 ## Matrizes
 
@@ -488,6 +485,7 @@ Agora, vamos adicionar o vetor calculado com o volume ao nosso data.frame. Para 
 
 ```{r}
 campo1 <- cbind(campo1, volume)
+campo1
 str(campo1)
 ```
 
@@ -535,15 +533,7 @@ Este é um tipo de objeto que você provavelmente não irá utilizar agora no in
 
 Teremos quatro matrizes com duas linhas e três colunas e os números de 1 a 24 estarão distribuídos nelas por colunas.
 
-> Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão 2**](exercicios.html#sessao2), se não, faça-os no conforto do seu lar e nos envie dúvidas pelo fórum.
-
-
-<span style="color:red"> Paramos aqui no primeiro dia. </span>
-
-
-# Segundo dia - retomando os trabalhos
-
-* [Aqui](https://GENt-esalq.github.io/cursoR2/dia1.R) você pode acessar um exemplo de script `.R` para esse primeiro dia.
+> Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão 2**](exercicios.html#sessao2), se não, faça-os em outro momento e nos envie dúvidas pelo fórum.
 
 * Obtenha o arquivo RData com todos os objetos criados até então no tutorial [aqui](https://GENt-esalq.github.io/cursoR2/dia1.RData).
 
@@ -588,7 +578,7 @@ write.table(campo1, file = "campo1.txt", sep = ";", dec = ".", row.names = FALSE
 write.csv(campo1, file = "campo1.csv", row.names = TRUE)
 ```
 
-Obs: Você pode adquirir pacotes para exportar e importar dados com outros fomatos, como exemplo o pacote `xlsx` exporta e importa dados com formato do excel.
+Obs: Você pode adquirir pacotes para exportar e importar dados com outros fomatos, como exemplo o pacote `xlsx` exporta e importa dados com formato do excel. O pacote `vroom` pode ser utilizado para compactar grandes tabelas.
 
 Ao exportar, há diversas opções para a formatação do arquivo, é importante considerá-las se o arquivo for usado em outro sofware posteriormente.
 
@@ -603,23 +593,23 @@ head(campo1_txt)
 head(campo1_csv)
 ```
 
-Agora que aprendemos a importar dados, vamos trabalhar com o conjunto gerado a partir do formulário que vocês preencheram.
+Agora que aprendemos a importar dados, vamos trabalhar com o conjunto gerado a partir dos participantes da disciplina Biometria de Marcadores - Turma de 2021.
 
 <span style="color:red">
-A planilha com os dados será disponibilizada, adicione-a ao seu diretório de trabalho ou indique o caminho da pasta ao importá-la para dentro do R, como a seguir. Caso esteja difícil encontrá-la, acesse:</span> 
+A planilha com os dados está disponível no link abaixo, adicione-a ao seu diretório de trabalho ou indique o caminho da pasta ao importá-la para dentro do R, como a seguir. </span> 
 
-* [dados.RData](https://GENt-esalq.github.io/dados_alunos2020.RData) 
-* [dados.csv](https://GENt-esalq.github.io/dados_alunos2020.csv)
+* [dados.RData](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/dados_alunos2021.RData) 
+* [dados.csv](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/dados_alunos2021.csv)
 
 Aqui usaremos o argumento `stringAsFactors` que impede que o R transforme os vetores da tabela em fatores, os quais são mais difíceis de trabalhar. O argumento `na.strings` irá indicar como foram nomeados os dados perdidos.
 
 ```{r, eval=FALSE}
-dados <- read.csv(file = "dados_alunos2020.csv", stringsAsFactors = FALSE, na.strings="-", header = T)
+dados <- read.csv(file = "dados_alunos2021.csv", stringsAsFactors = FALSE, na.strings="-", header = T, dec = ",")
 head(dados)
 ```
 
 ```{r}
-load("dados_alunos2020.RData")
+load("dados_alunos2021.RData")
 ```
 
 Vamos explorar a estrutura dos dados coletados:
@@ -635,28 +625,29 @@ Repare que nos nomes das colunas ainda estão as perguntas completas feitas no f
 ```{r}
 colnames(dados)
 
-colnames(dados) = c("horario", "genero", "participacao", "cidade", "instituicao", 
-                   "escolaridade", "graduacao", "area", "idade", "altura", "peso", 
-                   "aniversario", "conhecimentoR", "linguagens", "usoR", "motivacaoR")
+colnames(dados) = c("Ocupacao", "Graduacao", "Conhecimentos_Genetica", "Conhecimentos_Estatistica", "Conhecimento_Gen_Est", 
+                   "Latitude", "Longitude")
+colnames(dados)
 str(dados)
 ```
 
-# Paradoxo do aniversário
+# Manipulando os dados
 
-Nossa primeira análise com esses dados envolverá um problema denominado ["Paradoxo do aniversário"](https://en.wikipedia.org/wiki/Birthday_problem), que afirma que em um grupo de 23 pessoas (ou mais), escolhidas aleatoriamente, há mais de 50% de chance de duas pessoas terem a mesma data de aniversário.
+Agora usaremos os dados que temos para aprender diferentes comandos e funções do Ambiente R.
 
-Primeiro, vamos verificar em quantos somos, contando o número de linhas, para isso use a função `nrow`.
+Primeiro, vamos verificar quantos alunos responderam as questões do formulario da disciplina, contando o número de linhas, para isso use a função `nrow`.
 
 ```{r}
 nrow(dados)
 ```
 
-Vamos então verificar se temos no nosso grupo pessoas que compartilham o mesmo dia de aniversário.
+Vamos então verificar se temos no nosso grupo pessoas que compartilham a mesma graduação e ocupação.
 
 Podemos verificar isso facilmente com a função `table`, que indica a frequência de cada observação:
  
 ```{r, eval=FALSE}
-table(dados$aniversario)
+table(dados$Graduacao)
+table(dados$Ocupacao)
 ```
 
 # Estruturas condicionais
@@ -669,40 +660,40 @@ Nas funções condicionais `if` e `else`, estabelecemos uma condição para if, 
 
 ```{r}
 if(2 >3){
-  print("dois é maior que três")
+  cat("dois é maior que três")
 } else {
-  print("dois não é maior que três")
+  cat("dois não é maior que três")
 }
 ```
 
-* Teste o nível de conhecimento em R obtidos no formulaŕio (13ª coluna) pela segunda pessoa que o respondeu (linha 2). Envie uma mensagem motivacional se ela não possuir qualquer conhecimento (nota 0), outra se possuir algum conhecimento (restante das notas). (dica: o sinal `==` se refere a "exatamente igual a")
+* Descubra a Nivel de Conhecimentos em Genetica (3ª coluna) da segunda pessoa que o respondeu (linha 2). Envie uma mensagem motivacional se ela possuir conhecimentos basicos, outra se a pessoa ja possuir conhecimento Intermediario ou Avançado (restante das respostas). (dica: o sinal `==` se refere a "exatamente igual a")
 
 ```{r}
-if(dados[2,13] == 0){
-  print("Nunca é tarde para começar!")
+if(dados[2,3] =="Básico"){
+  cat("Força, Mendel acredita em você!")
 } else {
-  print("Já pegou o embalo, agora é só continuar!")
+  cat("Mendel agradece a preferência")
 }
 ```
 
 Podemos espeficiar mais do que uma condição repetindo a estrutura `if` `else`:
+Agora vamos estudar a ocupação das pessoas que responderam ao questionário.
 
 ```{r}
-if(dados[2,13] == 0){
-  print("Nunca é tarde para começar!")
-} else if (dados[2,13] > 0 & dados[2,13] < 5){
-  print("Já pegou o embalo, agora é só continuar!")
+if(dados[2,1] == "Mestrado"){
+  cat("Força, o quinto dia útil esta chegando!")
+} else if (dados[2,1] == "Doutorado"){
+  cat("Assim como seus amigos do mestrado, acredite até sexta a bolsa cai!")
 } else {
-  print("Nos avise se estivermos falando algo errado...hehe")
+  cat("Esse já tem a carteira assinada, que beleza!")
 }
 ```
 
-Também podemos fazer uso das funções `any` e `all`. Será que algum de nós tem mais de 60 anos de idade (idade está na 9ª coluna)? Se sim, diga para essa pessoa tomar cuidado e levar a sério o isolamento.
-
-Lembrando como `any` e `all` funcionam:
+Também podemos fazer uso das funções `any` e `all`. Lembrando como `any` e `all` funcionam:
 
 ```{r}
 x <- 1:10
+x
 all(x > 0)
 any(x > 0)
 
@@ -713,72 +704,46 @@ all(x > 10)
 any(x > 10)
 ```
 
+Podemos utilizar essas funções para testar se alguém de nós mora no centro de Piracicaba:
 
 ```{r, eval=FALSE}
-if(any(dados[,9] > 60)){
-  print("Sabemos que você está entre nós! Para sua segurança, é melhor que fique em casa, esperamos que esteja assistindo remotamente.")
+range(dados$Latitude)
+
+if(any(dados[,6] ==  -22.725)){
+  cat("Alguem mora no centro de Piracicaba")
 } else{
-  print("Não há maiores de 60 anos aqui, evitem visitar idosos nesse período, vamos mantê-los seguros.")
+  cat("Ninguem mora no centro de Piracicaba.")
+}
+
+if(all(dados[,6] ==  -22.725)){
+  cat("Todos moram no Centro de Piracicaba.")
+} else{
+  cat("Nem todos moram no centro de Piracicaba")
 }
 ```
 
-Ih! Achamos um bug, né? Vamos lidar com ele! O R deu uma dica de onde ele está:
-
-```
-Error in if (any(dados[, 9] > 60)) { : 
-  missing value where TRUE/FALSE needed
-```
-
-```{r, eval=F}
-dados[,9] # Verificamos que existem dados perdidos
-dados[,9] > 60 # Quando comparamos com 60, eles continuam como dados perdidos
-any(dados[,9] > 60) # Aqui está o bug! Por padrão o any, quando encontra NA retorna NA
-any(dados[,9] > 60, na.rm = TRUE) # Mudamos esse padrão utilizando o argumento para remover os NA
-```
+Usando a mesma lógica: será que algum de nós está no hemisfério norte do globo (latitude 6ª coluna maior que 0)? Se sim, diga para essa pessoa testar o sentido que a água do vaso sanitário gira.
 
 ```{r}
-# Nós poderíamos fazer também da seguinte maneira:
-idade <- dados[,9]
-is.na(idade)
-idade_semNA <- idade[-which(is.na(idade))]
-```
-
-Pronto! Podemos voltar ao código.
-
-```{r}
-if(any(dados[,9] > 60, na.rm = TRUE)){
-  print("Sabemos que você está entre nós! Para sua segurança, é melhor que fique em casa, esperamos que esteja assistindo remotamente.")
-} else{
-  print("Não há maiores de 60 anos aqui. Evitem visitar idosos nesse período, vamos mantê-los seguros.")
-}
-
-# ou
-if(any(idade_semNA > 60)){
-  print("Sabemos que você está entre nós! Para sua segurança, é melhor que fique em casa, esperamos que esteja assistindo remotamente.")
-} else{
-  print("Não há maiores de 60 anos aqui. Evitem visitar idosos nesse período, vamos mantê-los seguros.")
-}
-```
-
-* Lembra do paradoxo do aniversário? Verifique se existe uma data repetida no vetor e responda "Existem pessoas aqui que fazem aniversário no mesmo dia" caso exista e "Não temos pessoas com aniversário no mesmo dia aqui" caso contrário.
-
-```{r, echo=FALSE}
-if(any(table(dados$aniversario) > 1)){
-  cat("Existem pessoas aqui que fazem aniversário no mesmo dia")
-} else {
-  cat("Não temos pessoas com aniversário no mesmo dia aqui")
-}
+if(any(dados[,6] > 0)){
+  cat("Participantes", which(dados[,6] > 0), "vocês podem testar em que sentido a água do vaso sanitário gira aí?")
+} 
 ```
 
 ## Switch
 
-Uma outra estrutura que também pode ser usada com o mesmo propósito é o `switch`. Esta estrutura é mais utilizada quando trabalhado com caracteres. Por isso vamos aplicá-la para explorar a área (8ª coluna) com que a segunda pessoa se identifica.
+Uma outra estrutura que também pode ser usada com o mesmo propósito é o `switch`. Esta estrutura é mais utilizada quando trabalhado com caracteres. Por isso vamos aplicá-la também para a ocupação para vermos como pode ser mais simples (1ª coluna) o que a segunda e a quarta pessoa fazem.
 
 ```{r}
-switch(dados[2,8],
-  Exatas = print("Será que aprendeu alguma linhagem de programação na graduação?"),
-  Interdiciplinar = print("Em que foi a gradução?"),
-  print("Ta aqui colocando o pezinho na exatas")
+switch(dados[2,1],
+  Mestrado = cat("Força, o quinto dia util esta chegando!"),
+  Doutorado = cat("Assim como seus amigos do mestrado, acredite ate sexta a bolsa cai!"),
+  cat("Esse ja tem a carteira assinada, que beleza!")
+)
+switch(dados[4,1],
+  Mestrado = cat("Força, o quinto dia util esta chegando!"),
+  Doutorado = cat("Assim como seus amigos do mestrado, acredite ate sexta a bolsa cai!"),
+  cat("Esse ja tem a carteira assinada, que beleza!")
 )
 
 ```
@@ -805,20 +770,20 @@ for(i in 1:10){
 test
 ```
 
-Nos casos acima, `i` funciona como um index que irá variar de 1 até 10 a operação determinada entre chaves.
+Nos casos acima, `i` funciona como um índice que irá variar de 1 até 10 a operação determinada entre chaves.
 
 Com essa estrutura, podemos repetir a operação realizada com as estruturas `if` e `else` para todo o vetor:
 
 ```{r, eval=F}
 for(i in 1:nrow(dados)){
-  if(dados[i,13] == 0){
-    print("Nunca é tarde para começar!")
-  } else if (dados[i,13] > 0 && dados[i,13] < 5){
-    print("Já pegou o embalo, agora é só continuar!")
+  if(dados[i,1] == "Mestrado"){
+    print("Força, o quinto dia útil esta chegando!")
+  } else if (dados[i,1] == "Doutorado"){
+    print("Assim como seus amigos do mestrado, acredite até sexta a bolsa cai!")
   } else {
-      print("Nos avise se estivermos falando algo errado...hehe")
-    }
-} 
+    print("Esse já tem a carteira assinada, que beleza!")
+  }
+}
 ```
 
 **Dica: Identação**
@@ -828,104 +793,70 @@ Repare a diferença:
 ```{r, eval=FALSE}
 # Sem identação
 for(i in 1:nrow(dados)){
-if(dados[i,13] == 0){
-print("Nunca é tarde para começar!")
-} else if (dados[i,13] > 0 && dados[i,13] < 5){
-print("Já pegou o embalo, agora é só continuar!")
+if(dados[i,1] == "Mestrado"){
+print("Força, o quinto dia útil esta chegando!")
+} else if (dados[i,1] == "Doutorado"){
+print("Assim como seus amigos do mestrado, acredite até sexta a bolsa cai!")
 } else {
-print("Nos avise se estivermos falando algo errado...hehe")
+print("Esse já tem a carteira assinada, que beleza!")
 }
 }
 
 # Com identação correta
 for(i in 1:nrow(dados)){
-  if(dados[i,13] == 0){
-    print("Nunca é tarde para começar!")
-  } else if (dados[i,13] > 0 && dados[i,13] < 5){
-    print("Já pegou o embalo, agora é só continuar!")
+  if(dados[i,1] == "Mestrado"){
+    print("Força, o quinto dia útil esta chegando!")
+  } else if (dados[i,1] == "Doutorado"){
+    print("Assim como seus amigos do mestrado, acredite até sexta a bolsa cai!")
   } else {
-    print("Nos avise se estivermos falando algo errado...hehe")
+    print("Esse já tem a carteira assinada, que beleza!")
   }
 }
-
 ```
 
 O editor de código do RStudio tem uma facilitação para identar códigos em R, selecione a área que deseja identar e aperte `Ctrl-i`.
 
-Agora vamos trabalhar com a coluna 4, que possui a informação da cidade de origem dos participantes. Repare que alguns não colocaram o estado, como o exemplo sugeria. Vamos utilizar um loop para descobrir quais estão faltando. Vamos utilizar a função `grepl` para identificar as strings que contém o caracter "-", aqueles que tiverem consideraremos correto, os que não tiverem, vamos pedir para adicionar mais informações.
+Agora vamos trabalhar com a coluna 2, que possui a informação da graduação dos participantes. Repare que a função `table` retorna diferentes categorias que poderiam ser resumidas em apenas uma, como  "Engenharia agronômica" e "Agronomia". Vamos utilizar um loop para descobrir quais responderam áreas relacionadas à "Agro". Depois, quais dessas respostas não foram "Agronomia" e pedir para que este participante modifique a resposta digitando apenas "Agronomia". 
+
+Dica 1: Para identificar o padrão "Agro" podemos utilizar  a função `grepl`.
+Dica 2: Podemos utilizar if dentro de if
 
 ```{r}
 # Exemplo do uso da função grepl
-grepl("-", dados[1,4]) # A primeira linha contem o caracter "-"
+dados[,2]
+grepl("Agro", dados[,2]) # Quais linhas contém os caracteres "Agro"
+dados[grepl("Agro", dados[,2]),2]
 
 for(i in 1:nrow(dados)){
-  if(grepl("-", dados[i,4])){
-    cat("Esse/a seguiu o exemplo direitinho. Parabéns!\n")
-  } else {
-    cat("Precisamos adicionar mais informações na linha", i, "\n")
-  }
+  if(grepl("Agro", dados[i,2])){
+    if(dados[i,2] != "Agronomia"){
+     print("Por favor, substitua sua resposta por Agronomia.") 
+    }
+  } 
 }
 ```
 
 Para que seja possível imprimir conteúdo de objetos durante o loop, usamos a função `cat`, ela não separa cada resposta em uma linha, precisamos colocar o `\n` indicando a quebra de linha.
 
-Agora vamos nos mesmos corrigir essas informações. Podemos armazenar em uma variável a posição das linhas incorretas, então corrigiremos manualmente somente essas:
+Agora vamos nos mesmos homogeneizar essas informações. Podemos armazenar em uma variável a posição das linhas identificadas, então corrigiremos manualmente somente essas:
 
 ```{r}
-corrigir <- vector()
+homog <- vector()
 for(i in 1:nrow(dados)){
-  if(grepl("-", dados[i,4])){
-    cat("Esse/a seguiu o exemplo direitinho. Parabéns!\n")
-  } else {
-    cat("Precisamos adicionar mais informações na linha", i, "\n")
-    corrigir <- c(corrigir, i)
-  }
+  if(grepl("Agro", dados[i,2])){
+    if(dados[i,2] != "Agronomia"){
+     print("Por favor, substitua sua resposta por Agronomia.") 
+     homog <- c(homog, i)
+    }
+  } 
 }
 
-corrigir
+homog
 ```
-
 
 > Como você faria para corrigir esses elementos errados? Tente!
 
-Dica: [Primeiro busque quais são as cidades desses elementos (dados[corrigir,4]), depois, faça um novo vetor com os nomes corretos e substitua na tabela]{.spoiler}
-
-Uma possibilidade de resposta:
-
-```{r, eval=FALSE}
-dados[corrigir,4]
-novo <- c("Piracicaba - SP")
-dados[corrigir,4] <- novo
-
-# Verificando se corrigiu
-dados[,4]
-```
-
-> A coluna 9 da tabela se refere à idade dos participantes, imprima na tela (usando print ou cat) a década em que cada um nasceu, como a seguir: "Nasceu na década de 80".
-
-Dica: [Faça um novo vetor com a subtração das idades pelo ano atual e depois faça um loop com uma condicional para imprimir as mensagens na tela]{.spoiler}
-
-Uma possibilidade de resposta:
-
-```{r}
-decada <- 2020 - idade_semNA
-
-for(i in 1:length(decada)){
-  if(decada[i] < 1960){
-    print("Nasceu antes da década de 60")
-  } else if(decada[i] > 1960 && decada[i] < 1970){
-    print("Nasceu na década de 60")
-  } else if(decada[i] >= 1970 && decada[i] < 1980){
-    print("Nasceu na década de 70")
-  } else if(decada[i] >= 1980 && decada[i] < 1990){
-    print("Nasceu na década de 80")
-  } else if(decada[i] >= 1990 && decada[i] < 2000){
-    print("Nasceu na década de 90")
-  } else {
-    print("Xóvem")
-  }
-}
-```
+['dados[homog, 2] <- "Agronomia"']{.spoiler}
 
 ## While
 
@@ -936,7 +867,7 @@ x <- 1
 
 while(x < 5){
   x <- x + 1
-  print(x)
+  cat(x)
 }
 ```
 
@@ -949,7 +880,7 @@ x <- 1
 
 while(x < 5){
   x + 1
-  print(x)
+  cat(x)
 }
 ```
 
@@ -961,7 +892,7 @@ x <- 1
 while(x < 5){
   x <- x + 1
   if(x==4) break
-  print(x)
+  cat(x)
 }
 
 x <- 1
@@ -969,7 +900,7 @@ x <- 1
 while(x < 5){
   x <- x + 1
   if(x==4) next
-  print(x)
+  cat(x)
 }
 
 ```
@@ -982,7 +913,7 @@ Esta estrutura também exige uma condição de parada, mas esta condição é ne
 x <- 1
 repeat{
   x <- x+1
-  print(x)
+  cat(x)
   if(x==4) break
 }
 
@@ -1021,11 +952,12 @@ for(i in var1){
   }
 }
 
+# Verifique seu diretorio de trabalho, arquivos devem ter sido gerados
 ```
 
-Fizemos um vídeo com mais detalhes sobre loops no R, aumentem nossa quantidade de views e likes por [lá](https://www.youtube.com/watch?v=VYOo7I5htOw).
+Fizemos um vídeo com mais detalhes sobre loops no R (quando cursamos a disciplina de Biometria de Marcadores), aumentem nossa quantidade de views e likes por [lá](https://www.youtube.com/watch?v=VYOo7I5htOw).
 
-> Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão 3**](exercicios.html#sessao3), se não, faça-os no conforto do seu lar e nos envie dúvidas pelo fórum.
+> Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão 3**](exercicios.html#sessao3), se não, faça-os em outro momento e nos envie dúvidas pelo fórum.
 
 **Algumas dicas**:
 
@@ -1052,7 +984,7 @@ for(i in 1:dim(ex_mat)[1]) {   # Primeiro nível, não tem espaço
 
 Normalmente é uma boa prática criar um bloco de código se vai realizar aquela ação poucas vezes. Se for realizar várias vezes a ação e de uma vez só, vale a pena fazer um loop. Mas, se for realizar diversas vezes e o objeto de entrada for modificado, vale a pena fazer uma função. E, na hierarquia, quando tiver acumulado muitas funções para realizar uma tarefa mais complexa, vale a pena construir um pacote.
 
-A função também é considerada um objeto no R, portanto você a atribui à uma variável. Procure nomear a função com um nome curto e intuitivo em relação à tarefa que ela executa. Nem sempre é uma tarefa fácil.
+A função também é considerada um objeto no R, portanto você a atribui à uma variável. Procure nomear a função com um nome curto e intuitivo em relação à tarefa que ela executa. Essa nem sempre é uma tarefa fácil.
 
 <img src="meme.png" alt="[referência](https://www.reddit.com/r/ProgrammerHumor/comments/5z6n8p/every_time/)" width="300" height="400">
 
@@ -1106,83 +1038,98 @@ y <- 2
 quadra_mais_y(4) # quando temos, a função acessa o y do ambiente global
 ```
 
-Agora, vamos criar uma função para calcular o IMC (índice de massa corporal) dos participantes do curso. Lembrando que o IMC é calculado pela divisão do peso pelo quadrado da altura.
+Agora, vamos criar uma função para indicar quais participantes estão no hemisfério sul/norte e à oriente/ocidente do meridiano de Greenwich. Lembrando que latitudes > 0 se referem ao hemisfério norte e longitudes > 0 ao hemisfério oriental.
 
 ```{r}
-## Calcula o índice de massa corporal (IMC) dos participantes
-dados$peso
-dados$altura
-calc_IMC <- function(peso, altura){
-  IMC <- peso/altura^2
-  return(IMC)
+localizacao <- function(latitude, longitude){
+  hemisferio <- vector()
+  hemisferio[which(latitude > 0)] <- "Norte"
+  hemisferio[which(latitude < 0)] <- "Sul"
+  hemisferio[which(latitude == 0)] <- "Equador"
+  
+  meridiano <- vector()
+  meridiano[which(longitude > 0)] <- "Oriente"
+  meridiano[which(longitude < 0)] <- "Ocidente"
+  meridiano[which(longitude == 0)] <- "Meridiano de Greenwich"
+  
+  df <- data.frame(hemisferio, meridiano)
+  return(df)
 }
 
-calc_IMC(peso=dados$peso, altura=dados$altura)
+localizacao(latitude = dados[,6], longitude = dados[,7])
 ```
 
-Considere a tabela abaixo e faça agora a função dizer para o usuário quantos valores do vetor de IMCs estão em cada uma das categorias, além de retornar o vetor, como já estava fazendo antes.
+Agora, aprimore a função acima adicionando também uma coluna que indique a média de conhecimento do participante sobre as três áreas perguntadas. Considere para isso: Básico = 1, Intermediário = 2, Avançado = 3, Sabe o teste F? Fui eu que desenvolvi, mas não publiquei porque sou modesto = 99 e 0 = 0.
 
 ```{r, echo=F}
-IMC_table <- data.frame("peso" = c("Menos do que 18.5", "Entre 18,5 e 25", "Entre 25 e 30", "Entre 30 e 35", "Entre 35 e 40", "Mais do que 40"),
-                        "categoria"=c("Abaixo do peso", "Peso normal", "Sobrepeso", "Obesidade grau 1", "Obesidade grau 2", "Obesidade grau 3"))
-knitr::kable(IMC_table)
+# Dica
+dados[dados == "Avançado"] <- 3
+dados[dados == "Intermediário"] <- 2
+dados[dados == "Básico"] <- 1
+dados[dados == "Sabe o teste F? Fui eu que desenvolvi, mas não publiquei porque sou modesto"] <- 99
 ```
 
 
 ```{r}
-
-calc_IMC <- function(peso, altura){
-  IMC <- peso/altura^2
+localizacao <- function(latitude, 
+                        longitude, 
+                        genetica, 
+                        estatistica, 
+                        genetica_estatistica){
+  hemisferio <- vector()
+  hemisferio[which(latitude > 0)] <- "Norte"
+  hemisferio[which(latitude < 0)] <- "Sul"
+  hemisferio[which(latitude == 0)] <- "Equador"
   
-  idx <- sum(IMC < 18.5) # No R FALSE = 0 e TRUE=1, a soma aqui é a mesma coisa que contar o número de TRUEs
-  cat(idx, "indivíduos estão abaixo do peso")
-  idx <- sum(IMC >= 18.5 & IMC < 25)
-  cat(idx, "indivíduos estão com peso normal")
-  idx <- sum(IMC >= 25 & IMC < 30)
-  cat(idx, "indivíduos estão com sobrepeso")
-  idx <- sum(IMC >= 30 & IMC < 35)
-  cat(idx, "indivíduos estão com obesidade grau 1")
-  idx <- sum(IMC >= 35 & IMC < 40)
-  cat(idx, "indivíduos estão com obesidade grau 2")
-  idx <- sum(IMC >= 40)
-  cat(idx, "indivíduos estão com obesidade grau 3")
+  meridiano <- vector()
+  meridiano[which(longitude > 0)] <- "Oriente"
+  meridiano[which(longitude < 0)] <- "Ocidente"
+  meridiano[which(longitude == 0)] <- "Meridiano de Greenwich"
   
-  return(IMC)
+  medias <- (as.numeric(genetica) + 
+             as.numeric(estatistica) + 
+             as.numeric(genetica_estatistica))/3
+  
+  df <- data.frame(hemisferio, meridiano, round(medias,2))
+  return(df)
 }
 
+localizacao(dados[,6], dados[,7], genetica = dados[,3], 
+            estatistica = dados[,4], genetica_estatistica = dados[,5])
 ```
 
-
-Se é uma função para uso próprio, você saberá como deve ser o objeto de entrada, mas se ela for utilizada por outras pessoas, será necessário, além de uma prévia explicação de suas ações, verificar se o objeto de entrada esta de acordo com o esperado pela função. No nosso exemplo, não faria sentido o usário entrar com números negativos. Faça com que a função retorne um erro caso isso aconteça.
+Se é uma função para uso próprio, você saberá como deve ser o objeto de entrada, mas se ela for utilizada por outras pessoas, será necessário, além de uma prévia explicação de suas ações, verificar se o objeto de entrada esta de acordo com o esperado pela função. No nosso exemplo, não faria sentido o usário entrar com números fora do intervalo [-180, 180]. Faça com que a função retorne um erro caso isso aconteça.
 
 ```{r}
-# para testar durante a construção da função 
-peso <- dados$peso
-altura <- dados$altura
-
-calc_IMC <- function(peso, altura){
+localizacao <- function(latitude, 
+                        longitude, 
+                        genetica, 
+                        estatistica, 
+                        genetica_estatistica){
   
-  if(any(peso < 0 | altura < 0)){
-    stop("Os valores dos argumentos peso e altura não podem ser negativos")
-  }
+  if(any(latitude < -180 | latitude > 180)) stop("Valores de latitude inválidos")
+  if(any(longitude < -180 | longitude > 180)) stop("Valores de longitude inválidos")
   
-  IMC <- peso/altura^2
+  hemisferio <- vector()
+  hemisferio[which(latitude > 0)] <- "Norte"
+  hemisferio[which(latitude < 0)] <- "Sul"
+  hemisferio[which(latitude == 0)] <- "Equador"
   
-  idx <- sum(IMC < 18.5) # No R FALSE = 0 e TRUE=1, a soma aqui é a mesma coisa que contar o número de TRUEs
-  cat(idx, "indivíduos estão abaixo do peso")
-  idx <- sum(IMC >= 18.5 & IMC < 25)
-  cat(idx, "indivíduos estão com peso normal")
-  idx <- sum(IMC >= 25 & IMC < 30)
-  cat(idx, "indivíduos estão com sobrepeso")
-  idx <- sum(IMC >= 30 & IMC < 35)
-  cat(idx, "indivíduos estão com obesidade grau 1")
-  idx <- sum(IMC >= 35 & IMC < 40)
-  cat(idx, "indivíduos estão com obesidade grau 2")
-  idx <- sum(IMC >= 40)
-  cat(idx, "indivíduos estão com obesidade grau 3")
+  meridiano <- vector()
+  meridiano[which(longitude > 0)] <- "Oriente"
+  meridiano[which(longitude < 0)] <- "Ocidente"
+  meridiano[which(longitude == 0)] <- "Meridiano de Greenwich"
   
-  return(IMC)
+  medias <- (as.numeric(genetica) + 
+             as.numeric(estatistica) + 
+             as.numeric(genetica_estatistica))/3
+  
+  df <- data.frame(hemisferio, meridiano, round(medias,2))
+  return(df)
 }
+
+localizacao(dados[,6], dados[,7], genetica = dados[,3], 
+            estatistica = dados[,4], genetica_estatistica = dados[,5])
 ```
 
 ```{r, eval=FALSE}
@@ -1193,7 +1140,6 @@ calc_IMC(peso, altura)
 ```
 
 Para saber mais sobre desenvolvimento de funções acesse [aqui](https://www.r-bloggers.com/how-to-write-and-debug-an-r-function/) e, um pouco mais avançado, [aqui](http://adv-r.had.co.nz/Functions.html).
-
 
 # Rodando outros scripts .R 
 
@@ -1208,16 +1154,16 @@ source("funcoes.R")
 ```
 
 
-> Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão 4**](exercicios.html#sessao4), se não, faça-os no conforto do seu lar e nos envie dúvidas pelo fórum.
+> Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão 4**](exercicios.html#sessao4), se não, faça-os em outro momento e nos envie dúvidas pelo fórum.
 
 # Elaboração de gráficos simples
 
 Para outros dados coletados, vamos gerar alguns gráficos simples utilizando as funções básicas do R. Existem pacotes como o `ggplot2`, `plotly` e `shiny` que possuem ferramentas muito poderosas para construção de gráficos, mas exigem um pouco mais de tempo para aprendizagem de sua sintaxe.
 
-Os tipos mais comuns já possuem funções próprias, mas outros gráficos podem ser customizados de acordo com a necessidade do usuário. Vamos iniciar com um simples gráfico de frequências (ou histograma) para os dados de `altura`.
+Os tipos mais comuns já possuem funções próprias, mas outros gráficos podem ser customizados de acordo com a necessidade do usuário. Vamos iniciar com um simples gráfico de frequências (ou histograma) para os dados de `latitude`.
 
 ```{r}
-hist(dados$altura)
+hist(dados$Latitude)
 ```
 
 Vamos adicionar alguns argumentos para dar uma personalizada:
@@ -1227,13 +1173,13 @@ Vamos adicionar alguns argumentos para dar uma personalizada:
 ```{r, echo=FALSE}
 #### Histograma ####
 #Utiliza um vetor de valores para obter as frequências
-hist(dados$altura)
-hist(dados$altura, breaks = 2)
-hist(dados$altura, breaks = 15) 
+hist(dados$Latitude)
+hist(dados$Latitude, breaks = 2)
+hist(dados$Latitude, breaks = 15) 
 
 ```
 
-Agora tente fazer o **histograma para o peso**, aproveite para tentar alterar alguns parâmetros. Em seguida, serão apresentados outros gráficos que poderão ser utilizados.
+Agora tente fazer o **histograma para a Longitude**, aproveite para tentar alterar alguns parâmetros. Em seguida, serão apresentados outros gráficos que poderão ser utilizados.
 
 ## Salvar gráficos
 
@@ -1241,11 +1187,11 @@ Os gráficos podem ser salvos através dos menus disponíveis no RStudio, ou atr
 
 ```{r eval=FALSE}
 png(filename = "hist_rbase.png")
-hist(dados$altura)
+hist(dados$Latitude)
 dev.off()
 
 png(filename = "hist_rbase.png", width = 1500, height = 1500, res= 300)
-hist(dados$altura)
+hist(dados$Latitude)
 dev.off()
 ```
 
@@ -1259,7 +1205,7 @@ Existem diversos pacotes disponíveis para variadas aplicações. Utilizaremos o
 install.packages("ggplot2")
 ```
 
-Depois disso é necessário recrutá-lo com:
+Depois disso é necessário recrutá-lo toda vez que iniciar um sessão no R:
 
 ```{r}
 library("ggplot2")
@@ -1267,12 +1213,8 @@ library("ggplot2")
 
 O `ggplot2` é um pacote que permite a construção de gráficos estatísticos, suas funcionalidades vão muito além do que está disponível nos gráficos básicos do R. 
 
-# Algumas ferramentas básicas de análise de dados
 
-Claramente a análise de dados é algo muito específico de cada conjunto de dados e interesses. 
-
-
-## Pratique gerando relatórios no RStudio
+# Pratique gerando relatórios no RStudio
  
  Utilize o R no seu dia-a-dia para ir praticando a linguagem. Além das recomendações contidas na [primeira apresentação](), recomendamos também dar uma olhada em como gerar documentos em pdf e html usando a Markdown. Utilizamos essa metodologia para gerar este tutorial e outras apresentações do curso. Pode ser muito prático no dia-a-dia!
  
@@ -1335,6 +1277,10 @@ fiz um [link](https://GENt-esalq.github.io/)!
 
 
 Saiba mais no tutorial do R-bloggers, que acreditamos ser um bom começo! Acesse [aqui](https://www.r-bloggers.com/how-to-create-reports-with-r-markdown-in-rstudio/).
+
+# Algumas ferramentas básicas de análise de dados
+
+Claramente a análise de dados é algo muito específico de cada conjunto de dados e interesses. 
 
 ## Avaliando o clima de Londrina
 
@@ -1736,10 +1682,10 @@ Agora que você fez um plot de PCA, você pode perceber que ele é apenas uma va
 
 # Sugestões, críticas, elogios e convites para almoço
 
-Caso tenha sugestões para aprimoramento desse material, enviar e-mail para `gent.esalq@gmail.com`.
+Caso tenha sugestões para aprimoramento desse material, enviar e-mail para `biometriamarcadores@gmail.com`.
 
-Acesse também outros materiais em português produzidos por Cristiane Taniguti, Fernando Correr e Rodrigo Amadeu [aqui](http://cristianetaniguti.github.io/Workshop_genetica_esalq/).
+Acesse também outros materiais em português produzidos pela mesma equipe [aqui](http://cristianetaniguti.github.io/Workshop_genetica_esalq/).
 
-Este material foi produzido por alunos do programa de pós-graduação em Genética e Melhoramento de Plantas. Cristiane Taniguti, Fernando Correr, Guilherme Hokasa, Jenifer Camila Godoy e Wellingson Araújo ministraram o Treinamento.
+Este material foi produzido por alunos do programa de pós-graduação em Genética e Melhoramento de Plantas. Cristiane Taniguti, Fernando Correr e e Wellingson Araújo ministraram o Treinamento.
 
 Também recomendamos materiais em inglês [aqui](https://GENt-esalq.github.io/cursoR/english_tutorials.html).
