@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
-<meta name="author" content="GENt   Escola Superior de Agricultura Luiz de Queiroz   Universidade de São Paulo" />
+<meta name="author" content="Statistical Genetics Laboratory   Escola Superior de Agricultura Luiz de Queiroz   Universidade de São Paulo" />
 
 <meta name="date" content="2021-05-05" />
 
@@ -2485,6 +2485,7 @@ $(document).ready(function () {
       <li><a href="#criando-objetos">Criando objetos</a><ul>
       <li><a href="#indexação">Indexação</a></li>
       <li><a href="#matrizes">Matrizes</a></li>
+      <li><a href="#retomando">Retomando…</a></li>
       <li><a href="#data.frames">Data.frames</a></li>
       <li><a href="#listas">Listas</a></li>
       <li><a href="#arrays">Arrays</a></li>
@@ -2520,7 +2521,7 @@ $(document).ready(function () {
     </div>
     
     <div id="postamble" data-toggle="wy-nav-shift" class="status">
-              <p class="author"><span class="glyphicon glyphicon-user"></span> <a href="https://gent-esalq.github.io/">GENt</a> <br /> Escola Superior de Agricultura Luiz de Queiroz <br /> Universidade de São Paulo</p>
+              <p class="author"><span class="glyphicon glyphicon-user"></span> <a href="https://statgen-esalq.github.io/">Statistical Genetics Laboratory</a> <br /> Escola Superior de Agricultura Luiz de Queiroz <br /> Universidade de São Paulo</p>
                   <p class="date"><span class="glyphicon glyphicon-calendar"></span> 2021-05-05</p>
         </div>
 </div>
@@ -2804,6 +2805,17 @@ $(document).ready(function () {
 <p>Acessamos os números internos à matriz dando as coordenadas [linha,coluna], como no exemplo:</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1"></a>W[<span class="dv">4</span>,<span class="dv">2</span>] <span class="co"># Número posicionado na linha 4 e coluna 2</span></span></code></pre></div>
 <pre><code>## [1] 0.24</code></pre>
+</div>
+<div id="retomando" class="section level2">
+<h2>Retomando…</h2>
+<p><span style="color:red"> Paramos aqui no primeiro dia!! </span></p>
+<ul>
+<li><p>Acesse <a href="dia1.R">aqui</a> o script .R feito durante o primeiro dia de curso</p></li>
+<li><p>Acesse <a href="dia1.Rmd">aqui</a> o script em Rmarkdown do que foi feito no primeiro dia de curso</p></li>
+<li><p>Acesse <a href="dia1.RData">aqui</a> todos os objetos gerados no primeiro dia de curso. Precisaremos de alguns deles a seguir.</p></li>
+<li><p>Link mencionado: <a href="https://rpubs.com/" class="uri">https://rpubs.com/</a></p></li>
+<li><p><a href="https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts">Shortcuts do RStudio</a></p></li>
+</ul>
 <p>As vezes pode ser informativo dar nomes às colunas e às linhas da matriz, fazemos isso com:</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a><span class="kw">colnames</span>(W) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;altura&quot;</span>, <span class="st">&quot;diametro&quot;</span>)</span>
 <span id="cb88-2"><a href="#cb88-2"></a><span class="kw">rownames</span>(W) &lt;-<span class="st"> </span>clone</span>

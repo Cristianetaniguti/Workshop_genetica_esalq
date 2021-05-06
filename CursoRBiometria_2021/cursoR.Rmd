@@ -1,7 +1,7 @@
 ---
 title: "Treinamento em Programação no Ambiente R"
 date: "`r Sys.Date()`"
-author: "[GENt](https://gent-esalq.github.io/) <br/>  Escola Superior de Agricultura Luiz de Queiroz <br/> Universidade de São Paulo"
+author: "[Statistical Genetics Laboratory](https://statgen-esalq.github.io/) <br/>  Escola Superior de Agricultura Luiz de Queiroz <br/> Universidade de São Paulo"
 output:
     rmdformats::readthedown:
       css: readthedownstatgen.css
@@ -415,6 +415,18 @@ Acessamos os números internos à matriz dando as coordenadas [linha,coluna], co
 ```{r}
 W[4,2] # Número posicionado na linha 4 e coluna 2
 ```
+
+
+## Retomando...
+
+<span style="color:red"> Paramos aqui no primeiro dia!! </span>
+
+* Acesse [aqui](dia1.R) o script .R feito durante o primeiro dia de curso
+* Acesse [aqui](dia1.Rmd) o script em Rmarkdown do que foi feito no primeiro dia de curso
+* Acesse [aqui](dia1.RData) todos os objetos gerados  no primeiro dia de curso. Precisaremos de alguns deles a seguir. 
+
+* Link mencionado: https://rpubs.com/
+* [Shortcuts do RStudio](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts)
 
 As vezes pode ser informativo dar nomes às colunas e às linhas da matriz, fazemos isso com:
 

@@ -1,169 +1,201 @@
-#########################
-# Script Curso R
+# Curso 05/05
+# Introdução ao R
 
-# Data: 16/03/2020
-# GENt
-##########################
+# Vários comandos diferentes para a mesma coisa
+# cat("Hello world")
+cat("Qualquer outra coisa")
+print("Outra forma")
+paste("Mais outra")
 
-cat("Hello world!")
+print("Q")
 
-# Depende do seu computador
-# setwd("~/Documents/CursoR") 
+# Estabelece diretório de trabalho
+setwd("~/github/Workshop_genetica_esalq/CursoRBiometria_2021")
 
-getwd() # Se tiver perdido
+# Me perdi, usar:
+getwd()
 
-1+1.3                 #Decimal definido com "."
+#####################
+# Operações básicas
+#####################
+
+1 - 1.3  # Repare o que define o decimal "."
 2*3
 2^3
 4/2
 
-sqrt(4)              #raíz quadrada
-log(100, base = 10)  #logarítmo na base 10
-log(100)             #logarítmo com base neperiana
+sqrt(9) # raíz quadrada
+log(100) # base neperiana
+log(100, 10) # base 10
 
-# Resolvendo problema 
-((13+2+1.5)/3) + log(96, base = 4)
+# Exercício
+(13+2+1.5)/3 + log(96, 4)
 
-# Pedindo ajuda sobre função do R
+# Pedir ajuda
 ?log
 
+########################
+# Operações com vetores
+########################
 
-# Operação com vetores
+c(1,3,2,5,2)
 
-# Diferentes formas de criar um vetor
-c(1,3,2,5,2) 
+# Criar sequência
 1:10
-seq(from=0, to=100, by=5)
+
 # ou
-seq(0,100,5) # Se você já souber a ordem dos argumentos da função
-seq(from=4, to=30, by=3)
-rep(3:5, 2)
 
-# Operações
-c(1,4,3,2)*2  # Multiplica todos os elementos por 2
-c(4,2,1,5)+c(5,2,6,1) # Soma 4+5, 2+2, 1+6 e assim por diante
-c(4,2,1,5)*c(5,2,6,1) # Multiplica 4*5, 2*2, 1*6 e assim por diante
+seq(from = 1, to = 10, by = 1)
+seq(from = 1, to = 10, by = 2)
+seq(from=0, to=100, by=5)
 
-# Criando objetos
-x = c(30.1,30.4,40,30.2,30.6,40.1)
+# Crie uma sequencia utilizando a função seq 
+# que varie de 4 a 30, com intervalos de 3 em 3.
+
+seq(from=4, by = 3, to = 30)
+seq(4, 3, 30)
+?seq
+
+# ou ainda
+rep(3:5,2)
+
+# Operações com vetores
+c(1,4,3,2)^2
+c(4,2,1,5)+c(5,2,6,1)
+c(4,2,1,5)*c(5,2,6,1)
+
+x = c(30.1, 30.4, 40, 30.2, 30.6, 40.1)
 # ou
 x <- c(30.1,30.4,40,30.2,30.6,40.1)
 
+# A linguagem é case sensitive
+X
+
 y = c(0.26,0.3,0.36,0.24,0.27,0.35)
 
-# Operações com os objetos
-x*2
 x + y
 x*y
+x*2
+x*c(1,2)
+sqrt(x)
+
+x*c(1,2,3,4)
+
+# Comprimento do vetor
+length(x)
+
 z <- (x+y)/2
 z
 
-# Aplicando algumas funções
-sum(z)  # soma dos valores de z
-mean(z) # média 
-var(z)  # variância
+# Soma de todos os valores
+x + y
+sum((x + y)/2)
+sum(z)
+mean(z)
+var(z)
 
-# Obtendo valores internos dos objetos por indexação
-z[3] # elemento na terceira posição do vetor
+# Indexação
+
+z[3]
+
 z[2:4]
 
-# Para saber algumas características do objeto
 str(z)
 
-# Vetor de caracteres
-clone <- c("GRA02", "URO01", "URO03", "GRA02", "GRA01", "URO01")
+# Vetor caracteres
+clone <- c("GRA02", "URO01", 
+           "URO03", "GRA02", 
+           "GRA01", "URO01")
 
-# Vetor de fatores (ou variáveis categóricas)
-clone_fator <- as.factor(clone)
-str(clone_fator)
-levels(clone_fator)
-length(clone_fator)
+str(clone)
 
-# Vetor lógico
-logico <- x > 40
-logico   # Os elementos são maiores que 40?
+# Fator
+exemplo_fator <- as.factor(clone)
+str(exemplo_fator)
+length(exemplo_fator)
 
-# Indica a posição dos TRUE
-which(logico)  # Obtendo as posiçoes dos elementos TRUE
-x[which(logico)] # Obtendo os números maiores que 40 do vetor x pela posição
+# Lógico
 
-# Para ficar esperto/a
-(a <- 1:10)
+x >= 40 # numeros maiores ou igual a 40
+
+logico <- x >= 40
+
+# > maior
+# >= maior igual
+# < menor
+# <= menor ou igual
+# == igual
+# != diferente
+# ! negação
+
+which(logico)
+
+x[which(logico)]
+
+!logico
+
+x[!logico]
+
+clone
+
+clone %in% c("GRA02", "URO03", "URO01")
+match(clone, c("GRA02", "URO03", "URO01"))
+
+# Pergunta
+LETTERS
+
+which(LETTERS == "R")
+
+any(logico)
+all(logico)
+
+# Atenção 1
+a <- 1:10
+a
+
 b <- seq(from = 0.1, to = 1, 0.1)
-(b <- b*10)
-a==b        # Existe um problema computacional de armazenamento
-a==round(b) # Evitar que isso aconteceça arredondando o resultado
-?round      # Fiquei com dúvida nessa função
+b
 
-errado <- c(TRUE, "vish", 1) # Não podemos misturar classes num mesmo vetor
+a2 <- b*10
+a2
+a
+a == round(a2,4) # Sempre use round para comparar!!!
+
+# Atenção - não misture!
+errado <- c(TRUE, "vish", 1)
 errado
 
+################################
 # Matrizes
+################################
+
+X <- matrix(1:12, nrow = 6, ncol = 2, byrow = TRUE)
+X
 
 X <- matrix(1:12, nrow = 6, ncol = 2)
 X
-W <- matrix(c(x,y), nrow = 6, ncol =2)
+
+W <- matrix(c(x,y), nrow = 6, ncol = 2)
 W
 
-X*2
-X*X        
-X%*%t(X)          # Multiplicação matricial
-
-W[4,2] # Número posicionado na linha 4 e coluna 2
-
-# Nomeando linhas e colunas
-colnames(W) <- c("altura", "diametro")
-rownames(W) <- clone
+# ou
+exemplo <- c(x,y)
+W <- matrix(exemplo, nrow = 6, ncol = 2)
 W
 
-# Criando um data.frame
-campo1 <- data.frame("clone" = clone,     # Antes do sinal de "="  
-                     "altura" = x,        # estabelecemos os nomes  
-                     "diametro" = y,      # das colunas
-                     "idade" = rep(3:5, 2),
-                     "corte"= logico) 
-campo1
+# Meus atalhos
+# Shift + setas - seleciona 
+# rodar - ctrl + enter
 
-# uma forma de acessar as colunas
-campo1$idade
+# Multiplicação elemento a elemento
+X*X
 
-# outra forma de acessar as colunas
-campo1[,4] 
+# Multiplicaçao matricial
+X%*%t(X)
 
-# acessar linha 1 coluna 2
-campo1[1,2] 
+x[3]
 
-# calculando volume
-volume <- 3.14*((campo1$diametro/2)^2)*campo1$altura
-volume
+X[1:3,2]
 
-# adicionando nova coluna no data.frame
-campo1 <- cbind(campo1, volume)
-str(campo1)
-
-# Listas
-
-# Criando uma lista
-minha_lista <- list(campo1 = campo1, media_alt = tapply(campo1$altura, campo1$idade, mean), matrix_ex = W)
-str(minha_lista)
-
-# Acessando o primeiro nivel da lista
-minha_lista[[1]] 
-# ou
-minha_lista$campo1
-
-# Acessando a primeira coluna do primeiro nível da lista
-minha_lista[[1]][[3]]
-# ou
-minha_lista[[1]]$diametro
-# ou
-minha_lista$campo1$diametro
-# ou
-minha_lista$campo1[,3]
-
-
-## Arrays
-
-(meu_array <- array(1:24, dim = c(2,3,4)))
-
-save.image(file = "dia1.RData")
+# Links comentados
+# https://rpubs.com/

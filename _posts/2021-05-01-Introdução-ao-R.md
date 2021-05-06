@@ -11,6 +11,12 @@ Aqui disponibilizaremos os materiais utilizados nos treinamento e alguns outros 
 
 * [Tutorial principal](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/cursoR.html)
 
+* Acesse [aqui](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/dia1.R) o script .R feito durante o primeiro dia de curso
+
+* Acesse [aqui](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/dia1.Rmd) o script em Rmarkdown do que foi feito no primeiro dia de curso
+
+* Acesse [aqui](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/dia1.RData) todos os objetos gerados no primeiro dia de curso.
+
 * [Link para o fórum de discussões](https://groups.google.com/u/1/g/biometria-de-marcadores-2021)
 
 

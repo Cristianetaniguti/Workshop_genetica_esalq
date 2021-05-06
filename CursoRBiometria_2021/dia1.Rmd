@@ -1,0 +1,332 @@
+---
+title: "Treinamento - Introdução ao R"
+output: pdf_document
+---
+
+# Operações básicas
+
+Vamos então à linguagem! 
+
+O R pode funcionar como uma simples **calculadora**, que utiliza a mesma sintaxe que outros programas (como o excel):
+
+```{r, eval=FALSE}
+1+1.3                 #Decimal definido com "."
+2*3
+2^3
+4/2
+
+sqrt(4)              #raíz quadrada
+log(100, base = 10)  #logarítmo na base 10
+log(100)             #logarítmo com base neperiana
+
+```
+
+Agora, utilize as operações básicas para solucionar expressão abaixo. Lembre-se de utilizar parênteses `()` para estabelecer prioridades nas operações.
+
+$(\frac{13+2+1.5}{3})+ log_{4}96$
+
+Resultado esperado:
+
+```{r, echo=FALSE}
+((13+2+1.5)/3) + log(96, base = 4)
+```
+
+Repare que, se posicionar o parênteses de forma incorreta, o código não resultará em nenhuma mensagem de erro, pois este é um erro que chamamos de **erro lógico**, ou seja, o código roda, mas não faz o que você gostaria que ele fizesse. Esse é o tipo de erro mais difícil de ser consertado. Os erros que produzem uma mensagem, seja um aviso (**warning**) ou um erro (**error**) são chamados de **erros de sintaxe**. Nesses casos, o R retornará uma mensagem para te ajudar a corrigí-los. Os **warnings** não comprometem o funcionamento do código, mas chamam a atenção para algum ponto, já os **errors** precisam necessariamente ser corrigidos para que o código rode.
+
+Exemplo de error:
+
+```{r, eval=FALSE}
+((13+2+1,5)/3) + log(96, base = 4)
+```
+
+Você pode também esquecer de fechar algum parênteses, ou aspas, ou colchetes, ou chaves, nesses casos, o R ficará aguardando o comando para fechar o bloco de código sinalizando com um `+`:
+
+```{r, eval=FALSE}
+((13+2+1.5)/3 + log(96, base = 4)
+```
+
+Se acontecer, vá até o console e aperte ESC, que o bloco será finalizado para que você possa corrigí-lo.
+
+Os comandos `log` e `sqrt` são duas de muitas outras funções básicas que o R possui. Funções são conjuntos de instruções organizadas para realizar uma tarefa. Para todas elas, o R possui uma descrição para auxiliar no seu uso, para acessar essa ajuda use:
+
+```{r, eval=FALSE}
+?log
+```
+
+E será aberta a descrição da função na janela `Help` do RStudio.
+
+Se a descrição do próprio R não for suficiente para você entender como funciona a função, busque no google (de preferência em inglês). Existem diversos sites e fóruns com informações didáticas das funções do R.
+
+## Operações com vetores
+
+Os vetores são as estruturas mais simples trabalhadas no R. Construímos um vetor com uma sequencia numérica usando:
+
+```{r}
+c(1,3,2,5,2)
+```
+
+**MUITA ATENÇÃO**: O *c* é a função do R (*Combine Values into a Vector or List*) com a qual construímos um vetor! 
+
+Utilizamos o simbolo `:` para criar sequências de números inteiros, como:
+
+```{r}
+1:10
+```
+
+Podemos utilizar outras funções para gerar sequências, como:
+
+```{r}
+seq(from=0, to=100, by=5)
+# ou
+seq(0,100,5) # Se você já souber a ordem dos argumentos da função
+```
+
+* Crie uma sequencia utilizando a função `seq` que varie de 4 a 30, com intervalos de 3 em 3.
+
+```{r, echo=FALSE}
+seq(from=4, to=30, by=3)
+```
+
+A função `rep` gera sequências com números repetidos:
+
+```{r}
+rep(3:5, 2)
+```
+
+Podemos realizar operações utilizando esses vetores:
+
+```{r,eval=FALSE}
+c(1,4,3,2)*2
+c(4,2,1,5)+c(5,2,6,1)
+c(4,2,1,5)*c(5,2,6,1)
+```
+
+Repare que já esta ficando cansativo digitar os mesmos números repetidamente, vamos resolver isso criando **objetos** para armazenar nossos vetores e muito mais. 
+
+# Criando objetos
+
+O armazenamento de informações em objetos e a possível manipulação desses faz do R uma linguagem *orientada por objetos*. Para criar um objeto basta atribuir valores para as variáveis, como a seguir:
+
+```{r, results='hide'}
+x = c(30.1,30.4,40,30.2,30.6,40.1)
+# ou
+x <- c(30.1,30.4,40,30.2,30.6,40.1)
+
+y = c(0.26,0.3,0.36,0.24,0.27,0.35)
+```
+
+Os mais antigos costumam usar o sinal `<-`, mas tem a mesma função de `=`. Há quem prefira usar o `<-` como atribuição em objetos e `=` apenas para definir os argumentos dentro de funções. Organize-se da forma como preferir.
+
+Para acessar os valores dentro do objeto basta:
+
+```{r}
+x
+```
+
+A linguagem é sensível à letras maiúsculas e minúsculas, portanto `x` é diferente de `X`:
+
+```{r, eval=FALSE}
+X
+```
+
+O objeto `X` não foi criado. 
+
+O nome dos objetos é uma escolha pessoal, a sugestão é tentar manter um padrão para melhor organização. Alguns nomes não podem ser usados por estabelecerem papéis fixos no R, são eles:
+
+* NA - Not available, simboliza dados faltantes
+* NaN - Not a number, simboliza indefinições matemáticas
+* Inf - Infinite, conceito matemático
+* NULL - Null object, simboliza ausência de informação
+
+Podemos então realizar as operações com o objeto criado:
+
+Para realizar a operação o R alinha os dois vetores e realiza a operação elemento à elemento. Observe:
+
+```{r}
+x + y
+x*y
+```
+
+Se os vetores tiverem tamanhos diferentes, ele irá repetir o menor para realizar a operação elemento à elemento com todos do maior.
+
+```{r, results='hide'}
+x*2
+x*c(1,2)
+```
+
+Se caso o menor vetor não for múltiplo do maior, obteremos um aviso:
+
+```{r}
+x*c(1,2,3,4)
+```
+
+Repare que o **warning** não compromente o funcionamento do código, ele só dá uma dica de que algo pode não estar da forma como você gostaria.
+
+Podemos também armazenar a operação em outro objeto:
+
+```{r, results='hide'}
+z <- (x+y)/2
+z
+```
+
+Podemos também aplicar algumas funções, como exemplo:
+
+```{r}
+sum(z)  # soma dos valores de z
+mean(z) # média 
+var(z)  # variância
+```
+
+## Indexação
+
+Acessamos somente o 3º valor do vetor criado com `[]`:
+
+```{r, results='hide'}
+z[3]
+```
+
+Também podemos acessar o número da posição 2 a 4 com:
+
+```{r}
+z[2:4]
+```
+
+Para obter informações do vetor criado utilize:
+
+```{r}
+str(z)
+```
+
+A função `str` nos diz sobre a estrutura do vetor, que se trata de um vetor **numérico** com 6 elementos. 
+
+Os vetores também podem receber outras categorias como **caracteres**:
+
+```{r}
+clone <- c("GRA02", "URO01", "URO03", "GRA02", "GRA01", "URO01")
+```
+
+Outra classe são os **fatores**, esses podem ser um pouco complexos de lidar.
+
+De forma geral, fatores são valores categorizados por `levels`, como exemplo, se transformarmos nosso vetor de caracteres `clone` em fator, serão atribuidos níveis para cada uma das palavras:
+
+```{r}
+clone_fator <- as.factor(clone)
+str(clone_fator)
+levels(clone_fator)
+```
+
+Dessa forma, teremos apenas 4 níveis para um vetor com 6 elementos, já que as palavras "GRA02" e "URO01" se repetem. Podemos obter o número de elementos do vetor ou o seu comprimento com:
+
+```{r}
+length(clone_fator)
+```
+
+Também há vetores **lógicos**, que recebem valores de verdadeiro ou falso:
+
+```{r}
+logico <- x > 40
+logico   # Os elementos são maiores que 40?
+```
+
+Com ele podemos, por exemplo, identificar quais são as posições dos elementos maiores que 40:
+
+```{r}
+which(logico)  # Obtendo as posiçoes dos elementos TRUE
+
+x[which(logico)] # Obtendo os números maiores que 40 do vetor x pela posição
+# ou
+x[which(x > 40)]
+```
+
+Também podemos localizar elementos específicos com:
+
+```{r}
+clone %in% c("URO03", "GRA02")
+```
+
+Também podem ser úteis as funções `any` e `all`. Procure sobre elas.
+
+Encontre mais sobre outros operadores lógicos, como o `>` utilizado, neste [link](http://www.statmethods.net/management/operators.html).
+
+**Warning1**
+
+Faça uma sequência numérica, contendo 10 valores inteiros, e salve em um objeto chamado "a".
+
+```{r}
+(a <- 1:10)
+```
+
+Crie outra sequência, utilizando números decimais e qualquer operação matemática, de tal forma que seus valores sejam idênticos ao objeto "a".
+
+```{r}
+b <- seq(from = 0.1, to = 1, 0.1)
+(b <- b*10)
+```
+
+Os dois vetores parecem iguais, não?
+
+Então, utilizando um operador lógico, vamos verificar o objeto "b" é igual ao objeto "a".
+
+```{r}
+a==b
+```
+
+Alguns valores não são iguais. Como isso é possivel?
+
+```{r}
+a==round(b)
+```
+
+**Warning2**
+
+Não é possível misturar diferentes classes dentro de um mesmo vetor, ao tentar fazer isso repare que o R irá tentar igualar para uma única classe:
+
+```{r}
+errado <- c(TRUE, "vish", 1)
+errado
+```
+
+No caso, todos os elementos foram transformados em caracter.
+
+**Algumas Dicas**: 
+
+* Cuidado com a prioridade das operações, na dúvida, sempre acrescente parenteses conforme seu interesse de prioridade.
+* Lembre-se que, se esquecer de fechar algum `(` ou `[` ou `"`, o console do R ficará esperando você fechar indicando um `+`, nada será processado até que você digite diretamente no console um `)` ou aperte ESC.
+* Cuidado para não sobrepor objetos já criados criando outros com o mesmo nome. Use, por exemplo: altura1, altura2.
+* Mantenha no seu script .R somente os comandos que funcionaram e, de preferência, adicione comentários. Você pode, por exemplo, comentar dificuldades encontradas, para que você não cometa os mesmos erros mais tarde.
+
+> Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão 1**](exercicios.html#sessao1), se não, faça-os em outro momento e nos envie dúvidas pelo fórum.
+
+## Matrizes
+
+As matrizes são outra classe de objetos muito utilizadas no R, com elas podemos realizar operações de maior escala de forma automatizada.
+
+Por serem usadas em operações, normalmente armazenamos nelas elementos numéricos. Para criar uma matriz, determinamos uma sequência de números e indicamos o número de linhas e colunas da matriz:
+
+```{r}
+X <- matrix(1:12, nrow = 6, ncol = 2)
+X
+```
+
+Podemos também utilizar sequências já armazenadas em vetores para gerar uma matriz, desde que eles sejam numéricos:
+
+```{r}
+W <- matrix(c(x,y), nrow = 6, ncol =2)
+W
+```
+
+Com elas podemos realizar operações matriciais:
+
+```{r}
+X*2
+X*X        
+X%*%t(X)          # Multiplicação matricial
+```
+
+Utilizar essas operações exige conhecimento de álgebra de matrizes, se quiser se aprofundar a respeito, o livro *Linear Models in Statistics, Rencher (2008)* possui um boa revisão à respeito. Você também pode explorar a sintaxe do R para essas operações neste [link](http://www.statmethods.net/advstats/matrix.html).
+
+Acessamos os números internos à matriz dando as coordenadas [linha,coluna], como no exemplo:
+
+```{r}
+W[4,2] # Número posicionado na linha 4 e coluna 2
+```
