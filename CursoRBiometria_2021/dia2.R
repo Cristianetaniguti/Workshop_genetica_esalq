@@ -216,12 +216,12 @@ while(x<5){
   print(x)
 }
 
-x = 0
+x = 1
 while(x<5){
+  x = x+1
   if(x==4){
     next
   }
-  x = x+1
   print(x)
 }
 
@@ -252,8 +252,8 @@ hist(dados$Latitude, breaks = 30, col = "#EE964B",
 barplot(dados$Latitude~dados$Ocupacao)
 
 # Salvar
-png(filename = "hist_rbase.png", res = "300")
-hist(dados$Latitude~dados$)
+png(filename = "hist_rbase.png")
+hist(dados$Latitude)
 dev.off()
 
 # Exemplo de gráfico com cores para variável categórica
@@ -270,9 +270,6 @@ barplot(tapply(clima_lond$prec.mm, clima_lond$Mes, sum),
         ylab = "Precipitação em mm", col=c("red", "blue",
                                            "green", "yellow",
                                            "gray", "white"))
-
-
-
 
 
 
