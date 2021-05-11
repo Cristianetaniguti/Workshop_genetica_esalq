@@ -1,0 +1,31 @@
+---
+title: "Aula 2"
+author: "Fernando"
+date: "5/6/2021"
+output: pdf_document
+fontsize: 12pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Aula do dia 2
+
+## Menor
+
+### Menor ainda
+
+
+Criando objetos. Escrevendo o texto...
+
+```{r}
+x = 1
+x
+```
+
+
+
+
+
+
