@@ -1,0 +1,51 @@
+---
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+---
+
+# Treinamento em Programação no Ambiente R
+
+<img src="banner.jpg" alt="" width="450" height="700">
+
+## Sobre o curso
+
+O curso Treinamento de Programação em R é ofertado desde 2015 por alunos do Departamento de Genética. Você pode encontrar o material utilizado em anos anteriores neste [site](http://cristianetaniguti.github.io/Workshop_genetica_esalq/).
+
+Nos dias 16, 18 e 20 de março de 2020, o [GENt](https://gent-esalq.github.io/), grupo de Divulgação Científica do Programa de Pós-Graduação em Genética e Melhoramento de Plantas da ESALQ- USP, em parceria com o grupo Gfito-LQ, grupo de estudos do [Departamento de Fitopatologia e Nematologia](http://www.lfn.esalq.usp.br/), oferecerá uma nova versão do curso!
+
+
+**Teremos muitas novidades para a versão de março de 2020!!**
+
+Este ano, o curso também será transmitido online! Então você poderá se inscrever como participante presencial ou remoto. A experiência de quem estiver presente será provavelmente mais completa, mas temos número limitado de vagas (40 vagas).
+
+Além disso, também adotamos uma forma de contribuição de “pague o quanto quiser/puder”, com uma sugestão de 25 reais. O dinheiro arrecadado será investido nas ações do grupo de divulgação científica GENt. Saiba mais sobre as atividades do grupo explorando o nosso site.
+
+## Inscrições
+
+**As inscrições estão abertas de 12.02.2020 à 06.03.2020**
+
+Para se inscrever, basta preencher este [formulário](https://forms.gle/kydiaKPwtBuu6XKU7).
+
+Como o número de vagas será limitado, daremos prioridade à aqueles que se inscreverem primeiro e deixaremos o restante em uma lista de espera. Portanto, se você se inscreveu e por algum motivo não poderá comparecer, favor nos avisar via e-mail gent.esalq@gmail.com. Assim, outra pessoa poderá ocupar esta vaga e otimizaremos o espaço da sala!
+
+São 40 vagas presenciais e 25 possibilidades de acesso remoto. Caso opte pelo acesso remoto e existam mais interessados na sua mesma localidade, sugerimos que se reunam para que apenas um acesso seja feito e assim otimizaremos também as conexões. Neste caso, é necessário que apenas uma pessoa se inscreva para o curso.
+
+<font size="3" color="red">Inscrições encerradas.</font>
+
+## Aviso importante!!
+
+Em decorrência das atuais medidas referentes à **epidemia de Covid-19** [anunciadas pelo Cruesp](https://jornal.usp.br/institucional/cruesp-divulga-comunicado-sobre-suspensao-das-aulas-nas-universidades-a-partir-de-17-03/) nos últimos dias, liberamos acesso remoto para todos os participantes. Ainda mantemos as aulas presenciais na quarta e sexta-feira. Segundo às últimas medidas anunciadas, somente cursos presenciais com mais de 100 participantes devem ser cancelados essa semana.
+
+## Materiais
+
+Aqui será disponibilizado o material que será utilizado no **Treinamento em Programação no Ambiente R**.
+
+* [Cronograma do treinamento](cronograma.html)
+* [Tutorial de instalação do R, RStudio e pacotes que serão utilizados](Tutorial_instalacao.html)
+* [Apresentação inicial](teorica/teorica.html)
+* [**Tutorial principal**](cursoR.html)
+* [Exercícios](exercicios.html)
+* [Formulário](https://forms.gle/nxCzX5uB9mARmfxm9)
+* [Dados do formulário](dados_alunos2020.csv)
