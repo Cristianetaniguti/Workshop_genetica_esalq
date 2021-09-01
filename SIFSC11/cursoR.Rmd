@@ -1,16 +1,15 @@
 ---
-title: "Treinamento em Programação no Ambiente R"
+title: "Introdução ao R e aplicações em Genética"
 date: "`r Sys.Date()`"
-author: "[Statistical Genetics Laboratory](https://statgen-esalq.github.io/) <br/>  Escola Superior de Agricultura Luiz de Queiroz <br/> Universidade de São Paulo"
+author: ""
 output:
     rmdformats::readthedown:
       css: readthedownstatgen.css
 ---
 
-Esse material foi elaborado para o **Treinamento em Programação no Ambiente R**
-organizado pelo Laboratório de Genetica Estatistica do Departamento de Genética da ESALQ- USP
+Esse material foi elaborado para o **Introdução ao R e aplicações em Genética**.
 
-Sugerimos que, antes de iniciar a prática aqui descrita, siga [este tutorial](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/Tutorial_instalacao.html) para instalação do R e do RStudio.
+Sugerimos que, antes de iniciar a prática aqui descrita, siga [este tutorial](https://cristianetaniguti.github.io/Workshop_genetica_esalq/SIFSC11/Tutorial_instalacao.html) para instalação do R e do RStudio.
 
 
 # Familiarização com a interface do RStudio
@@ -26,11 +25,11 @@ A interface é separada em quatro janelas com principais funções:
 * Console
 * Arquivos, gráficos, pacotes e ajuda
 
-Explore cada uma das janelas. São inúmeras funcionalidades para cada uma delas, veremos algumas delas ao decorrer do curso.
+Explore cada uma das janelas. São inúmeras funcionalidades para cada uma delas, veremos algumas delas no decorrer do curso.
 
 ## Um primeiro script
 
-A janela de edição de código (provavelmente localizada no canto superior esquerdo) você irá utilizar para escrever o seu código. Abra um novo script clicando no `+` no canto superior esquerdo e selecionando `R script`.
+A janela de edição de código (provavelmente localizada no canto superior esquerdo) será utilizada para escrever o seu código. Abra um novo script clicando no `+` no canto superior esquerdo e selecionando `R script`.
 
 Vamos então iniciar os trabalhos com o tradicional `Hello World`. Digite no seu script:
 
@@ -40,13 +39,13 @@ cat("Hello world")
 
 Agora, selecione a linha e aperte o botão `Run` ou utilize `Ctrl + enter`.
 
-Ao fazer isso o seu código será processado na janela `Console`, onde aparecerá em azul (se você estiver com as cores padrão do R) o código escrito e, logo em seguida, o resultado desejado. A linha somente não será processada no console se houver o símbolo `#` na frente. Agora, experimente colocar `#` na frente do código escrito. E, novamente, selecione a linha e aperte `Run`. 
+Ao fazer isso o seu código será processado na janela `Console`, onde aparecerá em azul (se você estiver com as cores padrão do R) o código escrito e, logo em seguida, o resultado desejado. A linha somente não será processada no console se houver o símbolo `#` na frente. Agora, experimente colocar `#` na frente do código escrito. Novamente, selecione a linha e aperte `Run`. 
 
 ```{r}
 # cat("Hello world")
 ```
 
-O símbolo `#` é muito utilizado para realizar **comentários** ao decorrer do código. Esta é uma ótima prática para deixar o código organizado e para que você possa lembrar mais tarde o que você estava pensando quando o escreveu ou para que outras pessoas possam entendê-lo. Como no exemplo:
+O símbolo `#` é utilizado para **comentários** no código. Esta é uma ótima prática de organização e ajuda a lembrar, posteriormente, o que você estava pensando quando escreveu o código. Também é essencial para que outras pessoas possam entendê-lo. Como no exemplo:
 
 ```{r}
 # Iniciando os trabalhos no R
@@ -55,7 +54,7 @@ cat("Hello world")
 
 **Importante**: sempre que quiser realizar alguma alteração, edite o seu script e não diretamente no console, pois tudo o que neste é escrito, não terá como ser salvo!
 
-Para salvar seu script, você pode utilizar a aba `Files` localizada (como padrão) no canto direito inferior para procurar uma localização de sua preferência, criar uma nova pasta com o nome `CursoR`. 
+Para salvar seu script, você pode utilizar a aba `Files` localizada (como padrão) no canto direito inferior. Você pode procurar uma localização de sua preferência, criar uma nova pasta com o nome `CursoR`. 
 
 <span style="color:red"> Dica: </span>
 
@@ -65,7 +64,7 @@ Depois, basta clicar no disquete localizado no cabeçalho do RStudio ou com `Ctr
 
 ## Estabelecendo diretório de trabalho
 
-Outra boa prática no R é deixar o script no mesmo diretório onde estão seus dados brutos (arquivos de entrada no script) e os dados processados (gráficos, tabelas, etc). Para isso, vamos fazer com que o R identifique o mesmo diretório em que você salvou o script como **diretório de trabalho**, assim ele entenderá que é dali que precisa obter os dados e para lá que também irão os resultados.
+Outra boa prática no R é deixar o script no mesmo diretório onde estão seus dados brutos (arquivos de entrada no script) e os dados processados (gráficos, tabelas, etc). Para isso, vamos fazer com que o R identifique o mesmo diretório em que você salvou o script como **diretório de trabalho**. Assim, ele entenderá que é dali que os dados serão obtidos e é para lá que também irão os resultados.
 
 Você pode fazer isso utilizando as facilidades do RStudio, basta localizar o diretório `CursoR` pela aba `Files`, clicar em `More` e depois "Set as Working Directory". Repare que irá aparecer no console algo como:
 
@@ -73,7 +72,7 @@ Você pode fazer isso utilizando as facilidades do RStudio, basta localizar o di
 setwd("~/Documents/CursoR")
 ```
 
-Ou seja, você pode utilizar este mesmo comando para realizar esta ação. Esta então será nossa pasta de trabalho. Quando estiver perdido/a ou para ter certeza que o diretório de trabalho foi alterado utilize:
+Ou seja, você pode utilizar este mesmo comando para realizar esta ação. O resultado será nossa pasta de trabalho. Quando estiver perdido/a ou para ter certeza que o diretório de trabalho foi alterado utilize:
 
 ```{r, eval=FALSE}
 getwd()
@@ -83,9 +82,9 @@ getwd()
 
 Agora, imagine que você tem um diretório como `~/Documentos/mestrado/semestre1/disciplina_tal/aula_tal/dados_28174/analise_276182/resultados_161/`. Não é fácil lembrar todo este caminho para escrever num comando `setwd()`.
 
-Além da facilidade da janela do RStudio, você pode utilizar a tecla `Tab` para completar o caminho para você. Experimente buscando alguma pasta no seu computador. Basta começar a digitar o caminho e apertar `Tab`, ele irá completar o nome para você! Se você tiver mais do que um arquivo com aquele início de nome, aperte duas vezes o `Tab`, ele mostrará todas as opções.
+Além da facilidade da janela do RStudio, você também pode utilizar a tecla `Tab` para completar o caminho para você. Experimente buscando alguma pasta no seu computador. Basta começar a digitar o caminho e apertar `Tab`, ele irá completar o nome para você! Se você tiver mais do que um arquivo com aquele início de nome, aperte duas vezes o `Tab`, ele mostrará todas as opções.
 
-O `Tab` funciona não só para indicar caminhos, mas também para comandos e nomes de objetos. É muito comum errarmos no código por erros de digitação. Utilizar o `Tab` reduzirá significativamente esses erros.
+O `Tab` funciona não só para indicar caminhos, mas também para comandos e nomes de objetos. É muito comum cometermos erros de digitação no código. Utilizar o `Tab` reduzirá significativamente esses erros.
 
 
 # Operações básicas
@@ -101,8 +100,8 @@ O R pode funcionar como uma simples **calculadora**, que utiliza a mesma sintaxe
 4/2
 
 sqrt(4)              #raíz quadrada
-log(100, base = 10)  #logarítmo na base 10
-log(100)             #logarítmo com base neperiana
+log(100, base = 10)  #Logaritmo na base 10
+log(100)             #Logaritmo com base neperiana
 
 ```
 
@@ -116,7 +115,7 @@ Resultado esperado:
 ((13+2+1.5)/3) + log(96, base = 4)
 ```
 
-Repare que, se posicionar o parênteses de forma incorreta, o código não resultará em nenhuma mensagem de erro, pois este é um erro que chamamos de **erro lógico**, ou seja, o código roda, mas não faz o que você gostaria que ele fizesse. Esse é o tipo de erro mais difícil de ser consertado. Os erros que produzem uma mensagem, seja um aviso (**warning**) ou um erro (**error**) são chamados de **erros de sintaxe**. Nesses casos, o R retornará uma mensagem para te ajudar a corrigí-los. Os **warnings** não comprometem o funcionamento do código, mas chamam a atenção para algum ponto, já os **errors** precisam necessariamente ser corrigidos para que o código rode.
+Repare que, se posicionar o parênteses de forma incorreta, o código não resultará em nenhuma mensagem de erro, pois este é um erro que chamamos de **erro lógico**, ou seja, o código roda, mas não faz o que você gostaria que ele fizesse. Esse é o tipo de erro mais difícil de ser consertado. Os erros que produzem uma mensagem, seja um aviso (**warning**) ou um erro (**error**) são chamados de **erros de sintaxe**. Nesses casos, o R retornará uma mensagem para te ajudar a corrigí-los. Os **warnings** não comprometem o funcionamento do código, mas chamam a atenção para algum ponto; já os **errors** precisam necessariamente ser corrigidos para que o código rode.
 
 Exemplo de error:
 
@@ -132,7 +131,7 @@ Você pode também esquecer de fechar algum parênteses, ou aspas, ou colchetes,
 
 Se acontecer, vá até o console e aperte ESC, que o bloco será finalizado para que você possa corrigí-lo.
 
-Os comandos `log` e `sqrt` são duas de muitas outras funções básicas que o R possui. Funções são conjuntos de instruções organizadas para realizar uma tarefa. Para todas elas, o R possui uma descrição para auxiliar no seu uso, para acessar essa ajuda use:
+Os comandos `log` e `sqrt` são duas de muitas outras funções básicas que o R possui. Funções são conjuntos de instruções organizadas para realizar uma tarefa. Para todas elas, o R possui uma descrição para auxiliar no seu uso. Para acessar essa ajuda use:
 
 ```{r, eval=FALSE}
 ?log
@@ -208,7 +207,7 @@ Para acessar os valores dentro do objeto basta:
 x
 ```
 
-A linguagem é sensível à letras maiúsculas e minúsculas, portanto `x` é diferente de `X`:
+A linguagem é sensível à letras maiúsculas e minúsculas. Logo, `x` é diferente de `X`:
 
 ```{r, eval=FALSE}
 X
@@ -225,6 +224,11 @@ O nome dos objetos é uma escolha pessoal, a sugestão é tentar manter um padr�
 
 Podemos então realizar as operações com o objeto criado:
 
+```{r}
+x+2
+x*2
+```
+
 Para realizar a operação o R alinha os dois vetores e realiza a operação elemento à elemento. Observe:
 
 ```{r}
@@ -232,7 +236,7 @@ x + y
 x*y
 ```
 
-Se os vetores tiverem tamanhos diferentes, ele irá repetir o menor para realizar a operação elemento à elemento com todos do maior.
+Se os vetores tiverem tamanhos diferentes, ele irá repetir o menor para realizar a operação elemento a elemento com todos do maior.
 
 ```{r, results='hide'}
 x*2
@@ -364,23 +368,23 @@ a==round(b)
 
 **Warning2**
 
-Não é possível misturar diferentes classes dentro de um mesmo vetor, ao tentar fazer isso repare que o R irá tentar igualar para uma única classe:
+Não é possível misturar diferentes classes dentro de um mesmo vetor. Ao tentar fazer isso, repare que o R irá tentar igualar para uma única classe:
 
 ```{r}
 errado <- c(TRUE, "vish", 1)
 errado
 ```
 
-No caso, todos os elementos foram transformados em caracter.
+No caso, todos os elementos foram transformados em caracteres.
 
 **Algumas Dicas**: 
 
 * Cuidado com a prioridade das operações, na dúvida, sempre acrescente parenteses conforme seu interesse de prioridade.
-* Lembre-se que, se esquecer de fechar algum `(` ou `[` ou `"`, o console do R ficará esperando você fechar indicando um `+`, nada será processado até que você digite diretamente no console um `)` ou aperte ESC.
+* Lembre-se que, se esquecer de fechar algum `(` ou `[` ou `"`, o console do R ficará esperando você fechar indicando um `+`. Nada será processado até que você digite diretamente no console um `)` ou aperte ESC.
 * Cuidado para não sobrepor objetos já criados criando outros com o mesmo nome. Use, por exemplo: altura1, altura2.
 * Mantenha no seu script .R somente os comandos que funcionaram e, de preferência, adicione comentários. Você pode, por exemplo, comentar dificuldades encontradas, para que você não cometa os mesmos erros mais tarde.
 
-> Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão 1**](exercicios.html#sessao1), se não, faça-os em outro momento e nos envie dúvidas pelo fórum.
+> Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão 1**](exercicios.html#sessao1), se não, faça-os em outro momento e nos envie dúvidas.
 
 ## Matrizes
 
