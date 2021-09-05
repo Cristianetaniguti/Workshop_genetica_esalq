@@ -1,7 +1,7 @@
 ---
 title: "Introdução ao R e aplicações em Genética"
 date: "`r Sys.Date()`"
-author: ""
+author: "Universidade de São Paulo <\br> Texas A&M University <\br> Montana State University"
 output:
     rmdformats::readthedown:
       css: readthedownstatgen.css
@@ -419,18 +419,6 @@ Acessamos os números internos à matriz dando as coordenadas [linha,coluna], co
 ```{r}
 W[4,2] # Número posicionado na linha 4 e coluna 2
 ```
-
-
-## Retomando...
-
-<span style="color:red"> Paramos aqui no primeiro dia!! </span>
-
-* Acesse [aqui](dia1.R) o script .R feito durante o primeiro dia de curso
-* Acesse [aqui](dia1.Rmd) o script em Rmarkdown do que foi feito no primeiro dia de curso
-* Acesse [aqui](dia1.RData) todos os objetos gerados  no primeiro dia de curso. Precisaremos de alguns deles a seguir. 
-
-* Link mencionado: https://rpubs.com/
-* [Shortcuts do RStudio](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts)
 
 As vezes pode ser informativo dar nomes às colunas e às linhas da matriz, fazemos isso com:
 
@@ -975,6 +963,160 @@ dev.off()
 
 Agora, gere um gráfico e salve-o no formato de seu interesse. Em seguida, crie diversos gráficos dentro de uma mesma função gráfica e estude a saída. 
 
+# Um exemplo didático de aplicação em genética
+
+Aqui vamos exercitar um pouco do que aprendemos de R e já introduzir uma das muitas aplicações em genética.
+
+Para melhor didática, este é um exemplo hipotético, a partir de dados simulados para uma população de retrocruzamento.
+
+Mas vamos imaginar que se trata de um experimento de avaliação da resistência de diferentes cultivares de batata contra um fungo patógeno.
+
+Aqui temos a média ajustadas das medida do tamanho da lesão nas folhas de cada cultivar inoculadas.
+
+```{r}
+fenotipos <- read.csv("https://raw.githubusercontent.com/Cristianetaniguti/Workshop_genetica_esalq/gh-pages/4biotec/fenotipos.csv", 
+                      stringsAsFactors = F)
+str(fenotipos)
+```
+
+Ajuste os dados deixando apenas um coluna referente ao tamanho da lesão e o nome das cultivares como nome das linhas.
+
+```{r}
+rownames(fenotipos) <- fenotipos$cultivar
+fenotipos <- fenotipos[,-c(1,2)]
+```
+
+E aqui temos os genótipos de cada uma das cultivares. Podemos obtê-los via marcadores moleculares, como os SNPs.
+
+```
+Aa = 1
+aa = 0
+```
+
+```{r}
+genotipos <- read.csv("https://raw.githubusercontent.com/Cristianetaniguti/Workshop_genetica_esalq/gh-pages/4biotec/genotipos.csv", 
+                      stringsAsFactors = F)
+head(genotipos)
+```
+
+Observe que a primeira coluna da matrix é o nome da cultivar. Vamos fazer com que ela vire o nome das linhas.
+
+```{r}
+rownames(genotipos) <- genotipos[,1]
+genotipos <- genotipos[,-1]
+head(genotipos)
+```
+
+Como já vimos, gráficos são ferramentas interessantes para melhor visualização dos dados. Aqui vamos construir um heatmap, cada genótipo receberá uma cor diferente. Assim poderemos visualizar melhor a distribuição deles na população estudada.
+
+```{r, eval=FALSE}
+heatmap(genotipos, Colv = NA, Rowv = NA)
+```
+
+Opa! Aconteceu algo errado, né? É importante prestar atenção no que o erro diz, essas dicas são valiosas. O problema aqui é que a função só recebe objetos matriz e fornecemos para ela um data.frame.
+
+```{r}
+genotipos <- as.matrix(genotipos)
+heatmap(genotipos, Colv = NA, Rowv = NA)
+```
+
+Para que o gráfico fique intuitivo, precisamos fazer algumas alterações. Repare que embora a gente tenha somente genótipos, existem mais cores no gráfico. Vamos corrigir isso.
+
+```{r}
+geno.cores <- heat.colors(2)
+heatmap(genotipos, Colv = NA, Rowv = NA,  col=geno.cores)
+head(genotipos)
+```
+
+Agora eu quero visualizar a relação desses genótipos com os fenótipos. Para isso, vou acrescentar uma coluna ao lado com cores conforme os valores dos fenótipos. Ou seja, farei outro gradiente com cores frias para valores baixos do tamanho da lesão e cores fortes para valores altos.
+
+```{r}
+fenotipos_ordenado <- sort(fenotipos)
+
+desordem <- match(fenotipos, fenotipos_ordenado)
+fenotipos
+fenotipos_ordenado
+desordem
+
+colfunc <- colorRampPalette(c("royalblue", "red"))
+cores <- colfunc(20)[desordem]
+
+heatmap(genotipos, Colv = NA, Rowv = NA, col=heat.colors(2), RowSideColors = cores)
+```
+
+Uma bagunça! Não consigo tirar nenhuma conclusão. Mas.. e se eu ordenar conforme o valor do fenótipos?
+
+```{r}
+ordem <- match(fenotipos_ordenado, fenotipos)
+
+heatmap(genotipos[ordem,], Rowv = NA, Colv = NA, col=geno.cores, RowSideColors = cores[ordem])
+```
+
+Quase conseguimos ver uma tendência.
+
+Como são dados simulados, sabemos que os marcadores de 6 a 10 e de 18 a 20 estão relacionados com a característica. Vamos veer o que acontece se separamos eles.
+
+```{r}
+heatmap(genotipos[ordem,c(6:10,18:20)], Rowv = NA, Colv = NA, col=geno.cores, RowSideColors = cores[ordem])
+```
+
+Não é interessante?!? E ai? Qual genótipo é vantajoso ter nesses locos para o plantio de batata?
+
+E os marcadores não ligados?
+
+```{r}
+heatmap(genotipos[ordem,-c(6:10,17:20)], Rowv = NA, Colv = NA, col=geno.cores, RowSideColors = cores[ordem])
+```
+
+A bagunça continua! Indicando uma aleatoriedade, ou seja, não existe uma correlação entre o genótipo e o fenótipo.
+
+Mas uma análise visual apenas instiga nossa intuição, precisamos de uma análise estatística para realmente verificarmos. Existem muitos métodos estatísticos desenvolvidos para isso, muito robustos que levam em conta vários fatores importante como o desequilibrio de ligação entre os marcadores e a influência da existência de efeitos próximos. Mas por agora faremos a mais simples das análises, já muito obsoleta para esse propósito, mas servirá para o nosso aprendizado. Faremos uma análise de variância para cada marcador individualmente.
+
+```{r}
+mk <- genotipos[,11]
+mk <- gsub(pattern = 0, replacement = "aa", x = mk)
+mk <- gsub(pattern = 1, replacement = "Aa", x = mk)
+mk <- gsub(pattern = 2, replacement = "AA", x = mk)
+
+mk <- as.factor(mk)
+
+modelo <- lm(fenotipos ~ mk)
+summary(modelo)
+```
+
+```{r}
+mk <- genotipos[,10]
+mk <- gsub(pattern = 0, replacement = "aa", x = mk)
+mk <- gsub(pattern = 1, replacement = "Aa", x = mk)
+mk <- gsub(pattern = 2, replacement = "AA", x = mk)
+
+mk <- as.factor(mk)
+
+modelo <- lm(fenotipos ~ mk)
+summary(modelo)
+```
+
+Não queremos ficar digitando este código 25 vezes, né? Vamos aplicar nossos conhecimentos de estruturas de repetição (loops)
+
+```{r}
+p <- vector()
+for(i in 1:dim(genotipos)[2]){
+  mk <- genotipos[,i]
+  mk <- gsub(pattern = 0, replacement = "aa", x = mk)
+  mk <- gsub(pattern = 1, replacement = "Aa", x = mk)
+  mk <- gsub(pattern = 2, replacement = "AA", x = mk)
+  
+  mk <- as.factor(mk)
+  
+  modelo <- lm(fenotipos ~ mk)
+  f <- summary(modelo)$fstatistic
+  p[i] <- pf(f[1],f[2],f[3],lower.tail=F)
+}
+
+which(p < 0.05)
+```
+
+
 # Aplicações de pacotes
 
 Existem diversos pacotes disponíveis para variadas aplicações. Utilizaremos o *ggplot2*, que está disponível no repositório oficial do R, o CRAN. Portanto para instalá-lo:
@@ -989,7 +1131,7 @@ Depois disso é necessário recrutá-lo toda vez que iniciar um sessão no R:
 library("ggplot2")
 ```
 
-O `ggplot2` é um pacote que permite a construção de gráficos estatísticos, suas funcionalidades vão muito além do que está disponível nos gráficos básicos do R. 
+O `ggplot2` é um pacote que permite a construção de gráficos estatísticos, suas funcionalidades vão muito além do que está disponível nos gráficos básicos do R. Saiba mais sobre ele neste [link](https://ggplot2.tidyverse.org/). Encontre [aqui](https://www.r-graph-gallery.com/) vários exemplos de como ele pode ser usado.
 
 
 # Pratique gerando relatórios no RStudio
