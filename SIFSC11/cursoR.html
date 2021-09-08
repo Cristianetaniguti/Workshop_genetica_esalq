@@ -7,7 +7,7 @@
 
         <meta name="author" content="Universidade de São Paulo - Texas A&amp;M University - Montana State University" />
     
-        <meta name="date" content="2021-09-07" />
+        <meta name="date" content="2021-09-08" />
     
     <title>Introdução ao R e aplicações em Genética</title>
 
@@ -210,6 +210,7 @@
       <li><a href="#indexação">Indexação</a></li>
       <li><a href="#matrizes">Matrizes</a></li>
       <li><a href="#data.frames">Data.frames</a></li>
+      <li><a href="#paramos-aqui-no-primeiro-dia">Paramos aqui no primeiro dia!</a></li>
       <li><a href="#listas">Listas</a></li>
       <li><a href="#arrays">Arrays</a></li>
       </ul></li>
@@ -246,7 +247,7 @@
     </div>
     <div id="postamble" data-toggle="wy-nav-shift" class="status">
                   <p class="author"><span class="glyphicon glyphicon-user"></span> Universidade de São Paulo - Texas A&amp;M University - Montana State University</p>
-                        <p class="date"><span class="glyphicon glyphicon-calendar"></span> 2021-09-07</p>
+                        <p class="date"><span class="glyphicon glyphicon-calendar"></span> 2021-09-08</p>
           </div>
    </div>
      
@@ -614,6 +615,14 @@
 <li><p>Não esqueça que tudo o que fizer no R precisa ser explicitamente indicado, como uma multiplicação 4ac com <code>4*a*c</code>. Para gerar um vetor 1,3,2,6 é necessário: <code>c(1,3,2,6)</code>.</p></li>
 </ul>
 </div>
+<div id="paramos-aqui-no-primeiro-dia" class="section level2">
+<h2>Paramos aqui no primeiro dia!</h2>
+<ul>
+<li><p>Obtenha o arquivo <em>RData</em> com todos os objetos criados até então no tutorial <a href="https://raw.githubusercontent.com/Cristianetaniguti/Workshop_genetica_esalq/master/SIFSC11/dia_1.RData">aqui</a>.</p></li>
+<li><p>Obtenha o arquivo <em>Rscript</em> com os comandos rodados até então no tutorial <a href="https://raw.githubusercontent.com/Cristianetaniguti/Workshop_genetica_esalq/master/SIFSC11/dia_1.R">aqui</a>.</p></li>
+</ul>
+<p><strong>Coloque ambos no seu Diretório de Trabalho</strong></p>
+</div>
 <div id="listas" class="section level2">
 <h2>Listas</h2>
 <p>Listas consistem em uma coleção de objetos, não necessariamente de mesma classe. Nelas podemos armazenar todos os outros objetos já vistos e recuperá-los pela indexação com <code>[[</code>. Como exemplo, vamos utilizar alguns objetos que já foram gerados.</p>
@@ -694,18 +703,14 @@
 <blockquote>
 <p>Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da <a href="exercicios.html#sessao2"><strong>Sessão 2</strong></a>, se não, faça-os em outro momento e nos envie dúvidas pelo fórum.</p>
 </blockquote>
-<ul>
-<li>Obtenha o arquivo RData com todos os objetos criados até então no tutorial <a href="https://GENt-esalq.github.io/cursoR2/dia1.RData">aqui</a>.</li>
-</ul>
-<p><strong>Coloque ambos no seu Diretório de Trabalho</strong></p>
 </div>
 </div>
 <div id="importando-e-exportando-dados" class="section level1">
 <h1>Importando e exportando dados</h1>
 <p>Os arquivos RData são exclusivos do R, clicando duas vezes no arquivo ou utilizando:</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;dia1.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;dia_1.RData&quot;</span>)</span></code></pre></div>
 <p>Você vai recuperar todos os objetos gerados até agora no tutorial. Para gerar esse arquivo RData, eu rodei todos os códigos daqui para cima e usei:</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="at">file =</span> <span class="st">&quot;dia1.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="at">file =</span> <span class="st">&quot;dia_1.RData&quot;</span>)</span></code></pre></div>
 <p>Este comando salva tudo o que você tem no seu Ambiente Global (todos os objetos que aparecem ali no canto direito superior). Você pode também salvar somente um objeto com:</p>
 <div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(campo1, <span class="at">file =</span> <span class="st">&quot;campo1.RData&quot;</span>)</span></code></pre></div>
 <p>Se removermos ele do nosso Ambiente Global com:</p>
@@ -2147,7 +2152,7 @@ fiz um [link](https://GENt-esalq.github.io/)!
 <p>Caso tenha sugestões para aprimoramento desse material, enviar e-mail para <code>biometriamarcadores@gmail.com</code>.</p>
 <p>Acesse também outros materiais em português produzidos pela mesma equipe <a href="http://cristianetaniguti.github.io/Workshop_genetica_esalq/">aqui</a>.</p>
 <p>Este material foi produzido por alunos do programa de pós-graduação em Genética e Melhoramento de Plantas. Cristiane Taniguti, Fernando Correr e e Wellingson Araújo ministraram o Treinamento.</p>
-<p>Também recomendamos materiais em inglês <a href="https://GENt-esalq.github.io/cursoR/english_tutorials.html">aqui</a>. &gt;&gt;&gt;&gt;&gt;&gt;&gt; b991b8ebd0662d7706632ec8beb20b4bbee31bfe</p>
+<p>Também recomendamos materiais em inglês <a href="https://GENt-esalq.github.io/cursoR/english_tutorials.html">aqui</a>.</p>
 </div>
 </div>
 

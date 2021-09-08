@@ -502,6 +502,15 @@ str(campo1)
 
 * Não esqueça que tudo o que fizer no R precisa ser explicitamente indicado, como uma multiplicação 4ac com `4*a*c`. Para gerar um vetor 1,3,2,6 é necessário: `c(1,3,2,6)`.
 
+
+## Paramos aqui no primeiro dia!
+
+* Obtenha o arquivo _RData_ com todos os objetos criados até então no tutorial [aqui](https://raw.githubusercontent.com/Cristianetaniguti/Workshop_genetica_esalq/master/SIFSC11/dia_1.RData).
+
+* Obtenha o arquivo _Rscript_ com os comandos rodados até então no tutorial [aqui](https://raw.githubusercontent.com/Cristianetaniguti/Workshop_genetica_esalq/master/SIFSC11/dia_1.R).
+
+**Coloque ambos no seu Diretório de Trabalho**
+
 ## Listas
 
 Listas consistem em uma coleção de objetos, não necessariamente de mesma classe. Nelas podemos armazenar todos os outros objetos já vistos e recuperá-los pela indexação com `[[`. Como exemplo, vamos utilizar alguns objetos que já foram gerados.
@@ -541,24 +550,19 @@ Teremos quatro matrizes com duas linhas e três colunas e os números de 1 a 24 
 
 > Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão 2**](exercicios.html#sessao2), se não, faça-os em outro momento e nos envie dúvidas pelo fórum.
 
-* Obtenha o arquivo _RData_ com todos os objetos criados até então no tutorial [aqui](https://raw.githubusercontent.com/Cristianetaniguti/Workshop_genetica_esalq/master/SIFSC11/dia_1.Rdata).
-
-* Obtenha o arquivo _Rscript_ com os comandos rodados até então no tutorial [aqui](https://raw.githubusercontent.com/Cristianetaniguti/Workshop_genetica_esalq/master/SIFSC11/dia_1.R).
-
-**Coloque ambos no seu Diretório de Trabalho**
 
 # Importando e exportando dados
 
 Os arquivos RData são exclusivos do R, clicando duas vezes no arquivo ou utilizando:
 
 ```{r}
-load("dia1.RData")
+load("dia_1.RData")
 ```
 
 Você vai recuperar todos os objetos gerados até agora no tutorial. Para gerar esse arquivo RData, eu rodei todos os códigos daqui para cima e usei:
 
-```{r}
-save.image(file = "dia1.RData")
+```{r, eval=FALSE}
+save.image(file = "dia_1.RData")
 ```
 
 Este comando salva tudo o que você tem no seu Ambiente Global (todos os objetos que aparecem ali no canto direito superior). Você pode também salvar somente um objeto com:
@@ -1684,4 +1688,3 @@ Acesse também outros materiais em português produzidos pela mesma equipe [aqui
 Este material foi produzido por alunos do programa de pós-graduação em Genética e Melhoramento de Plantas. Cristiane Taniguti, Fernando Correr e e Wellingson Araújo ministraram o Treinamento.
 
 Também recomendamos materiais em inglês [aqui](https://GENt-esalq.github.io/cursoR/english_tutorials.html).
->>>>>>> b991b8ebd0662d7706632ec8beb20b4bbee31bfe
