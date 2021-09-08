@@ -412,7 +412,7 @@ X*X
 X%*%t(X)          # Multiplicação matricial
 ```
 
-Utilizar essas operações exige conhecimento de álgebra de matrizes, se quiser se aprofundar, o livro *Linear Models in Statistics, Rencher (2008)* possui um boa revisão. Você também pode explorar a sintaxe do R para essas operações neste [link](http://www.statmethods.net/advstats/matrix.html).
+Utilizar essas operações exige conhecimento de álgebra de matrizes, se quiser se aprofundar a respeito, o livro *Linear Models in Statistics, Rencher (2008)* possui um boa revisão à respeito. Você também pode explorar a sintaxe do R para essas operações neste [link](http://www.statmethods.net/advstats/matrix.html).
 
 Acessamos os números internos à matriz dando as coordenadas [linha,coluna], como no exemplo:
 
@@ -420,7 +420,7 @@ Acessamos os números internos à matriz dando as coordenadas [linha,coluna], co
 W[4,2] # Número posicionado na linha 4 e coluna 2
 ```
 
-Às vezes pode ser mais informativo dar nomes às colunas e linhas da matriz. Para isso:
+As vezes pode ser informativo dar nomes às colunas e às linhas da matriz, fazemos isso com:
 
 ```{r}
 colnames(W) <- c("altura", "diametro")
@@ -428,13 +428,15 @@ rownames(W) <- clone
 W
 ```
 
-Essas funções `colnames` e `rownames` também funcionam nos `data.frames`.
+Essas funções `colnames` e `rownames` também funcionam nos data.frames.
 
 ## Data.frames
 
-Diferente das matrizes, não realizamos operações com os data.frames, mas eles permitem a união de vetores com classes diferentes. Os *data frames* são semelhantes a tabelas geradas em outros programas, como o Excel.
+Diferente das matrizes, não realizamos operações com os data.frames, mas eles permitem a união de vetores com classes diferentes. Os *data frames* são semelhantes a tabelas geradas em outros programas, como o excel.
 
-Os *data frames* são combinações de vetores de mesmo comprimento. Todos os vetores que criamos até agora tem tamanho 6, verifique. Podemos assim combiná-los em colunas de um único data.frame:
+Os *data frames* são combinações de vetores de mesmo comprimento. Todos os que criamos até agora tem tamanho 6, verifique. 
+
+Podemos assim combiná-los em colunas de um único data.frame:
 
 ```{r}
 campo1 <- data.frame("clone" = clone,     # Antes do sinal de "="  
@@ -465,13 +467,15 @@ Dessa forma, se quisermos obter um conteúdo específico podemos dar as coordena
 campo1[1,2] 
 ```
 
+
 * Obtenha o diâmetro do clone "URO03".
+
 
 ```{r, echo=FALSE}
 campo1[3,3] 
 ```
 
-Mesmo se tratando de um *data frame*, podemos realizar operações com os vetores numéricos que o compõem.
+Mesmo se tratando de um *data frame*, podemos realizar operações com os vetores numéricos que a compõe.
 
 * Com o diâmetro e a altura das árvores, calcule o volume conforme a fórmula a seguir e armazene em um objeto `volume`:
 
@@ -495,11 +499,12 @@ str(campo1)
 * Lembre-se que, para construir matrizes e *data frames*, as colunas devem apresentar o mesmo número de elementos.
 
 * Caso não saiba o operador ou a função que deve ser utilizada, busque no google. Por exemplo, se está em dúvida em como calcular o desvio padrão, busque por "desvio padrão R" ou, melhor ainda, "standard deviation R". Logo nas primeiras páginas você obterá respostas. A comunidade do R é bastante ativa e grande parte das suas perguntas sobre ele já foram respondidas em algum lugar da web.
+
 * Não esqueça que tudo o que fizer no R precisa ser explicitamente indicado, como uma multiplicação 4ac com `4*a*c`. Para gerar um vetor 1,3,2,6 é necessário: `c(1,3,2,6)`.
 
 ## Listas
 
-Listas consistem em uma coleção de objetos, não necessariamente de mesma classe. Nelas podemos armazenar todos os outros objetos já vistos e recuperá-los pela indexação com `[[`. Vamos utilizar alguns objetos que já foram gerados como um exemplo:
+Listas consistem em uma coleção de objetos, não necessariamente de mesma classe. Nelas podemos armazenar todos os outros objetos já vistos e recuperá-los pela indexação com `[[`. Como exemplo, vamos utilizar alguns objetos que já foram gerados.
 
 ```{r}
 minha_lista <- list(campo1 = campo1, media_alt = tapply(campo1$altura, campo1$idade, mean), matrix_ex = W)
@@ -513,7 +518,7 @@ minha_lista[[1]]
 # ou
 minha_lista$campo1
 ```
-Para acessar uma coluna específica no data frame `campo1`, que está dentro da minha_lista:  
+Para acessar uma coluna específica no data.frame `campo1`, que está dentro da minha_lista:  
 
 ```{r}
 minha_lista[[1]][[3]]
@@ -522,8 +527,7 @@ minha_lista[[1]]$diametro
 # ou
 minha_lista$campo1$diametro
 ```
-
-Listas são muito úteis quando vamos utilizar/gerar diversos objetos dentro de um loop. 
+Listas são muito úteis, por exemplo, quando vamos utilizar/gerar diversos objetos dentro de um loop. 
 
 ## Arrays
 
@@ -602,6 +606,14 @@ A planilha com os dados está disponível no link abaixo, adicione-a ao seu dire
 
 * [dados.RData](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/dados_alunos2021.RData) 
 * [dados.csv](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/dados_alunos2021.csv)
+
+Também podemos importar os dados diretamente do github, utilizando o pacote _readr_.
+
+```{r, eval=FALSE}
+library(readr)
+dados <- read_csv("https://github.com/Cristianetaniguti/Workshop_genetica_esalq/raw/master/SIFSC11/dados_alunos2021.csv")
+
+```
 
 Aqui usaremos o argumento `stringAsFactors` que impede que o R transforme os vetores da tabela em fatores, os quais são mais difíceis de trabalhar. O argumento `na.strings` irá indicar como foram nomeados os dados perdidos.
 
