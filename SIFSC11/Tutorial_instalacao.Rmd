@@ -1,6 +1,6 @@
 ---
 date: "`r Sys.Date()`"
-author: "[Statistical Genetics Laboratory](https://statgen-esalq.github.io/) <br/>  Escola Superior de Agricultura Luiz de Queiroz <br/> Universidade de São Paulo"
+author: "Universidade de São Paulo - Texas A&M University - Montana State University"
 output:
     rmdformats::readthedown:
       css: readthedownstatgen.css

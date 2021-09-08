@@ -46,5 +46,6 @@ O treinamento de Programação em R é ofertado desde 2015 por alunos do Departa
 Aqui será disponibilizado o material que será utilizado no **Introdução ao R e aplicações em Genética**.
 
 * [Tutorial de instalação do R, RStudio e pacotes que serão utilizados](Tutorial_instalacao.html)
+* [Introdução](Introducao.pdf)
 * [**Tutorial principal**](cursoR.html)
 * [Exercícios](exercicios.html)
