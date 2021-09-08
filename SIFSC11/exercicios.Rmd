@@ -187,9 +187,9 @@ c)[apenas o "head": 24.16867 18.61976 18.22499 20.43744 31.26128 24.17230]{.spoi
 
 c)[O valor mínimo: 1.170791]{.spoiler}
 
-> 4 - Em algumas áreas experimentais de soja foram identificadas a presença de alguns nematóides.
+> 4 - Em algumas áreas experimentais de soja foram identificadas a presença de alguns nematoides.
 
-|Área | Nematóide | Produtividade da área (kg/ha)
+|Área | Nematoide | Produtividade da área (kg/ha)
 |--------|-----------|------------|--------------
 |A1      | *Meloidogyne incognita* | 2700
 |A2      | *Meloidogyne incognita* | 2500
@@ -200,7 +200,7 @@ c)[O valor mínimo: 1.170791]{.spoiler}
 |A7      | *Meloidogyne javanica* | 2300
 |A8      | NA | 3800
 
-> a)Crie um data.frame com as informações da tabela acima
+> a) Crie um data frame com as informações da tabela acima
 
 > b)Crie uma coluna contendo o munícipio que cada área é localizado (Piracicaba-SP, Rio Verde-GO, Londrina-PR, Barreiras-BA, Uberaba-MG, Rondonopólis-MT, Vilhena-RO, Gurupi-TO)
 

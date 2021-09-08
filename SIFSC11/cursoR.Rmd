@@ -467,7 +467,9 @@ Dessa forma, se quisermos obter um conteúdo específico podemos dar as coordena
 campo1[1,2] 
 ```
 
-* Obtenha o diâmetro do clone "URO03.
+
+* Obtenha o diâmetro do clone "URO03".
+
 
 ```{r, echo=FALSE}
 campo1[3,3] 
@@ -484,7 +486,7 @@ volume <- 3.14*((campo1$diametro/2)^2)*campo1$altura
 volume
 ```
 
-Agora, vamos adicionar o vetor calculado com o volume ao nosso data.frame. Para isso use a função `cbind`.
+Agora, vamos adicionar o vetor calculado com o volume ao nosso *data frame*. Para isso use a função `cbind`.
 
 ```{r}
 campo1 <- cbind(campo1, volume)
@@ -494,8 +496,10 @@ str(campo1)
 
 **Algumas dicas**:
 
-* Lembre-se que, para construir matrizes e *data frames*, o número de elementos em cada coluna tem que ser iguais.
-* Caso não saiba o operador ou a função que deve ser utilizada, como o desvio padrão, busque no google algo como "desvio padrão R", ou melhor "standard deviation R". Logo nas primeiras páginas você obterá respostas. A comunidade do R é bastante ativa e grande parte das suas perguntas sobre ele já foram respondidas em algum lugar da web.
+* Lembre-se que, para construir matrizes e *data frames*, as colunas devem apresentar o mesmo número de elementos.
+
+* Caso não saiba o operador ou a função que deve ser utilizada, busque no google. Por exemplo, se está em dúvida em como calcular o desvio padrão, busque por "desvio padrão R" ou, melhor ainda, "standard deviation R". Logo nas primeiras páginas você obterá respostas. A comunidade do R é bastante ativa e grande parte das suas perguntas sobre ele já foram respondidas em algum lugar da web.
+
 * Não esqueça que tudo o que fizer no R precisa ser explicitamente indicado, como uma multiplicação 4ac com `4*a*c`. Para gerar um vetor 1,3,2,6 é necessário: `c(1,3,2,6)`.
 
 ## Listas
@@ -523,7 +527,6 @@ minha_lista[[1]]$diametro
 # ou
 minha_lista$campo1$diametro
 ```
-
 Listas são muito úteis, por exemplo, quando vamos utilizar/gerar diversos objetos dentro de um loop. 
 
 ## Arrays
@@ -603,6 +606,13 @@ A planilha com os dados está disponível no link abaixo, adicione-a ao seu dire
 
 * [dados.RData](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/dados_alunos2021.RData) 
 * [dados.csv](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/dados_alunos2021.csv)
+
+Também podemos importar os dados diretamente do github, apontando o endereço web.
+
+```{r, eval=FALSE}
+dados <- read.csv("https://github.com/Cristianetaniguti/Workshop_genetica_esalq/raw/master/SIFSC11/dados_alunos2021.csv")
+
+```
 
 Aqui usaremos o argumento `stringAsFactors` que impede que o R transforme os vetores da tabela em fatores, os quais são mais difíceis de trabalhar. O argumento `na.strings` irá indicar como foram nomeados os dados perdidos.
 
@@ -1672,3 +1682,4 @@ Acesse também outros materiais em português produzidos pela mesma equipe [aqui
 Este material foi produzido por alunos do programa de pós-graduação em Genética e Melhoramento de Plantas. Cristiane Taniguti, Fernando Correr e e Wellingson Araújo ministraram o Treinamento.
 
 Também recomendamos materiais em inglês [aqui](https://GENt-esalq.github.io/cursoR/english_tutorials.html).
+>>>>>>> b991b8ebd0662d7706632ec8beb20b4bbee31bfe
