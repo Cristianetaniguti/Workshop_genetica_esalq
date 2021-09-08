@@ -604,6 +604,14 @@ A planilha com os dados está disponível no link abaixo, adicione-a ao seu dire
 * [dados.RData](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/dados_alunos2021.RData) 
 * [dados.csv](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/dados_alunos2021.csv)
 
+Também podemos importar os dados diretamente do github, utilizando o pacote _readr_.
+
+```{r, eval=FALSE}
+library(readr)
+dados <- read_csv("https://github.com/Cristianetaniguti/Workshop_genetica_esalq/raw/master/SIFSC11/dados_alunos2021.csv")
+
+```
+
 Aqui usaremos o argumento `stringAsFactors` que impede que o R transforme os vetores da tabela em fatores, os quais são mais difíceis de trabalhar. O argumento `na.strings` irá indicar como foram nomeados os dados perdidos.
 
 ```{r, eval=FALSE}
