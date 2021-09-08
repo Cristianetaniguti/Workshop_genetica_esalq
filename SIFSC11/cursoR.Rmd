@@ -541,7 +541,9 @@ Teremos quatro matrizes com duas linhas e três colunas e os números de 1 a 24 
 
 > Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão 2**](exercicios.html#sessao2), se não, faça-os em outro momento e nos envie dúvidas pelo fórum.
 
-* Obtenha o arquivo RData com todos os objetos criados até então no tutorial [aqui](https://GENt-esalq.github.io/cursoR2/dia1.RData).
+* Obtenha o arquivo _RData_ com todos os objetos criados até então no tutorial [aqui](https://raw.githubusercontent.com/Cristianetaniguti/Workshop_genetica_esalq/master/SIFSC11/dia_1.Rdata).
+
+* Obtenha o arquivo _Rscript_ com os comandos rodados até então no tutorial [aqui](https://raw.githubusercontent.com/Cristianetaniguti/Workshop_genetica_esalq/master/SIFSC11/dia_1.R).
 
 **Coloque ambos no seu Diretório de Trabalho**
 
